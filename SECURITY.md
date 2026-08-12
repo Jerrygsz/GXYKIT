@@ -9,7 +9,7 @@ This is a constrained device under ETSI EN 303 645 V2.1.1 Clauses 5.3-14 and 5.3
 Bluetooth pairing uses SSP user confirmation or random per-session code (ETSI EN 303 645 Clause 5.2-1).
 
 ## Reporting a Vulnerability
-Email: security@gxyelectronics.com
+Email: wangweian@gxykit.com
 We acknowledge receipt within 5 working days in accordance with ISO/IEC 29147:2018.
 During the support period, issues are handled via published advisories, workaround guidance, or successor-model recommendation.
 
