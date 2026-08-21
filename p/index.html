@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GXYKIT Product Catalog</title>
+<script src="data.js"></script>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+:root {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8e8ed;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --text-tertiary: #aeaeb2;
+  --accent-blue: #0071e3;
+  --accent-blue-hover: #0077ed;
+  --accent-purple: #5e5ce6;
+  --accent-green: #34c759;
+  --accent-orange: #ff9500;
+  --accent-red: #ff3b30;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+  --blur: blur(20px) saturate(180%);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Segoe UI", sans-serif;
+}
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ===== Slide System ===== */
+.slide {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+}
+.slide.active {
+  display: block;
+}
+/* ===== Cover Slide ===== */
+#slide-cover {
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#slide-cover.active {
+  display: flex;
+}
+#slide-cover::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(0,113,227,0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(94,92,230,0.12) 0%, transparent 50%);
+  animation: floatBg 20s ease-in-out infinite;
+}
+@keyframes floatBg {
+  0%, 100% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(-30px, 20px) rotate(5deg); }
+}
+.cover-content { position: relative; z-index: 2; padding: 40px; }
+.cover-logo {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #0071e3, #5e5ce6);
+  border-radius: 20px;
+  margin: 0 auto 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; font-weight: 700; color: #fff;
+  box-shadow: 0 8px 32px rgba(0,113,227,0.4);
+  animation: logoPop 0.8s var(--spring) 0.2s both;
+}
+@keyframes logoPop {
+  from { transform: scale(0) rotate(-180deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+.cover-title {
+  font-size: 2.8rem; font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  animation: fadeUp 0.8s var(--ease) 0.4s both;
+}
+.cover-subtitle {
+  font-size: 1.25rem; color: rgba(255,255,255,0.6);
+  font-weight: 400;
+  margin-bottom: 48px;
+  animation: fadeUp 0.8s var(--ease) 0.6s both;
+}
+.cover-stats {
+  display: flex; gap: 48px; justify-content: center;
+  animation: fadeUp 0.8s var(--ease) 0.8s both;
+}
+.cover-stat { text-align: center; }
+.cover-stat-num {
+  font-size: 2.2rem; font-weight: 700;
+  background: linear-gradient(135deg, #0071e3, #5e5ce6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cover-stat-label {
+  font-size: 0.9rem; color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cover-start-btn {
+  margin-top: 48px;
+  padding: 14px 40px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  animation: fadeUp 0.8s var(--ease) 1s both;
+}
+.cover-start-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+
+/* ===== Navigation Bar ===== */
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(245,245,247,0.72);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 20px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-bar.show { display: flex; }
+.nav-back {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--accent-blue);
+  font-size: 1rem; font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.nav-back:hover { opacity: 0.7; }
+.nav-title {
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ===== Category Tabs ===== */
+.cat-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 80px 20px 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(245,245,247,0.92);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.cat-tabs::-webkit-scrollbar { display: none; }
+.cat-tab {
+  flex-shrink: 0;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  white-space: nowrap;
+}
+.cat-tab.active {
+  background: var(--text-primary);
+  color: #fff;
+  border-color: var(--text-primary);
+}
+.cat-tab:hover:not(.active) {
+  background: var(--bg-tertiary);
+}
+
+/* ===== Product Grid ===== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 8px 16px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.product-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: 320px 380px;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.product-card:active {
+  transform: scale(0.98);
+}
+.card-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #f5f5f7, #e8e8ed);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.card-img-wrap img {
+  width: 80%; height: 80%;
+  object-fit: contain;
+  transition: transform 0.6s var(--ease);
+}
+.product-card:hover .card-img-wrap img {
+  transform: scale(1.08);
+}
+.card-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;
+}
+.badge-bt { background: var(--accent-blue); }
+.badge-power { background: var(--accent-orange); }
+.badge-fm { background: var(--accent-purple); }
+.badge-new { background: var(--accent-green); }
+
+.card-body { padding: 16px 20px 20px; }
+.card-model {
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.card-type {
+  font-size: 0.85rem; color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.card-params {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.param-chip {
+  padding: 3px 10px;
+  background: var(--bg-tertiary);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.param-chip.highlight {
+  background: rgba(0,113,227,0.1);
+  color: var(--accent-blue);
+}
+
+/* ===== Product Detail Modal ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-height: 90vh;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 201;
+  transform: translateY(100%);
+  transition: transform 0.5s var(--spring);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.modal.show { transform: translateY(0); }
+.modal-handle {
+  width: 40px; height: 5px;
+  background: var(--text-tertiary);
+  border-radius: 100px;
+  margin: 8px auto 0;
+  flex-shrink: 0;
+}
+.modal-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  width: 32px; height: 32px;
+  background: var(--bg-tertiary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--text-tertiary); transform: scale(1.1); }
+.modal-header {
+  padding: 16px 24px 0;
+  text-align: center;
+}
+.modal-img {
+  width: 200px; height: 200px;
+  margin: 0 auto 16px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.modal-img img {
+  width: 85%; height: 85%;
+  object-fit: contain;
+}
+.modal-model {
+  font-size: 1.8rem; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.modal-type {
+  font-size: 1rem; color: var(--text-secondary);
+  margin-top: 2px;
+}
+.modal-section {
+  padding: 20px 24px;
+  border-top: 1px solid var(--bg-tertiary);
+}
+.modal-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.param-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.param-item {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+.param-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+.param-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.selling-points {
+  background: linear-gradient(135deg, rgba(0,113,227,0.05), rgba(94,92,230,0.05));
+  border-radius: var(--radius-md);
+  padding: 16px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  color: var(--text-primary);
+}
+.price-table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.price-cell {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 8px;
+  text-align: center;
+}
+.price-tier {
+  font-size: 0.7rem; color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.price-val {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--accent-blue);
+}
+.price-unit { font-size: 0.7rem; color: var(--text-tertiary); }
+
+/* ===== Bottom Nav ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: 100px;
+  padding: 8px;
+  display: none;
+  gap: 4px;
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.bottom-nav.show { display: flex; }
+.nav-btn {
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  border: none;
+  background: transparent;
+}
+.nav-btn.active {
+  background: var(--text-primary);
+  color: #fff;
+}
+
+/* ===== Category Hero ===== */
+.cat-hero {
+  padding: 100px 24px 24px;
+  text-align: center;
+}
+.cat-hero-icon {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-md);
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+}
+.cat-hero-title {
+  font-size: 2rem; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.cat-hero-count {
+  font-size: 1rem; color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; }
+  .cover-subtitle { font-size: 1rem; }
+  .cover-stats { gap: 24px; }
+  .cover-stat-num { font-size: 1.6rem; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); padding: 8px 12px 100px; }
+  .param-grid { grid-template-columns: 1fr; }
+  .price-table { grid-template-columns: repeat(2, 1fr); }
+  .modal-model { font-size: 1.4rem; }
+  .cat-hero-title { font-size: 1.5rem; }
+}
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); padding: 8px 8px 100px; }
+  .cat-tabs { padding: 80px 12px 12px; }
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-tertiary);
+}
+.empty-state-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state-text { font-size: 1rem; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- Cover Slide -->
+<div class="slide active" id="slide-cover">
+  <div class="cover-content">
+    <div class="cover-logo">G</div>
+    <h1 class="cover-title">GXYKIT Product Catalog</h1>
+    <p class="cover-subtitle">Shenzhen Guangxinyi Electronics Co., Ltd.</p>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-num" id="stat-products">0</div>
+        <div class="cover-stat-label">Products</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num" id="stat-categories">0</div>
+        <div class="cover-stat-label">Categories</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">8</div>
+        <div class="cover-stat-label">Series</div>
+      </div>
+    </div>
+    <button class="cover-start-btn" onclick="showCatalog()">Explore Catalog &rarr;</button>
+  </div>
+</div>
+
+<!-- Catalog Slide -->
+<div class="slide" id="slide-catalog">
+  <div class="nav-bar show" id="navBar">
+    <div class="nav-back" onclick="showCover()">
+      <span>&#8249;</span>
+      <span>Catalog</span>
+    </div>
+    <div class="nav-title" id="navTitle">All Products</div>
+    <div style="width:80px"></div>
+  </div>
+
+  <div class="cat-tabs" id="catTabs"></div>
+
+  <div class="cat-hero" id="catHero" style="display:none">
+    <div class="cat-hero-icon" id="heroIcon"></div>
+    <h2 class="cat-hero-title" id="heroTitle"></h2>
+    <p class="cat-hero-count" id="heroCount"></p>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <div class="bottom-nav show" id="bottomNav">
+    <button class="nav-btn active" onclick="scrollToTop()">Top</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+  <div class="modal-handle"></div>
+  <div class="modal-close" onclick="closeModal()">&times;</div>
+  <div id="modalContent"></div>
+</div>
+
+<script>
+// Category config
+const CATEGORIES = [
+  { key: 'all', label: 'All', icon: 'GRID', color: '#0071e3' },
+  { key: 'Car Charger', label: 'Car Chargers', icon: 'POWER', color: '#ff9500' },
+  { key: 'Car Bluetooth MP3', label: 'Car Bluetooth MP3', icon: 'MUSIC', color: '#5e5ce6' },
+  { key: 'Bluetooth Receiver', label: 'BT Receivers', icon: 'BT', color: '#0071e3' },
+  { key: 'FM Transmitter', label: 'FM Transmitters', icon: 'FM', color: '#34c759' },
+  { key: 'Car Charger Hub', label: 'Charger Hubs', icon: 'HUB', color: '#ff3b30' },
+  { key: 'Wireless Charger', label: 'Wireless', icon: 'WIRELESS', color: '#5e5ce6' },
+  { key: 'CarPlay', label: 'CarPlay', icon: 'CAR', color: '#86868b' },
+  { key: 'Other', label: 'Other', icon: 'MORE', color: '#aeaeb2' },
+];
+
+const CAT_ICONS = {
+  'Car Charger': { emoji: 'power', bg: 'rgba(255,149,0,0.12)', text: '#ff9500' },
+  'Car Bluetooth MP3': { emoji: 'music', bg: 'rgba(94,92,230,0.12)', text: '#5e5ce6' },
+  'Bluetooth Receiver': { emoji: 'bluetooth', bg: 'rgba(0,113,227,0.12)', text: '#0071e3' },
+  'FM Transmitter': { emoji: 'fm', bg: 'rgba(52,199,89,0.12)', text: '#34c759' },
+  'Car Charger Hub': { emoji: 'hub', bg: 'rgba(255,59,48,0.12)', text: '#ff3b30' },
+  'Wireless Charger': { emoji: 'wireless', bg: 'rgba(94,92,230,0.12)', text: '#5e5ce6' },
+  'CarPlay': { emoji: 'car', bg: 'rgba(134,134,139,0.12)', text: '#86868b' },
+  'Other': { emoji: 'other', bg: 'rgba(174,174,178,0.12)', text: '#aeaeb2' },
+};
+
+let currentCategory = 'all';
+let productsRendered = false;
+
+// Init
+function init() {
+  document.getElementById('stat-products').textContent = PRODUCTS.length;
+  const cats = new Set(PRODUCTS.map(p => p.category));
+  document.getElementById('stat-categories').textContent = cats.size;
+  renderTabs();
+}
+
+function showCover() {
+  document.getElementById('slide-catalog').classList.remove('active');
+  var cover = document.getElementById('slide-cover');
+  cover.classList.add('active');
+  cover.style.display = '';
+}
+
+function showCatalog() {
+  var cover = document.getElementById('slide-cover');
+  cover.classList.remove('active');
+  // Force hide cover to prevent it from remaining visible
+  cover.style.display = 'none';
+  document.getElementById('slide-catalog').classList.add('active');
+  if (!productsRendered) {
+    showLoading();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        renderProducts('all');
+        productsRendered = true;
+      });
+    });
+  }
+}
+
+function showLoading() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text-tertiary);"><div style="width:32px;height:32px;border:3px solid var(--bg-tertiary);border-top-color:var(--accent-blue);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px;"></div><div>Loading products...</div></div>';
+}
+
+function renderTabs() {
+  const container = document.getElementById('catTabs');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const count = cat.key === 'all' ? PRODUCTS.length : PRODUCTS.filter(p => p.category === cat.key).length;
+    if (cat.key !== 'all' && count === 0) return;
+    const tab = document.createElement('div');
+    tab.className = 'cat-tab' + (cat.key === currentCategory ? ' active' : '');
+    tab.textContent = cat.label + ' (' + count + ')';
+    tab.onclick = () => {
+      currentCategory = cat.key;
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderProducts(cat.key);
+    };
+    container.appendChild(tab);
+  });
+}
+
+function renderProducts(cat) {
+  const grid = document.getElementById('productGrid');
+  const hero = document.getElementById('catHero');
+  const navTitle = document.getElementById('navTitle');
+
+  let products = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
+
+  if (cat !== 'all') {
+    const icon = CAT_ICONS[cat] || CAT_ICONS['Other'];
+    hero.style.display = 'block';
+    document.getElementById('heroIcon').style.background = icon.bg;
+    document.getElementById('heroIcon').style.color = icon.text;
+    document.getElementById('heroIcon').textContent = getIconSymbol(icon.emoji);
+    document.getElementById('heroTitle').textContent = CATEGORIES.find(c => c.key === cat)?.label || cat;
+    document.getElementById('heroCount').textContent = products.length + ' products';
+    navTitle.textContent = CATEGORIES.find(c => c.key === cat)?.label || cat;
+  } else {
+    hero.style.display = 'none';
+    navTitle.textContent = 'All Products (' + products.length + ')';
+  }
+
+  grid.innerHTML = '';
+
+  if (products.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128269;</div><div class="empty-state-text">No products in this category</div></div>';
+    return;
+  }
+
+  // Stagger animation
+  products.forEach((p, i) => {
+    const card = createCard(p);
+    card.style.animationDelay = (i * 0.04) + 's';
+    grid.appendChild(card);
+  });
+}
+
+function createCard(p) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.onclick = () => openModal(p);
+
+  // Badges
+  let badges = '';
+  if (p.bt) badges += '<div class="card-badge badge-bt">' + p.bt + '</div>';
+  else if (p.power) badges += '<div class="card-badge badge-power">' + extractPower(p.power) + '</div>';
+
+  // Param chips
+  let chips = '';
+  const paramOrder = ['bt','power','ports','signal','dim','fm','battery','input_v','material','cert'];
+  const chipLabels = {
+    bt: p.bt, power: extractPower(p.power), ports: p.ports, signal: p.signal,
+    dim: p.dim, fm: p.fm, battery: p.battery, input_v: p.input_v, material: p.material, cert: p.cert
+  };
+  paramOrder.forEach(key => {
+    const val = chipLabels[key];
+    if (val) {
+      const isHighlight = (key === 'bt' || key === 'power');
+      chips += '<span class="param-chip' + (isHighlight ? ' highlight' : '') + '">' + val + '</span>';
+    }
+  });
+
+  card.innerHTML = `
+    <div class="card-img-wrap">
+      ${badges}
+      <img src="${p.image}" alt="${p.model}" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div class="card-body">
+      <div class="card-model">${p.model}</div>
+      <div class="card-type">${p.type_en || p.type_cn || p.category}</div>
+      <div class="card-params">${chips}</div>
+    </div>
+  `;
+  return card;
+}
+
+function extractPower(power) {
+  if (!power) return '';
+  const m = power.match(/(\d+)W/);
+  if (m) return m[1] + 'W';
+  if (power.includes('Wireless')) return 'Wireless';
+  return power.substring(0, 15);
+}
+
+function getIconSymbol(type) {
+  const symbols = {
+    power: '\u26A1', music: '\u266B', bluetooth: '\u25C8', fm: '\u25CE',
+    hub: '\u25A3', wireless: '\u25CB', car: '\u25C6', other: '\u25C7'
+  };
+  return symbols[type] || '\u25C7';
+}
+
+// Modal
+function openModal(p) {
+  const overlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modal');
+  const content = document.getElementById('modalContent');
+
+  let paramsHTML = '';
+  const paramGroups = [
+    { title: 'Core Specs', items: [
+      ['Bluetooth', p.bt], ['Chip', p.chip], ['Power', p.power],
+      ['Output Spec', p.ports], ['Input Voltage', p.input_v], ['Battery', p.battery],
+      ['Signal Range', p.signal], ['FM Frequency', p.fm],
+    ]},
+    { title: 'Physical', items: [
+      ['Dimensions', p.dim], ['Weight', p.nw || p.weight], ['Gross Weight', p.gw],
+      ['Cable Length', p.cable], ['Material', p.material], ['Color', p.color],
+      ['Screen', p.screen],
+    ]},
+    { title: 'Technical', items: [
+      ['Protocols', p.proto], ['Audio Codecs', p.audio], ['RX/TX', p.rxtx],
+      ['Certifications', p.cert], ['Safety', p.safety], ['Features', p.features],
+      ['Accessories', p.acc],
+    ]},
+  ];
+
+  paramGroups.forEach(group => {
+    const validItems = group.items.filter(item => item[1]);
+    if (validItems.length === 0) return;
+    paramsHTML += '<div class="modal-section"><div class="modal-section-title">' + group.title + '</div><div class="param-grid">';
+    validItems.forEach(item => {
+      paramsHTML += `<div class="param-item"><div class="param-label">${item[0]}</div><div class="param-value">${item[1]}</div></div>`;
+    });
+    paramsHTML += '</div></div>';
+  });
+
+  // Selling points
+  if (p.selling) {
+    paramsHTML += '<div class="modal-section"><div class="modal-section-title">Selling Points</div><div class="selling-points">' + p.selling + '</div></div>';
+  }
+
+  // Prices
+  const hasPrice = p.p_sample || p.p_500 || p.p_2000 || p.p_5000;
+  if (hasPrice) {
+    paramsHTML += '<div class="modal-section"><div class="modal-section-title">Pricing (RMB)</div><div class="price-table">';
+    const prices = [['Sample', p.p_sample], ['500pcs', p.p_500], ['2000pcs', p.p_2000], ['5000pcs', p.p_5000]];
+    prices.forEach(([tier, val]) => {
+      if (val) {
+        paramsHTML += `<div class="price-cell"><div class="price-tier">${tier}</div><div class="price-val">${val}</div><div class="price-unit">RMB</div></div>`;
+      }
+    });
+    paramsHTML += '</div></div>';
+  }
+
+  // Description
+  if (p.desc) {
+    paramsHTML += '<div class="modal-section"><div class="modal-section-title">Product Description</div><div style="font-size:0.85rem;line-height:1.7;color:var(--text-secondary);white-space:pre-wrap">' + p.desc + '</div></div>';
+  }
+
+  content.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-img"><img src="${p.image}" alt="${p.model}" onerror="this.style.display='none'"></div>
+      <div class="modal-model">${p.model}</div>
+      <div class="modal-type">${p.type_en || p.type_cn || p.category}</div>
+    </div>
+    ${paramsHTML}
+  `;
+
+  overlay.classList.add('show');
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Init
+init();
+</script>
+</body>
+</html>
