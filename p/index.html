@@ -579,6 +579,13 @@ body {
 </div>
 
 <script>
+// Load from localStorage if admin edited data
+try {
+  const stored = localStorage.getItem('gxykit_products_v1');
+  if (stored) {
+    window.PRODUCTS = JSON.parse(stored);
+  }
+} catch(e) {}
 // Category config
 const CATEGORIES = [
   { key: 'all', label: 'All', icon: 'GRID', color: '#0071e3' },
@@ -767,9 +774,8 @@ function openModal(p) {
       ['Signal Range', p.signal], ['FM Frequency', p.fm],
     ]},
     { title: 'Physical', items: [
-      ['Dimensions', p.dim], ['Weight', p.nw || p.weight], ['Gross Weight', p.gw],
+      ['Dimensions', p.dim], ['N.W.', p.nw], ['G.W.', p.gw],
       ['Cable Length', p.cable], ['Material', p.material], ['Color', p.color],
-      ['Screen', p.screen],
     ]},
     { title: 'Technical', items: [
       ['Protocols', p.proto], ['Audio Codecs', p.audio], ['RX/TX', p.rxtx],

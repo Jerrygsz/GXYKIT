@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GXYKIT Product Admin</title>
+<script src="data.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #f5f5f7;
+  --bg-card: #ffffff;
+  --text: #1d1d1f;
+  --text-sec: #86868b;
+  --text-ter: #aeaeb2;
+  --accent: #0071e3;
+  --accent-hov: #0077ed;
+  --success: #34c759;
+  --warn: #ff9500;
+  --danger: #ff3b30;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", sans-serif;
+}
+html { font-size: 16px; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+/* ===== Login Page ===== */
+.login-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f0f1e);
+  display: flex; align-items: center; justify-content: center;
+}
+.login-overlay.hidden { display: none; }
+.login-box {
+  background: var(--bg-card); border-radius: 24px; padding: 40px 36px;
+  width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: loginIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes loginIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.login-logo {
+  width: 64px; height: 64px; border-radius: 16px;
+  background: linear-gradient(135deg, #0071e3, #5e5ce6);
+  margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 700; color: #fff;
+  box-shadow: 0 8px 24px rgba(0,113,227,0.3);
+}
+.login-title { text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.login-sub { text-align: center; font-size: 0.9rem; color: var(--text-sec); margin-bottom: 28px; }
+.login-field { margin-bottom: 16px; }
+.login-field label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-sec); margin-bottom: 6px; text-transform: uppercase; }
+.login-field input {
+  width: 100%; padding: 12px 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;
+  font-size: 1rem; font-family: var(--font); transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--bg);
+}
+.login-field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,113,227,0.1); }
+.login-btn {
+  width: 100%; padding: 14px; border-radius: 12px; border: none;
+  background: var(--accent); color: #fff; font-size: 1rem; font-weight: 600;
+  font-family: var(--font); cursor: pointer; transition: all 0.2s; margin-top: 8px;
+}
+.login-btn:hover { background: var(--accent-hov); transform: translateY(-1px); }
+.login-btn:active { transform: scale(0.98); }
+.login-error {
+  color: var(--danger); font-size: 0.85rem; text-align: center;
+  margin-top: 12px; min-height: 20px; font-weight: 500;
+}
+.login-hint {
+  text-align: center; font-size: 0.75rem; color: var(--text-ter);
+  margin-top: 20px;
+}
+
+/* ===== Header ===== */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245,245,247,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-title { font-size: 1.25rem; font-weight: 700; }
+.header-sub { font-size: 0.8rem; color: var(--text-sec); }
+.header-tabs { display: flex; gap: 4px; background: rgba(0,0,0,0.04); padding: 4px; border-radius: 10px; }
+.header-tab {
+  padding: 6px 16px; border-radius: 8px; border: none; background: transparent;
+  font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s;
+  color: var(--text-sec); font-family: var(--font);
+}
+.header-tab.active { background: var(--bg-card); color: var(--text); box-shadow: var(--shadow); }
+
+/* ===== Main ===== */
+.main { padding: 76px 24px 24px; max-width: 1600px; margin: 0 auto; }
+
+/* ===== Toolbar ===== */
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  margin-bottom: 20px;
+}
+.toolbar-left { display: flex; gap: 8px; flex: 1; }
+.toolbar-right { display: flex; gap: 8px; }
+.search-box {
+  position: relative; flex: 1; max-width: 400px;
+}
+.search-box input {
+  width: 100%; padding: 10px 14px 10px 38px;
+  border: 1px solid rgba(0,0,0,0.08); border-radius: 10px;
+  font-size: 0.9rem; font-family: var(--font); background: var(--bg-card);
+  transition: border-color 0.2s;
+}
+.search-box input:focus { outline: none; border-color: var(--accent); }
+.search-box::before { content: "\U1F50D"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
+.btn {
+  padding: 10px 18px; border-radius: 10px; border: none;
+  font-size: 0.9rem; font-weight: 500; cursor: pointer;
+  font-family: var(--font); transition: all 0.2s; white-space: nowrap;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hov); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover { filter: brightness(1.1); }
+.btn-warn { background: var(--warn); color: #fff; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { filter: brightness(1.1); }
+.btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,0.1); color: var(--text); }
+.btn-ghost:hover { background: rgba(0,0,0,0.04); }
+.btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+/* ===== Page Sections ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== Product Table ===== */
+.table-wrap {
+  background: var(--bg-card); border-radius: var(--radius);
+  box-shadow: var(--shadow); overflow: hidden; margin-bottom: 20px;
+}
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.data-table th {
+  text-align: left; padding: 12px 16px; font-weight: 600; font-size: 0.8rem;
+  color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.03em;
+  background: var(--bg); border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: sticky; top: 0; z-index: 5;
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,0.04);
+  vertical-align: top;
+}
+.data-table tr:hover td { background: rgba(0,113,227,0.03); }
+.data-table .td-model { font-weight: 600; font-size: 0.95rem; }
+.data-table .td-category { color: var(--text-sec); }
+.data-table .td-price { font-weight: 600; color: var(--accent); }
+.data-table .td-dim { color: var(--text-sec); font-size: 0.8rem; }
+.data-table .td-edit input, .data-table .td-edit select, .data-table .td-edit textarea {
+  width: 100%; padding: 6px 8px; border: 1px solid var(--accent); border-radius: 6px;
+  font-size: 0.85rem; font-family: var(--font); background: #fff;
+}
+.data-table .td-edit textarea { min-height: 60px; resize: vertical; }
+
+/* ===== Action Buttons ===== */
+.actions { display: flex; gap: 4px; }
+.action-btn {
+  padding: 4px 8px; border-radius: 6px; border: none;
+  font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+}
+.action-btn.edit { background: rgba(0,113,227,0.1); color: var(--accent); }
+.action-btn.edit:hover { background: var(--accent); color: #fff; }
+.action-btn.save { background: var(--success); color: #fff; }
+.action-btn.cancel { background: var(--text-ter); color: #fff; }
+.action-btn.delete { background: rgba(255,59,48,0.1); color: var(--danger); }
+.action-btn.delete:hover { background: var(--danger); color: #fff; }
+
+/* ===== Pagination ===== */
+.pagination {
+  display: flex; gap: 6px; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.page-btn {
+  padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);
+  background: var(--bg-card); cursor: pointer; font-family: var(--font); font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.page-btn:hover { background: var(--bg); }
+.page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ===== Modal / Form ===== */
+.modal-bg {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px); z-index: 200; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-bg.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
+  background: var(--bg-card); border-radius: var(--radius); width: 90%; max-width: 700px;
+  max-height: 85vh; overflow-y: auto; z-index: 201; box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.modal-box.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+.modal-header { padding: 20px 24px 0; display: flex; justify-content: space-between; align-items: center; }
+.modal-title { font-size: 1.3rem; font-weight: 700; }
+.modal-close { width: 32px; height: 32px; border-radius: 50%; background: var(--bg); border: none;
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer;
+}
+.modal-body { padding: 20px 24px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 4px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size: 0.8rem; font-weight: 600; color: var(--text-sec); text-transform: uppercase; }
+.form-field input, .form-field select, .form-field textarea {
+  padding: 10px 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;
+  font-size: 0.9rem; font-family: var(--font); transition: border-color 0.2s;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--accent); }
+.form-field textarea { min-height: 80px; resize: vertical; }
+.modal-footer { padding: 16px 24px 20px; display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid rgba(0,0,0,0.06); }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 300;
+  padding: 12px 20px; border-radius: 10px; color: #fff; font-weight: 500;
+  font-size: 0.9rem; transform: translateY(80px); opacity: 0; transition: all 0.4s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-success { background: var(--success); }
+.toast-warn { background: var(--warn); }
+.toast-danger { background: var(--danger); }
+
+/* ===== Quote Page ===== */
+.quote-layout {
+  display: grid; grid-template-columns: 1fr 380px; gap: 20px;
+}
+@media (max-width: 1100px) {
+  .quote-layout { grid-template-columns: 1fr; }
+}
+
+/* Product Selector */
+.selector-header { margin-bottom: 12px; }
+.selector-header h3 { font-size: 1.1rem; font-weight: 600; }
+.selector-header p { font-size: 0.85rem; color: var(--text-sec); }
+
+.select-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+}
+.select-card {
+  background: var(--bg-card); border-radius: var(--radius); padding: 12px;
+  box-shadow: var(--shadow); cursor: pointer; transition: all 0.2s;
+  border: 2px solid transparent; position: relative;
+}
+.select-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.select-card.selected { border-color: var(--accent); background: rgba(0,113,227,0.03); }
+.select-card .check { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px;
+  border: 2px solid var(--text-ter); border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: #fff; transition: all 0.2s;
+}
+.select-card.selected .check { background: var(--accent); border-color: var(--accent); }
+.select-card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 8px; }
+.select-card .sc-model { font-weight: 600; font-size: 0.95rem; }
+.select-card .sc-type { font-size: 0.8rem; color: var(--text-sec); margin-bottom: 4px; }
+.select-card .sc-price { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+
+/* Cart Panel */
+.cart-panel {
+  background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px; position: sticky; top: 76px; height: fit-content;
+}
+.cart-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.cart-item {
+  display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  align-items: center;
+}
+.cart-item-img { width: 48px; height: 48px; object-fit: contain; border-radius: 6px; background: var(--bg); flex-shrink: 0; }
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-model { font-weight: 600; font-size: 0.9rem; }
+.cart-item-type { font-size: 0.75rem; color: var(--text-sec); }
+.cart-item-qty { display: flex; align-items: center; gap: 6px; }
+.cart-item-qty input {
+  width: 60px; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;
+  font-size: 0.85rem; text-align: center; font-family: var(--font);
+}
+.cart-item-qty button {
+  width: 24px; height: 24px; border-radius: 6px; border: none; background: var(--bg);
+  cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center;
+}
+.cart-item-rm { color: var(--danger); font-size: 0.75rem; cursor: pointer; border: none; background: none; }
+.cart-empty { text-align: center; color: var(--text-ter); padding: 24px 0; font-size: 0.9rem; }
+
+/* Customer Form in Cart */
+.cart-customer { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06); }
+.cart-customer h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.cart-customer input {
+  width: 100%; padding: 8px 12px; margin-bottom: 8px;
+  border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;
+  font-size: 0.85rem; font-family: var(--font);
+}
+.cart-actions { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.cart-actions .btn { width: 100%; }
+
+/* ===== Quote Result Modal ===== */
+.quote-result { padding: 20px; }
+.quote-company { text-align: center; margin-bottom: 24px; }
+.quote-company h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.quote-company p { font-size: 0.85rem; color: var(--text-sec); }
+.quote-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+.quote-meta-item { background: var(--bg); padding: 10px 14px; border-radius: 8px; }
+.quote-meta-item label { font-size: 0.75rem; color: var(--text-sec); display: block; }
+.quote-meta-item span { font-weight: 600; font-size: 0.9rem; }
+.quote-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 20px; }
+.quote-table th { background: var(--bg); padding: 10px; text-align: left; font-size: 0.8rem; font-weight: 600; color: var(--text-sec); border-bottom: 2px solid rgba(0,0,0,0.08); }
+.quote-table td { padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.quote-table .q-model { font-weight: 600; }
+.quote-table .q-qty { text-align: center; }
+.quote-table .q-price { text-align: right; color: var(--accent); font-weight: 600; }
+.quote-table .q-total { text-align: right; font-weight: 700; }
+.quote-total { text-align: right; padding: 16px; background: var(--bg); border-radius: 10px; margin-bottom: 20px; }
+.quote-total-label { font-size: 0.85rem; color: var(--text-sec); }
+.quote-total-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.quote-note { font-size: 0.8rem; color: var(--text-sec); line-height: 1.6; padding: 12px; background: var(--bg); border-radius: 8px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .header { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  .header-tabs { order: 3; width: 100%; justify-content: center; }
+  .main { padding: 120px 12px 12px; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .toolbar-left, .toolbar-right { width: 100%; }
+  .search-box { max-width: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .data-table { font-size: 0.8rem; }
+  .data-table th, .data-table td { padding: 8px 10px; }
+  .modal-box { width: 95%; max-height: 90vh; }
+  .select-grid { grid-template-columns: repeat(2, 1fr); }
+  .quote-meta { grid-template-columns: 1fr; }
+}
+
+/* ===== Empty State ===== */
+.empty { text-align: center; padding: 48px 20px; color: var(--text-ter); }
+.empty-icon { font-size: 48px; margin-bottom: 12px; }
+
+/* ===== Category filter chips ===== */
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.chip {
+  padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(0,0,0,0.08);
+  background: var(--bg-card); font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+  font-family: var(--font);
+}
+.chip.active { background: var(--text); color: #fff; border-color: var(--text); }
+.chip:hover:not(.active) { background: var(--bg); }
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">G</div>
+    <div class="login-title">GXYKIT Admin</div>
+    <div class="login-sub">Product Management System</div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Enter username" value="Jerry" onkeydown="if(event.key==='Enter')document.getElementById('loginPass').focus()">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <button class="login-btn" style="background:transparent;color:var(--text-sec);border:1px solid rgba(0,0,0,0.1);margin-top:10px;" onclick="viewAsGuest()">Continue as Guest</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">Guests can generate quotations. Admin login required for product edits.</div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>
+      <div class="header-title">GXYKIT Admin</div>
+      <div class="header-sub" id="statusText">Products: 0</div>
+    </div>
+  </div>
+  <div class="header-tabs">
+    <button class="header-tab active" onclick="switchTab('manage')">Product Manage</button>
+    <button class="header-tab" onclick="switchTab('quote')">Quotation</button>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-ghost btn-sm" onclick="exportDataJS()">Export data.js</button>
+    <button class="btn btn-primary btn-sm" onclick="showAddModal()">+ Add Product</button>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+  <!-- ===== Manage Page ===== -->
+  <div class="page active" id="page-manage">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search model, type, category..." oninput="filterTable()">
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <button class="btn btn-ghost btn-sm" onclick="importDataJS()">Import data.js</button>
+        <button class="btn btn-ghost btn-sm" onclick="resetToDefault()">Reset Default</button>
+      </div>
+    </div>
+    <div class="filter-chips" id="filterChips"></div>
+    <div class="table-wrap">
+      <table class="data-table" id="productTable">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Bluetooth</th>
+            <th>Power</th>
+            <th>Ports</th>
+            <th>Dimensions</th>
+            <th style="min-width:100px">Sample</th>
+            <th style="min-width:100px">500pcs</th>
+            <th style="min-width:100px">2000pcs</th>
+            <th style="min-width:100px">5000pcs</th>
+            <th style="width:100px">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- ===== Quote Page ===== -->
+  <div class="page" id="page-quote">
+    <div class="quote-layout">
+      <div class="selector-area">
+        <div class="toolbar" style="margin-bottom:12px">
+          <div class="search-box" style="max-width:300px">
+            <input type="text" id="quoteSearch" placeholder="Search products..." oninput="filterQuoteProducts()">
+          </div>
+          <div class="filter-chips" id="quoteFilterChips" style="margin-bottom:0"></div>
+        </div>
+        <div class="select-grid" id="selectGrid"></div>
+      </div>
+      <div class="cart-panel">
+        <div class="cart-title">Quotation List (<span id="cartCount">0</span>)</div>
+        <div id="cartItems">
+          <div class="cart-empty">No products selected.<br>Click products to add.</div>
+        </div>
+        <div class="cart-customer">
+          <h4>Customer Info</h4>
+          <input type="text" id="custName" placeholder="Customer Name">
+          <input type="text" id="custCompany" placeholder="Company Name">
+          <input type="email" id="custEmail" placeholder="Email">
+          <input type="text" id="custNote" placeholder="Notes / Terms">
+        </div>
+        <div class="cart-actions">
+          <button class="btn btn-primary" onclick="generateQuote()">Generate Quote</button>
+          <button class="btn btn-success" onclick="exportQuoteExcel()">Export Excel</button>
+          <button class="btn btn-ghost" onclick="clearCart()">Clear All</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-bg" id="modalBg" onclick="closeModal()"></div>
+<div class="modal-box" id="modalBox">
+  <div class="modal-header">
+    <div class="modal-title" id="modalTitle">Add Product</div>
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="form-grid" id="formGrid"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveProduct()">Save</button>
+  </div>
+</div>
+
+<!-- Quote Preview Modal -->
+<div class="modal-bg" id="quoteModalBg" onclick="closeQuoteModal()"></div>
+<div class="modal-box" id="quoteModalBox" style="max-width:900px">
+  <div class="modal-header">
+    <div class="modal-title">Quotation Preview</div>
+    <button class="modal-close" onclick="closeQuoteModal()">&times;</button>
+  </div>
+  <div class="modal-body" id="quotePreviewBody"></div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeQuoteModal()">Close</button>
+    <button class="btn btn-success" onclick="exportQuoteExcel()">Export Excel</button>
+    <button class="btn btn-primary" onclick="printQuote()">Print</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const STORAGE_KEY = 'gxykit_products_v1';
+const DEFAULT_PRODUCTS = PRODUCTS || [];
+let products = [];
+let editingId = null;
+let cart = [];
+
+// Fields config for form/table
+const FIELDS = [
+  { key: 'model', label: 'Model', type: 'text', required: true },
+  { key: 'category', label: 'Category', type: 'select', options: ['Car Charger','Car Bluetooth MP3','Bluetooth Receiver','FM Transmitter','Car Charger Hub','Wireless Charger','CarPlay','Other'] },
+  { key: 'type_en', label: 'Product Type (EN)', type: 'text' },
+  { key: 'type_cn', label: 'Product Type (CN)', type: 'text' },
+  { key: 'bt', label: 'Bluetooth', type: 'text' },
+  { key: 'chip', label: 'Chip', type: 'text' },
+  { key: 'power', label: 'Power/Charging', type: 'text' },
+  { key: 'ports', label: 'Ports', type: 'text' },
+  { key: 'features', label: 'Features', type: 'textarea' },
+  { key: 'signal', label: 'Signal Distance', type: 'text' },
+  { key: 'dim', label: 'Dimensions', type: 'text' },
+  { key: 'nw', label: 'N.W. (g)', type: 'text' },
+  { key: 'gw', label: 'G.W. (g)', type: 'text' },
+  { key: 'fm', label: 'FM Frequency', type: 'text' },
+  { key: 'input_v', label: 'Input Voltage', type: 'text' },
+  { key: 'material', label: 'Material', type: 'text' },
+  { key: 'color', label: 'Color', type: 'text' },
+  { key: 'cert', label: 'Certifications', type: 'text' },
+  { key: 'safety', label: 'Safety Protections', type: 'text' },
+  { key: 'audio', label: 'Audio Codecs', type: 'text' },
+  { key: 'rxtx', label: 'RX/TX', type: 'text' },
+  { key: 'proto', label: 'Protocols', type: 'text' },
+  { key: 'selling', label: 'Selling Points', type: 'textarea' },
+  { key: 'desc', label: 'Product Description', type: 'textarea' },
+  { key: 'p_sample', label: 'Sample Price (RMB)', type: 'text' },
+  { key: 'p_500', label: '500pcs Price (RMB)', type: 'text' },
+  { key: 'p_2000', label: '2000pcs Price (RMB)', type: 'text' },
+  { key: 'p_5000', label: '5000pcs Price (RMB)', type: 'text' },
+  { key: 'image', label: 'Image Path', type: 'text', placeholder: 'images/model.jpg' },
+  { key: 'acc', label: 'Accessories', type: 'text' },
+  { key: 'box_dim', label: 'Box Dimensions (mm)', type: 'text', placeholder: '120 x 80 x 45' },
+  { key: 'box_weight', label: 'Box Weight (g)', type: 'text', placeholder: '85' },
+  { key: 'carton_dim', label: 'Carton Dimensions (mm)', type: 'text', placeholder: '500 x 400 x 300' },
+  { key: 'carton_weight', label: 'Carton Weight (kg)', type: 'text', placeholder: '12.5' },
+];
+
+// ===== AUTH =====
+const AUTH_USER = 'Jerry';
+const AUTH_PASS = 'GXY88888';
+const AUTH_KEY = 'gxykit_auth';
+let isLoggedIn = false;
+
+function checkAuth() {
+  try {
+    const auth = sessionStorage.getItem(AUTH_KEY);
+    if (auth) {
+      const data = JSON.parse(auth);
+      if (data.user === AUTH_USER && data.time > Date.now() - 86400000) {
+        isLoggedIn = true;
+        document.getElementById('loginOverlay').classList.add('hidden');
+        initApp();
+        return;
+      }
+    }
+  } catch(e) {}
+  // Not logged in, show login
+  isLoggedIn = false;
+  document.getElementById('loginOverlay').classList.remove('hidden');
+  document.getElementById('loginUser').focus();
+}
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const errorEl = document.getElementById('loginError');
+  if (user === AUTH_USER && pass === AUTH_PASS) {
+    isLoggedIn = true;
+    sessionStorage.setItem(AUTH_KEY, JSON.stringify({ user: user, time: Date.now() }));
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.getElementById('loginPass').value = '';
+    errorEl.textContent = '';
+    initApp();
+    showToast('Welcome back, Jerry!', 'success');
+  } else {
+    errorEl.textContent = 'Invalid username or password';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+}
+
+function doLogout() {
+  isLoggedIn = false;
+  sessionStorage.removeItem(AUTH_KEY);
+  document.getElementById('loginOverlay').classList.remove('hidden');
+  document.getElementById('loginUser').value = 'Jerry';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').textContent = '';
+  // Clear pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-manage').classList.add('active');
+  document.querySelectorAll('.header-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+}
+
+function requireAuth(action) {
+  if (!isLoggedIn) {
+    showToast('Please sign in first', 'warn');
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    document.getElementById('loginUser').focus();
+    return false;
+  }
+  return true;
+}
+
+// ===== INIT =====
+function init() {
+  checkAuth();
+}
+
+function initApp() {
+  loadData();
+  updateStatus();
+  renderFilterChips();
+  renderTable();
+  renderQuoteFilterChips();
+  renderQuoteProducts();
+  renderCart();
+}
+
+function loadData() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      products = JSON.parse(stored);
+      showToast('Loaded from local storage', 'success');
+    } else {
+      products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    }
+  } catch(e) {
+    products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+  }
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  updateStatus();
+}
+
+function updateStatus() {
+  document.getElementById('statusText').textContent = 'Products: ' + products.length + ' | Saved: ' + new Date().toLocaleTimeString();
+}
+
+// ===== TAB =====
+function switchTab(tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.header-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== TABLE / MANAGE =====
+let currentPage = 1;
+let pageSize = 20;
+let currentFilter = 'all';
+let searchQuery = '';
+
+function renderFilterChips() {
+  const cats = [...new Set(products.map(p => p.category))];
+  const container = document.getElementById('filterChips');
+  container.innerHTML = '<div class="chip' + (currentFilter === 'all' ? ' active' : '') + '" onclick="setFilter(\'all\')">All (' + products.length + ')</div>';
+  cats.forEach(cat => {
+    const count = products.filter(p => p.category === cat).length;
+    container.innerHTML += '<div class="chip' + (currentFilter === cat ? ' active' : '') + '" onclick="setFilter(\'' + cat + '\')">' + cat + ' (' + count + ')</div>';
+  });
+}
+
+function setFilter(cat) {
+  currentFilter = cat;
+  currentPage = 1;
+  renderFilterChips();
+  renderTable();
+}
+
+function filterTable() {
+  searchQuery = document.getElementById('searchInput').value.toLowerCase();
+  currentPage = 1;
+  renderTable();
+}
+
+function getFiltered() {
+  let list = products;
+  if (currentFilter !== 'all') {
+    list = list.filter(p => p.category === currentFilter);
+  }
+  if (searchQuery) {
+    list = list.filter(p => {
+      const text = (p.model + ' ' + (p.type_en || '') + ' ' + (p.type_cn || '') + ' ' + (p.category || '')).toLowerCase();
+      return text.includes(searchQuery);
+    });
+  }
+  return list;
+}
+
+function renderTable() {
+  const list = getFiltered();
+  const start = (currentPage - 1) * pageSize;
+  const pageItems = list.slice(start, start + pageSize);
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  pageItems.forEach((p, idx) => {
+    const realIdx = products.indexOf(p);
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td class="td-model">' + (p.model || '') + '</td>' +
+      '<td class="td-category">' + (p.category || '') + '</td>' +
+      '<td>' + (p.type_en || p.type_cn || '') + '</td>' +
+      '<td>' + (p.bt || '') + '</td>' +
+      '<td>' + (p.power || '') + '</td>' +
+      '<td>' + (p.ports || '') + '</td>' +
+      '<td class="td-dim">' + (p.dim || '') + '</td>' +
+      '<td class="td-price">' + (p.p_sample || '-') + '</td>' +
+      '<td class="td-price">' + (p.p_500 || '-') + '</td>' +
+      '<td class="td-price">' + (p.p_2000 || '-') + '</td>' +
+      '<td class="td-price">' + (p.p_5000 || '-') + '</td>' +
+      '<td><div class="actions">' +
+      '<button class="action-btn edit" onclick="editProduct(' + realIdx + ')">Edit</button>' +
+      '<button class="action-btn delete" onclick="deleteProduct(' + realIdx + ')">Del</button>' +
+      '</div></td>';
+    tbody.appendChild(tr);
+  });
+  renderPagination(list.length);
+}
+
+function renderPagination(total) {
+  const totalPages = Math.ceil(total / pageSize) || 1;
+  const container = document.getElementById('pagination');
+  let html = '';
+  html += '<button class="page-btn" ' + (currentPage === 1 ? 'disabled' : '') + ' onclick="goPage(' + (currentPage - 1) + ')">&lt;</button>';
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      html += '<button class="page-btn' + (i === currentPage ? ' active' : '') + '" onclick="goPage(' + i + ')">' + i + '</button>';
+    } else if (i === currentPage - 2 || i === currentPage + 2) {
+      html += '<span style="padding:0 4px;color:var(--text-ter)">...</span>';
+    }
+  }
+  html += '<button class="page-btn" ' + (currentPage === totalPages ? 'disabled' : '') + ' onclick="goPage(' + (currentPage + 1) + ')">&gt;</button>';
+  container.innerHTML = html;
+}
+
+function goPage(n) {
+  currentPage = n;
+  renderTable();
+}
+
+// ===== ADD / EDIT =====
+function showAddModal() {
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'Add Product';
+  buildForm({});
+  document.getElementById('modalBg').classList.add('show');
+  document.getElementById('modalBox').classList.add('show');
+}
+
+function editProduct(idx) {
+  editingId = idx;
+  document.getElementById('modalTitle').textContent = 'Edit Product: ' + products[idx].model;
+  buildForm(products[idx]);
+  document.getElementById('modalBg').classList.add('show');
+  document.getElementById('modalBox').classList.add('show');
+}
+
+function buildForm(data) {
+  const grid = document.getElementById('formGrid');
+  grid.innerHTML = '';
+  FIELDS.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'form-field' + (f.type === 'textarea' ? ' full' : '');
+    let input = '';
+    if (f.type === 'select') {
+      input = '<select id="f_' + f.key + '">' + f.options.map(o => '<option value="' + o + '"' + ((data[f.key] || '') === o ? ' selected' : '') + '>' + o + '</option>').join('') + '</select>';
+    } else if (f.type === 'textarea') {
+      input = '<textarea id="f_' + f.key + '" rows="3">' + (data[f.key] || '') + '</textarea>';
+    } else if (f.key === 'image') {
+      // Image field with file upload
+      const currentImg = data[f.key] || '';
+      const isBase64 = currentImg.startsWith('data:image');
+      input = '<input type="text" id="f_' + f.key + '" value="' + currentImg + '" placeholder="images/model.jpg or paste base64">' +
+        '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;">' +
+        '<label style="padding:6px 12px;background:var(--accent);color:#fff;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">' +
+        '<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this)">Upload Local Image' +
+        '</label>' +
+        '<span id="imgUploadStatus" style="font-size:0.75rem;color:var(--text-sec);"></span>' +
+        '</div>' +
+        '<div id="imgPreview" style="margin-top:8px;">' + (currentImg ? '<img src="' + currentImg + '" style="max-height:80px;max-width:120px;border-radius:6px;background:var(--bg);object-fit:contain;">' : '') + '</div>' +
+        '<div style="font-size:0.7rem;color:var(--text-ter);margin-top:4px;">Tip: For large images, save to images/ folder and enter path above.</div>';
+    } else {
+      input = '<input type="text" id="f_' + f.key + '" value="' + (data[f.key] || '') + '" placeholder="' + (f.placeholder || '') + '">';
+    }
+    div.innerHTML = '<label>' + f.label + (f.required ? ' *' : '') + '</label>' + input;
+    grid.appendChild(div);
+  });
+}
+
+function handleImageUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('imgUploadStatus');
+  const previewEl = document.getElementById('imgPreview');
+  const pathInput = document.getElementById('f_image');
+  statusEl.textContent = 'Reading...';
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    pathInput.value = base64;
+    previewEl.innerHTML = '<img src="' + base64 + '" style="max-height:80px;max-width:120px;border-radius:6px;background:var(--bg);object-fit:contain;">';
+    const mb = (base64.length * 0.75 / 1024 / 1024).toFixed(2);
+    statusEl.textContent = file.name + ' (' + mb + 'MB base64)';
+    showToast('Image loaded as base64. Save product to keep it.', 'success');
+  };
+  reader.onerror = function() {
+    statusEl.textContent = 'Failed to read file';
+    showToast('Image upload failed', 'danger');
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveProduct() {
+  const data = {};
+  FIELDS.forEach(f => {
+    data[f.key] = document.getElementById('f_' + f.key).value.trim();
+  });
+  if (!data.model) {
+    showToast('Model is required', 'warn');
+    return;
+  }
+  if (editingId !== null) {
+    products[editingId] = { ...products[editingId], ...data };
+    showToast('Product updated', 'success');
+  } else {
+    data.id = Date.now();
+    products.push(data);
+    showToast('Product added', 'success');
+  }
+  saveData();
+  closeModal();
+  renderTable();
+  renderQuoteProducts();
+}
+
+function deleteProduct(idx) {
+  if (!confirm('Delete product "' + products[idx].model + '"?')) return;
+  products.splice(idx, 1);
+  saveData();
+  renderTable();
+  renderQuoteProducts();
+  renderCart();
+  showToast('Product deleted', 'danger');
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('show');
+  document.getElementById('modalBox').classList.remove('show');
+  editingId = null;
+}
+
+// ===== EXPORT / IMPORT =====
+function exportDataJS() {
+  const json = JSON.stringify(products, null, 2);
+  const blob = new Blob(['const PRODUCTS = ' + json + ';'], { type: 'application/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.js';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('data.js exported! Replace the file to update catalog.', 'success');
+}
+
+function importDataJS() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.js';
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const text = ev.target.result;
+        const json = text.replace(/const\s+PRODUCTS\s*=\s*/, '').replace(/;$/, '');
+        products = JSON.parse(json);
+        saveData();
+        renderTable();
+        renderQuoteProducts();
+        showToast('Data imported successfully', 'success');
+      } catch(err) {
+        showToast('Import failed: ' + err.message, 'danger');
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function resetToDefault() {
+  if (!confirm('Reset all data to default? This will overwrite local changes.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+  saveData();
+  renderTable();
+  renderQuoteProducts();
+  renderCart();
+  showToast('Data reset to default', 'success');
+}
+
+// ===== QUOTE PAGE =====
+let quoteFilter = 'all';
+let quoteSearch = '';
+
+function renderQuoteFilterChips() {
+  const cats = [...new Set(products.map(p => p.category))];
+  const container = document.getElementById('quoteFilterChips');
+  container.innerHTML = '<div class="chip' + (quoteFilter === 'all' ? ' active' : '') + '" onclick="setQuoteFilter(\'all\')">All</div>';
+  cats.forEach(cat => {
+    container.innerHTML += '<div class="chip' + (quoteFilter === cat ? ' active' : '') + '" onclick="setQuoteFilter(\'' + cat + '\')">' + cat + '</div>';
+  });
+}
+
+function setQuoteFilter(cat) {
+  quoteFilter = cat;
+  renderQuoteFilterChips();
+  renderQuoteProducts();
+}
+
+function filterQuoteProducts() {
+  quoteSearch = document.getElementById('quoteSearch').value.toLowerCase();
+  renderQuoteProducts();
+}
+
+function getQuoteFiltered() {
+  let list = products;
+  if (quoteFilter !== 'all') {
+    list = list.filter(p => p.category === quoteFilter);
+  }
+  if (quoteSearch) {
+    list = list.filter(p => {
+      const text = (p.model + ' ' + (p.type_en || '') + ' ' + (p.type_cn || '')).toLowerCase();
+      return text.includes(quoteSearch);
+    });
+  }
+  return list;
+}
+
+function renderQuoteProducts() {
+  const list = getQuoteFiltered();
+  const grid = document.getElementById('selectGrid');
+  grid.innerHTML = '';
+  list.forEach((p, idx) => {
+    const realIdx = products.indexOf(p);
+    const inCart = cart.find(c => c.idx === realIdx);
+    const card = document.createElement('div');
+    card.className = 'select-card' + (inCart ? ' selected' : '');
+    card.onclick = () => toggleCart(realIdx);
+    const price = p.p_sample || p.p_500 || '-';
+    card.innerHTML =
+      '<div class="check">' + (inCart ? '&#10003;' : '') + '</div>' +
+      '<img src="' + (p.image || '') + '" alt="' + p.model + '" onerror="this.style.display=\'none\'">' +
+      '<div class="sc-model">' + p.model + '</div>' +
+      '<div class="sc-type">' + (p.type_en || p.category) + '</div>' +
+      '<div class="sc-price">' + (price !== '-' ? 'Sample: ' + price + ' RMB' : 'Price on request') + '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function toggleCart(idx) {
+  const existing = cart.find(c => c.idx === idx);
+  if (existing) {
+    cart = cart.filter(c => c.idx !== idx);
+  } else {
+    cart.push({ idx: idx, qty: 100, priceTier: 'p_500' });
+  }
+  renderQuoteProducts();
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  document.getElementById('cartCount').textContent = cart.length;
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty">No products selected.<br>Click products to add.</div>';
+    return;
+  }
+  let html = '';
+  cart.forEach((c, i) => {
+    const p = products[c.idx];
+    html += '<div class="cart-item">' +
+      '<img class="cart-item-img" src="' + (p.image || '') + '" onerror="this.style.display=\'none\'">' +
+      '<div class="cart-item-info">' +
+      '<div class="cart-item-model">' + p.model + '</div>' +
+      '<div class="cart-item-type">' + (p.type_en || p.category) + '</div>' +
+      '</div>' +
+      '<div class="cart-item-qty">' +
+      '<button onclick="changeQty(' + i + ', -1)">-</button>' +
+      '<input type="number" value="' + c.qty + '" min="1" onchange="setQty(' + i + ', this.value)">' +
+      '<button onclick="changeQty(' + i + ', 1)">+</button>' +
+      '</div>' +
+      '<button class="cart-item-rm" onclick="removeCart(' + i + ')">Remove</button>' +
+      '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function changeCartTier(i, tier) {
+  cart[i].priceTier = tier;
+  renderCart();
+}
+
+function changeQty(i, delta) {
+  cart[i].qty = Math.max(1, cart[i].qty + delta);
+  renderCart();
+}
+
+function setQty(i, val) {
+  cart[i].qty = Math.max(1, parseInt(val) || 1);
+  renderCart();
+}
+
+function removeCart(i) {
+  cart.splice(i, 1);
+  renderQuoteProducts();
+  renderCart();
+}
+
+function clearCart() {
+  cart = [];
+  renderQuoteProducts();
+  renderCart();
+}
+
+// ===== GENERATE QUOTE =====
+function generateQuote() {
+  if (cart.length === 0) {
+    showToast('Please select at least one product', 'warn');
+    return;
+  }
+  const custName = document.getElementById('custName').value || 'Customer';
+  const custCompany = document.getElementById('custCompany').value || '';
+  const custEmail = document.getElementById('custEmail').value || '';
+  const custNote = document.getElementById('custNote').value || 'Prices are valid for 30 days. MOQ applies. Payment: T/T in advance. Delivery: FOB Shenzhen.';
+
+  let total = 0;
+  let rows = '';
+  cart.forEach(c => {
+    const p = products[c.idx];
+    const price = parseFloat(p[c.priceTier] || p.p_sample || p.p_500 || 0) || 0;
+    const lineTotal = price * c.qty;
+    total += lineTotal;
+    rows += '<tr>' +
+      '<td class="q-model">' + p.model + '</td>' +
+      '<td>' + (p.type_en || p.category) + '</td>' +
+      '<td>' + (p.desc || '-') + '</td>' +
+      '<td class="q-qty">' + c.qty + '</td>' +
+      '<td class="q-price">' + (price ? price.toFixed(2) : '-') + '</td>' +
+      '<td class="q-total">' + (lineTotal ? lineTotal.toFixed(2) : '-') + '</td>' +
+      '<td style="font-size:0.75rem;color:var(--text-sec)">' + (p.box_dim || '-') + '<br>' + (p.box_weight || '-') + 'g</td>' +
+      '<td style="font-size:0.75rem;color:var(--text-sec)">' + (p.carton_dim || '-') + '<br>' + (p.carton_weight || '-') + 'kg</td>' +
+      '</tr>';
+  });
+
+  const dateStr = new Date().toLocaleDateString();
+  const quoteNo = 'QT-' + Date.now().toString().slice(-8);
+
+  const html = '<div class="quote-result">' +
+    '<div class="quote-company">' +
+    '<h2>QUOTATION</h2>' +
+    '<p>Shenzhen Guangxinyi Electronics Co., Ltd.</p>' +
+    '</div>' +
+    '<div class="quote-meta">' +
+    '<div class="quote-meta-item"><label>Quote No.</label><span>' + quoteNo + '</span></div>' +
+    '<div class="quote-meta-item"><label>Date</label><span>' + dateStr + '</span></div>' +
+    '<div class="quote-meta-item"><label>To</label><span>' + custName + (custCompany ? ' / ' + custCompany : '') + '</span></div>' +
+    '<div class="quote-meta-item"><label>Email</label><span>' + (custEmail || '-') + '</span></div>' +
+    '</div>' +
+    '<table class="quote-table">' +
+    '<thead><tr><th>Model</th><th>Description</th><th>Product Description</th><th>Qty</th><th>Unit Price (RMB)</th><th>Total (RMB)</th><th>Box Size / Weight</th><th>Carton Size / Weight</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody>' +
+    '</table>' +
+    '<div class="quote-total">' +
+    '<div class="quote-total-label">Total Amount</div>' +
+    '<div class="quote-total-value">' + (total ? total.toFixed(2) : '-') + ' RMB</div>' +
+    '</div>' +
+    '<div class="quote-note">' + custNote.replace(/\n/g, '<br>') + '</div>' +
+    '</div>';
+
+  document.getElementById('quotePreviewBody').innerHTML = html;
+  document.getElementById('quoteModalBg').classList.add('show');
+  document.getElementById('quoteModalBox').classList.add('show');
+}
+
+function closeQuoteModal() {
+  document.getElementById('quoteModalBg').classList.remove('show');
+  document.getElementById('quoteModalBox').classList.remove('show');
+}
+
+function printQuote() {
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write('<html><head><title>Quotation</title><style>' +
+    'body{font-family:Arial,sans-serif;padding:40px;max-width:800px;margin:0 auto}' +
+    'h2{text-align:center}table{width:100%;border-collapse:collapse;margin:20px 0}' +
+    'th,td{padding:10px;text-align:left;border-bottom:1px solid #ddd}' +
+    'th{background:#f5f5f7;font-weight:600}.total{text-align:right;font-size:1.5rem;font-weight:700;margin:20px 0}' +
+    '.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}' +
+    '.meta-item{background:#f5f5f7;padding:10px;border-radius:6px}' +
+    '.meta-item label{font-size:0.75rem;color:#666;display:block}' +
+    '.meta-item span{font-weight:600}' +
+    '</style></head><body>' + document.getElementById('quotePreviewBody').innerHTML + '</body></html>');
+  printWindow.document.close();
+  printWindow.print();
+}
+
+// ===== EXCEL EXPORT =====
+function exportQuoteExcel() {
+  if (cart.length === 0) {
+    showToast('Please select at least one product', 'warn');
+    return;
+  }
+  const custName = document.getElementById('custName').value || 'Customer';
+  const custCompany = document.getElementById('custCompany').value || '';
+  const custEmail = document.getElementById('custEmail').value || '';
+  const custNote = document.getElementById('custNote').value || '';
+  const dateStr = new Date().toLocaleDateString();
+
+  // Build workbook
+  const wb = XLSX.utils.book_new();
+  wb.Props = { Title: 'Quotation', Subject: 'Product Quotation', Author: 'GXYKIT' };
+
+  // Header rows
+  const wsData = [
+    ['QUOTATION'],
+    ['Shenzhen Guangxinyi Electronics Co., Ltd.'],
+    [''],
+    ['Date:', dateStr],
+    ['To:', custName + (custCompany ? ' - ' + custCompany : '')],
+    ['Email:', custEmail || '-'],
+    [''],
+    ['Model', 'Description', 'Product Description', 'Qty', 'Unit Price (RMB)', 'Total (RMB)', 'Box Size (mm)', 'Box Weight (g)', 'Carton Size (mm)', 'Carton Weight (kg)'],
+  ];
+
+  let total = 0;
+  cart.forEach(c => {
+    const p = products[c.idx];
+    const price = parseFloat(p[c.priceTier] || p.p_sample || p.p_500 || 0) || 0;
+    const lineTotal = price * c.qty;
+    total += lineTotal;
+    wsData.push([
+      p.model,
+      p.type_en || p.category,
+      p.desc || '-',
+      c.qty,
+      price || '-',
+      lineTotal || '-',
+      p.box_dim || '-',
+      p.box_weight || '-',
+      p.carton_dim || '-',
+      p.carton_weight || '-'
+    ]);
+  });
+
+  wsData.push(['', '', '', '', '', '', '', '', '', '']);
+  wsData.push(['', '', '', '', '', 'Total:', total ? total.toFixed(2) : '-', '', '', '']);
+  wsData.push(['']);
+  wsData.push(['Notes:']);
+  wsData.push([custNote]);
+
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+  ws['!cols'] = [{wch: 15}, {wch: 25}, {wch: 35}, {wch: 8}, {wch: 18}, {wch: 18}, {wch: 18}, {wch: 14}, {wch: 18}, {wch: 16}];
+  XLSX.utils.book_append_sheet(wb, ws, 'Quotation');
+  XLSX.writeFile(wb, 'Quotation_' + custName.replace(/\s+/g, '_') + '_' + dateStr.replace(/\//g, '-') + '.xlsx');
+  showToast('Excel exported!', 'success');
+}
+
+// ===== TOAST =====
+function showToast(msg, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast toast-' + type + ' show';
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeQuoteModal(); }
+});
+
+// ===== INIT =====
+init();
+</script>
+</body>
+</html>
