@@ -775,6 +775,14 @@ function renderProducts(cat) {
 
   let products = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
 
+  // Sort by year descending, then by model ascending
+  products.sort((a, b) => {
+    const ya = parseInt(a.year) || 0;
+    const yb = parseInt(b.year) || 0;
+    if (yb !== ya) return yb - ya;
+    return (a.model || '').localeCompare(b.model || '', undefined, {numeric: true});
+  });
+
   if (cat !== 'all') {
     const icon = CAT_ICONS[cat] || CAT_ICONS['Other'];
     hero.style.display = 'block';
