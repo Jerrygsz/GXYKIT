@@ -115,7 +115,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   transition: border-color 0.2s;
 }
 .search-box input:focus { outline: none; border-color: var(--accent); }
-.search-box::before { content: "\U1F50D"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
+.search-box::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
 .btn {
   padding: 10px 18px; border-radius: 10px; border: none;
   font-size: 0.9rem; font-weight: 500; cursor: pointer;
@@ -448,7 +448,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     <div class="toolbar">
       <div class="toolbar-left">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search model, type, category..." oninput="filterTable()">
+          <input type="text" id="searchInput" placeholder="Search model, type, category..." oninput="filterTable()" autocomplete="off">
         </div>
       </div>
       <div class="toolbar-right">
