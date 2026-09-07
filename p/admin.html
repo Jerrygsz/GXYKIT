@@ -562,6 +562,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 <script>
 // ===== DATA =====
 const STORAGE_KEY = 'gxykit_products_v1';
+const STORAGE_VERSION_KEY = 'gxykit_data_version';
+const DATA_VERSION_JS = (typeof DATA_VERSION !== 'undefined') ? DATA_VERSION : 'unknown';
 const DEFAULT_PRODUCTS = PRODUCTS || [];
 let products = [];
 let editingId = null;
@@ -627,10 +629,13 @@ function checkAuth() {
       }
     }
   } catch(e) {}
-  // Not logged in, show login
   isLoggedIn = false;
   document.getElementById('loginOverlay').classList.remove('hidden');
   document.getElementById('loginUser').focus();
+}
+
+function init() {
+  checkAuth();
 }
 
 function doLogin() {
@@ -675,11 +680,6 @@ function requireAuth(action) {
   return true;
 }
 
-// ===== INIT =====
-function init() {
-  checkAuth();
-}
-
 function initApp() {
   loadData();
   mergeHubCategory();
@@ -695,8 +695,25 @@ function initApp() {
 function loadData() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
+    const storedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
     if (stored) {
       products = JSON.parse(stored);
+      // Version mismatch: data.js was updated, localStorage is stale
+      if (DATA_VERSION_JS !== 'unknown' && storedVersion !== DATA_VERSION_JS) {
+        const doReload = confirm(
+          'Data has been updated (v' + DATA_VERSION_JS + ').\n' +
+          'Your local data is from an older version (v' + (storedVersion || 'unknown') + ').\n\n' +
+          'Click OK to load the latest data from data.js.\n' +
+          'Click Cancel to keep your local changes (may have outdated categories).'
+        );
+        if (doReload) {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+          products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+          showToast('Loaded latest data from data.js (v' + DATA_VERSION_JS + ')', 'success');
+          return;
+        }
+      }
       return;
     }
     const userDefault = localStorage.getItem(STORAGE_KEY + '_default');
@@ -707,24 +724,33 @@ function loadData() {
     }
   } catch(e) {}
   products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+  // Save version on first load
+  if (DATA_VERSION_JS !== 'unknown') {
+    localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+  }
 }
 
 function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  if (DATA_VERSION_JS !== 'unknown') {
+    localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+  }
   updateStatus();
 }
 
 function mergeHubCategory() {
   let changed = 0;
   products.forEach(p => {
-    if (p.category === 'Car Charger Hub') {
+    const cat = p.category || '';
+    // Normalize old/variant category names
+    if (cat === 'Car Charger Hub' || cat === 'Car Charger Hubs' || cat === 'Car Chargers') {
       p.category = 'Car Charger';
       changed++;
     }
   });
   if (changed > 0) {
     saveData();
-    showToast('Merged ' + changed + ' Charger Hub(s) into Car Charger', 'success');
+    showToast('Normalized ' + changed + ' product category name(s) to "Car Charger"', 'success');
     return true;
   }
   return false;
@@ -749,10 +775,17 @@ let currentFilter = 'all';
 let searchQuery = '';
 
 function renderFilterChips() {
-  const cats = [...new Set(products.map(p => p.category))];
+  // Get unique categories from products
+  const rawCats = [...new Set(products.map(p => p.category))];
+  // Sort to match FIELDS order for consistency
+  const fieldCats = (FIELDS.find(f => f.key === 'category') || {}).options || [];
+  const knownCats = fieldCats.filter(c => rawCats.includes(c));
+  const unknownCats = rawCats.filter(c => !fieldCats.includes(c));
+  const cats = knownCats.concat(unknownCats.sort());
   const container = document.getElementById('filterChips');
   container.innerHTML = '<div class="chip' + (currentFilter === 'all' ? ' active' : '') + '" onclick="setFilter(\'all\')">All (' + products.length + ')</div>';
   cats.forEach(cat => {
+    if (!cat) return;
     const count = products.filter(p => p.category === cat).length;
     container.innerHTML += '<div class="chip' + (currentFilter === cat ? ' active' : '') + '" onclick="setFilter(\'' + cat + '\')">' + cat + ' (' + count + ')</div>';
   });
@@ -861,7 +894,13 @@ function buildForm(data) {
     div.className = 'form-field' + (f.type === 'textarea' || f.type === 'image' ? ' full' : '');
     let input = '';
     if (f.type === 'select') {
-      input = '<select id="f_' + f.key + '">' + f.options.map(o => '<option value="' + o + '"' + ((data[f.key] || '') === o ? ' selected' : '') + '>' + o + '</option>').join('') + '</select>';
+      // Build options: include FIELDS options + current value if not in options
+      let opts = f.options.slice();
+      const currentVal = data[f.key] || '';
+      if (currentVal && !opts.includes(currentVal)) {
+        opts.push(currentVal);
+      }
+      input = '<select id="f_' + f.key + '">' + opts.map(o => '<option value="' + o + '"' + (currentVal === o ? ' selected' : '') + '>' + o + '</option>').join('') + '</select>';
     } else if (f.type === 'textarea') {
       input = '<textarea id="f_' + f.key + '" rows="3">' + (data[f.key] || '') + '</textarea>';
     } else if (f.type === 'image') {
@@ -983,14 +1022,27 @@ function importDataJS() {
     reader.onload = ev => {
       try {
         const text = ev.target.result;
-        const json = text.replace(/const\s+PRODUCTS\s*=\s*/, '').replace(/;$/, '');
+        // Extract DATA_VERSION if present
+        let importedVersion = null;
+        const verMatch = text.match(/DATA_VERSION\s*=\s*['"]([^'"]+)['"]/);
+        if (verMatch) importedVersion = verMatch[1];
+        // Remove DATA_VERSION line and PRODUCTS const to extract JSON
+        const json = text
+          .replace(/const\s+DATA_VERSION\s*=\s*['"][^'"]*['"]\s*;?\s*/, '')
+          .replace(/const\s+PRODUCTS\s*=\s*/, '')
+          .replace(/;$/, '')
+          .trim();
         products = JSON.parse(json);
+        // Update version in localStorage
+        if (importedVersion) {
+          localStorage.setItem(STORAGE_VERSION_KEY, importedVersion);
+        }
         saveData();
         renderTable();
         renderQuoteProducts();
         renderFilterChips();
         populateBatchCategories();
-        showToast('Data imported successfully', 'success');
+        showToast('Data imported successfully' + (importedVersion ? ' (v' + importedVersion + ')' : ''), 'success');
       } catch(err) {
         showToast('Import failed: ' + err.message, 'danger');
       }
@@ -1010,6 +1062,10 @@ function resetToDefault() {
       products = JSON.parse(userDefault);
     } else {
       products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+      // Reset version to match data.js
+      if (DATA_VERSION_JS !== 'unknown') {
+        localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+      }
     }
   } catch(e) {
     products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
@@ -1018,6 +1074,8 @@ function resetToDefault() {
   renderTable();
   renderQuoteProducts();
   renderCart();
+  renderFilterChips();
+  populateBatchCategories();
   showToast('Data reset to default', 'success');
 }
 
@@ -1051,19 +1109,17 @@ function clearSelection() {
 function populateBatchCategories() {
   const select = document.getElementById('batchCategory');
   if (!select) return;
-  const cats = [...new Set(products.map(p => p.category))];
+  // Sort categories: FIELDS order first, then any unknown
+  const rawCats = [...new Set(products.map(p => p.category))];
+  const fieldCats = (FIELDS.find(f => f.key === 'category') || {}).options || [];
+  const knownCats = fieldCats.filter(c => rawCats.includes(c));
+  const unknownCats = rawCats.filter(c => !fieldCats.includes(c)).sort();
+  const cats = knownCats.concat(unknownCats);
   select.innerHTML = '<option value="">Change category to...</option>';
   cats.forEach(cat => {
+    if (!cat) return;
     select.innerHTML += '<option value="' + cat + '">' + cat + '</option>';
   });
-  const fieldCats = FIELDS.find(f => f.key === 'category');
-  if (fieldCats && fieldCats.options) {
-    fieldCats.options.forEach(opt => {
-      if (!cats.includes(opt)) {
-        select.innerHTML += '<option value="' + opt + '">' + opt + '</option>';
-      }
-    });
-  }
 }
 
 function batchChangeCategory() {
@@ -1091,10 +1147,16 @@ let quoteFilter = 'all';
 let quoteSearch = '';
 
 function renderQuoteFilterChips() {
-  const cats = [...new Set(products.map(p => p.category))];
+  // Sort to match FIELDS order for consistency
+  const rawCats = [...new Set(products.map(p => p.category))];
+  const fieldCats = (FIELDS.find(f => f.key === 'category') || {}).options || [];
+  const knownCats = fieldCats.filter(c => rawCats.includes(c));
+  const unknownCats = rawCats.filter(c => !fieldCats.includes(c)).sort();
+  const cats = knownCats.concat(unknownCats);
   const container = document.getElementById('quoteFilterChips');
   container.innerHTML = '<div class="chip' + (quoteFilter === 'all' ? ' active' : '') + '" onclick="setQuoteFilter(\'all\')">All</div>';
   cats.forEach(cat => {
+    if (!cat) return;
     container.innerHTML += '<div class="chip' + (quoteFilter === cat ? ' active' : '') + '" onclick="setQuoteFilter(\'' + cat + '\')">' + cat + '</div>';
   });
 }
