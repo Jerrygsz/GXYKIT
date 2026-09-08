@@ -574,6 +574,7 @@ const DEFAULT_PRODUCTS = PRODUCTS || [];
 let products = [];
 let editingId = null;
 let cart = [];
+let _batchImages = [];
 
 // Fields config for form/table
 const FIELDS = [
@@ -932,12 +933,65 @@ function buildForm(data) {
     div.innerHTML = '<label>' + f.label + (f.required ? ' *' : '') + '</label>' + input;
     grid.appendChild(div);
   });
-    // After all fields rendered, update image previews if batch images exist
-    if (_batchImages && _batchImages.length > 0) updateImagePreviews();
+  // After all fields rendered, update image previews if batch images exist
+  if (_batchImages && _batchImages.length > 0) updateImagePreviews();
+}
+
+function handleDragOver(e, el) {
+  e.preventDefault();
+  if (el) el.classList.add('drag-over');
+}
+
+function handleDragLeave(e, el) {
+  e.preventDefault();
+  if (el) el.classList.remove('drag-over');
+}
+
+function handleDrop(e, el) {
+  e.preventDefault();
+  if (el) el.classList.remove('drag-over');
+  const fileInput = el.querySelector('input[type="file"]');
+  if (fileInput && e.dataTransfer.files.length > 0) {
+    fileInput.files = e.dataTransfer.files;
+    handleBatchUpload(fileInput);
+  }
+}
+
+function handleBatchUpload(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+  processBatchFiles(files);
+}
+
+function processBatchFiles(files) {
+  const maxImages = 3;
+  const remainingSlots = maxImages - _batchImages.length;
+  const toAdd = files.slice(0, remainingSlots);
+  let processed = 0;
+  toAdd.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      _batchImages.push(e.target.result);
+      processed++;
+      if (processed === toAdd.length) {
+        updateImagePreviews();
+        syncBatchToHidden();
+      }
+    };
+    reader.readAsDataURL(file);
   });
   if (files.length > remainingSlots) {
     showToast('Only ' + remainingSlots + ' of ' + files.length + ' images were added (max 3)', 'warn');
   }
+}
+
+function syncBatchToHidden() {
+  const img1 = document.getElementById('f_image');
+  const img2 = document.getElementById('f_image2');
+  const img3 = document.getElementById('f_image3');
+  if (img1) img1.value = _batchImages[0] || '';
+  if (img2) img2.value = _batchImages[1] || '';
+  if (img3) img3.value = _batchImages[2] || '';
 }
 
 function updateImagePreviews() {
