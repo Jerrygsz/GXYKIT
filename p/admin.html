@@ -372,30 +372,36 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 }
 .batch-select:focus { outline: none; border-color: var(--accent); }
 
-/* ===== Multi-Image Upload in Form ===== */
-.img-upload-group {
-  display: flex; gap: 12px; flex-wrap: wrap;
+/* ===== Batch Image Upload ===== */
+.image-dropzone {
+  border: 2px dashed rgba(0,0,0,0.15); border-radius: 12px; padding: 24px 16px;
+  text-align: center; cursor: pointer; transition: all 0.2s;
+  background: var(--bg-card); min-height: 120px; display: flex;
+  align-items: center; justify-content: center;
 }
-.img-upload-slot {
-  flex: 1; min-width: 140px;
+.image-dropzone:hover { border-color: var(--accent); background: rgba(0,113,227,0.04); }
+.image-dropzone.dragover { border-color: var(--accent); background: rgba(0,113,227,0.08); }
+.image-dropzone .drop-hint { color: var(--text-sec); font-size: 0.85rem; line-height: 1.6; }
+.image-dropzone .drop-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.image-preview-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px; margin-top: 10px;
 }
-.img-upload-slot .slot-label {
-  font-size: 0.75rem; color: var(--text-sec); margin-bottom: 4px;
+.img-preview-card {
+  position: relative; border-radius: 8px; overflow: hidden;
+  background: var(--bg-card); border: 1px solid rgba(0,0,0,0.06);
+  aspect-ratio: 1;
 }
-.img-upload-slot input[type="text"] {
-  width: 100%; padding: 8px 10px; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;
-  font-size: 0.8rem; font-family: var(--font);
+.img-preview-thumb {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.img-upload-slot .upload-btn {
-  display: block; padding: 6px 10px; background: var(--accent); color: #fff;
-  border-radius: 6px; font-size: 0.75rem; cursor: pointer; text-align: center; margin-top: 4px;
+.img-preview-del {
+  position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+  border: none; border-radius: 50%; background: rgba(0,0,0,0.5); color: #fff;
+  font-size: 14px; line-height: 22px; text-align: center; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
 }
-.img-upload-slot .slot-preview {
-  margin-top: 6px; min-height: 50px;
-}
-.img-upload-slot .slot-preview img {
-  max-height: 60px; max-width: 100%; border-radius: 6px; background: var(--bg); object-fit: contain;
-}
+.img-preview-del:hover { background: rgba(255,59,48,0.8); }
 </style>
 </head>
 <body>
@@ -600,9 +606,9 @@ const FIELDS = [
   { key: 'p_2000', label: '2000pcs Price (RMB)', type: 'text' },
   { key: 'p_5000', label: '5000pcs Price (RMB)', type: 'text' },
   { key: 'year', label: 'Year', type: 'text', placeholder: '2024' },
-  { key: 'image', label: 'Image 1 (Main)', type: 'image', placeholder: 'images/model.jpg' },
-  { key: 'image2', label: 'Image 2', type: 'image', placeholder: 'images/model-2.jpg' },
-  { key: 'image3', label: 'Image 3', type: 'image', placeholder: 'images/model-3.jpg' },
+    { key: 'image', label: 'Images (max 3)', type: 'images', placeholder: 'Upload up to 3 images' },
+  { key: 'image2', label: 'Image 2', type: 'hidden' },
+  { key: 'image3', label: 'Image 3', type: 'hidden' },
   { key: 'acc', label: 'Accessories', type: 'text' },
   { key: 'box_dim', label: 'Box Dimensions (mm)', type: 'text', placeholder: '120 x 80 x 45' },
   { key: 'box_weight', label: 'Box Weight (g)', type: 'text', placeholder: '85' },
@@ -891,7 +897,7 @@ function buildForm(data) {
   grid.innerHTML = '';
   FIELDS.forEach(f => {
     const div = document.createElement('div');
-    div.className = 'form-field' + (f.type === 'textarea' || f.type === 'image' ? ' full' : '');
+    div.className = 'form-field' + (f.type === 'textarea' || f.type === 'images' ? ' full' : '');
     let input = '';
     if (f.type === 'select') {
       // Build options: include FIELDS options + current value if not in options
@@ -903,48 +909,64 @@ function buildForm(data) {
       input = '<select id="f_' + f.key + '">' + opts.map(o => '<option value="' + o + '"' + (currentVal === o ? ' selected' : '') + '>' + o + '</option>').join('') + '</select>';
     } else if (f.type === 'textarea') {
       input = '<textarea id="f_' + f.key + '" rows="3">' + (data[f.key] || '') + '</textarea>';
-    } else if (f.type === 'image') {
-      const currentImg = data[f.key] || '';
-      input = '<input type="text" id="f_' + f.key + '" value="' + currentImg + '" placeholder="' + (f.placeholder || 'images/model.jpg') + '">' +
-        '<div style="margin-top:6px;display:flex;gap:8px;align-items:center;">' +
-        '<label style="padding:6px 12px;background:var(--accent);color:#fff;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">' +
-        '<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this, \'' + f.key + '\')">Upload' +
-        '</label>' +
-        '<span id="status_' + f.key + '" style="font-size:0.75rem;color:var(--text-sec);"></span>' +
+    } else if (f.type === 'images') {
+      // Batch upload area for up to 3 images
+      input = '<div class="image-dropzone" id="imgDropzone_' + f.key + '" onclick="document.getElementById(\'batchUpload_' + f.key + '\').click()" ondragover="handleDragOver(event,this)" ondragleave="handleDragLeave(event,this)" ondrop="handleDrop(event,this)">' +
+        '<div class="drop-hint"><span class="drop-icon">📷</span><br>Drop images here or click to browse<br><small>Up to 3 images</small></div>' +
+        '<input type="file" id="batchUpload_' + f.key + '" accept="image/*" multiple style="display:none" onchange="handleBatchUpload(this)">' +
         '</div>' +
-        '<div id="preview_' + f.key + '" style="margin-top:6px;">' + (currentImg ? '<img src="' + currentImg + '" style="max-height:60px;max-width:100px;border-radius:6px;background:var(--bg);object-fit:contain;">' : '') + '</div>';
+        '<div class="image-preview-grid" id="imgPreviewGrid_' + f.key + '"></div>' +
+        '<input type="hidden" id="f_' + f.key + '" value="' + (data[f.key] || '') + '">' +
+        '<input type="hidden" id="f_image2" value="' + (data.image2 || '') + '">' +
+        '<input type="hidden" id="f_image3" value="' + (data.image3 || '') + '">';
+      // Initialize batch array from existing images
+      _batchImages = [];
+      if (data.image) _batchImages.push(data.image);
+      if (data.image2) _batchImages.push(data.image2);
+      if (data.image3) _batchImages.push(data.image3);
+    } else if (f.type === 'hidden') {
+      input = '<input type="hidden" id="f_' + f.key + '" value="' + (data[f.key] || '') + '">';
     } else {
       input = '<input type="text" id="f_' + f.key + '" value="' + (data[f.key] || '') + '" placeholder="' + (f.placeholder || '') + '">';
     }
     div.innerHTML = '<label>' + f.label + (f.required ? ' *' : '') + '</label>' + input;
     grid.appendChild(div);
   });
+    // After all fields rendered, update image previews if batch images exist
+    if (_batchImages && _batchImages.length > 0) updateImagePreviews();
+  });
+  if (files.length > remainingSlots) {
+    showToast('Only ' + remainingSlots + ' of ' + files.length + ' images were added (max 3)', 'warn');
+  }
 }
 
-function handleImageUpload(input, fieldKey) {
-  const file = input.files[0];
-  if (!file) return;
-  const statusEl = document.getElementById('status_' + fieldKey);
-  const previewEl = document.getElementById('preview_' + fieldKey);
-  const pathInput = document.getElementById('f_' + fieldKey);
-  statusEl.textContent = 'Reading...';
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const base64 = e.target.result;
-    pathInput.value = base64;
-    previewEl.innerHTML = '<img src="' + base64 + '" style="max-height:60px;max-width:100px;border-radius:6px;background:var(--bg);object-fit:contain;">';
-    const mb = (base64.length * 0.75 / 1024 / 1024).toFixed(2);
-    statusEl.textContent = file.name + ' (' + mb + 'MB)';
-    showToast('Image ' + fieldKey + ' loaded', 'success');
-  };
-  reader.onerror = function() {
-    statusEl.textContent = 'Failed to read file';
-    showToast('Image upload failed', 'danger');
-  };
-  reader.readAsDataURL(file);
+function updateImagePreviews() {
+  const grid = document.getElementById('imgPreviewGrid_image');
+  if (!grid) return;
+  let html = '';
+  _batchImages.forEach((img, idx) => {
+    html += '<div class="img-preview-card">' +
+      '<img src="' + img + '" class="img-preview-thumb">' +
+      '<button class="img-preview-del" onclick="removeBatchImage(' + idx + ')" title="Remove">×</button>' +
+      '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+function removeBatchImage(idx) {
+  _batchImages.splice(idx, 1);
+  updateImagePreviews();
 }
 
 function saveProduct() {
+  // Sync batch images to hidden inputs before saving
+  const img1 = document.getElementById('f_image');
+  const img2 = document.getElementById('f_image2');
+  const img3 = document.getElementById('f_image3');
+  if (img1) img1.value = _batchImages[0] || '';
+  if (img2) img2.value = _batchImages[1] || '';
+  if (img3) img3.value = _batchImages[2] || '';
+
   const data = {};
   FIELDS.forEach(f => {
     data[f.key] = document.getElementById('f_' + f.key).value.trim();
