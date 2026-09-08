@@ -241,7 +241,8 @@ body {
   transform: scale(0.98);
 }
 .card-img-wrap {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   aspect-ratio: 4/3;
   background: linear-gradient(135deg, #f5f5f7, #e8e8ed);
   display: flex; align-items: center; justify-content: center;
@@ -271,6 +272,47 @@ body {
 .badge-fm { background: var(--accent-purple); }
 .badge-new { background: var(--accent-green); }
 
+.card-gallery {
+  display: flex;
+  position: relative;
+}
+.card-thumb-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 4px;
+  background: rgba(255,255,255,0.7);
+  width: 48px;
+  min-width: 48px;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0,0,0,0.04);
+}
+.card-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.card-thumb.active {
+  border-color: var(--accent-blue);
+  opacity: 1;
+}
+.card-thumb:hover {
+  opacity: 0.8;
+  border-color: var(--text-tertiary);
+}
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .card-body { padding: 16px 20px 20px; }
 .card-model {
   font-size: 1.3rem; font-weight: 700;
@@ -280,6 +322,16 @@ body {
 .card-type {
   font-size: 0.85rem; color: var(--text-secondary);
   margin-bottom: 12px;
+}
+.card-year {
+  font-size: 0.75rem; color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.card-year span {
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 600;
 }
 .card-params {
   display: flex; flex-wrap: wrap; gap: 6px;
@@ -353,7 +405,7 @@ body {
 }
 .modal-img {
   width: 200px; height: 200px;
-  margin: 0 auto 16px;
+  margin-bottom: 16px;
   background: var(--bg-tertiary);
   border-radius: var(--radius-lg);
   display: flex; align-items: center; justify-content: center;
@@ -404,7 +456,10 @@ body {
 }
 .modal-type {
   font-size: 1rem; color: var(--text-secondary);
-  margin-top: 2px;
+}
+.modal-year {
+  font-size: 0.85rem; color: var(--text-tertiary);
+  margin-top: 6px;
 }
 .modal-section {
   padding: 20px 24px;
@@ -537,6 +592,20 @@ body {
 @media (max-width: 480px) {
   .product-grid { grid-template-columns: repeat(2, 1fr); padding: 8px 8px 100px; }
   .cat-tabs { padding: 80px 12px 12px; }
+  .card-gallery { flex-direction: column; }
+  .card-thumb-strip {
+    flex-direction: row;
+    width: 100%;
+    min-width: auto;
+    padding: 6px;
+    border-right: none;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    justify-content: center;
+    gap: 8px;
+    order: 2;
+  }
+  .card-thumb { width: 32px; height: 32px; }
+  .card-img-wrap { order: 1; }
 }
 
 /* ===== Empty State ===== */
@@ -552,7 +621,71 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ===== Modal Thumbnails ===== */
+/* ===== Modal Gallery (side thumbnails) ===== */
+.modal-gallery {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  margin: 0 auto 16px;
+}
+.modal-gallery .modal-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.modal-gallery .modal-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.modal-gallery .modal-thumb img {
+  width: 90%; height: 90%;
+  object-fit: contain;
+}
+.modal-gallery .modal-thumb.active {
+  border-color: var(--accent-blue);
+}
+
+@media (max-width: 480px) {
+  .modal-gallery {
+    flex-direction: column;
+  }
+  .modal-gallery .modal-thumbs {
+    flex-direction: row;
+    order: 2;
+    justify-content: center;
+  }
+  .modal-gallery .modal-img {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-gallery {
+    flex-direction: column;
+  }
+  .modal-gallery .modal-thumbs {
+    flex-direction: row;
+    order: 2;
+    justify-content: center;
+  }
+  .modal-gallery .modal-img {
+    order: 1;
+  }
+}
+
+/* ===== Modal Thumbnails (legacy bottom layout) ===== */
 .modal-thumbs {
   display: flex; gap: 8px; justify-content: center;
   margin-bottom: 16px;
@@ -822,6 +955,17 @@ function createCard(p) {
   if (p.bt) badges += '<div class="card-badge badge-bt">' + p.bt + '</div>';
   else if (p.power) badges += '<div class="card-badge badge-power">' + extractPower(p.power) + '</div>';
 
+  // Multiple images thumbnail strip
+  const imgs = [p.image, p.image2, p.image3].filter(Boolean);
+  let thumbsHTML = '';
+  if (imgs.length > 1) {
+    thumbsHTML = '<div class="card-thumb-strip">' +
+      imgs.slice(0, 3).map((img, idx) =>
+        '<div class="card-thumb' + (idx === 0 ? ' active' : '') + '"><img src="' + img + '" loading="lazy" onerror="this.style.display=\'none\'"></div>'
+      ).join('') +
+      '</div>';
+  }
+
   // Param chips
   let chips = '';
   const paramOrder = ['bt','power','ports','signal','dim','fm','battery','input_v','material','cert'];
@@ -837,17 +981,36 @@ function createCard(p) {
     }
   });
 
+  const mainImg = p.image || '';
+  const imgCount = imgs.length;
   card.innerHTML = `
-    <div class="card-img-wrap">
-      ${badges}
-      <img src="${p.image}" alt="${p.model}" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-gallery">
+      ${imgCount > 1 ? thumbsHTML : ''}
+      <div class="card-img-wrap">
+        ${badges}
+        <img class="card-main-img" src="${mainImg}" alt="${p.model}" loading="lazy" onerror="this.style.display='none'">
+      </div>
     </div>
     <div class="card-body">
       <div class="card-model">${p.model}</div>
       <div class="card-type">${p.type_en || p.type_cn || p.category}</div>
+      ${p.year ? '<div class="card-year"><span>' + p.year + '</span></div>' : ''}
       <div class="card-params">${chips}</div>
     </div>
   `;
+  // Wire thumbnail click to switch main image
+  if (imgCount > 1) {
+    const thumbs = card.querySelectorAll('.card-thumb');
+    const mainImgEl = card.querySelector('.card-main-img');
+    thumbs.forEach((thumb, idx) => {
+      thumb.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (mainImgEl) mainImgEl.src = imgs[idx];
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+  }
   return card;
 }
 
@@ -932,10 +1095,13 @@ function openModal(p) {
 
   content.innerHTML = `
     <div class="modal-header">
-      <div class="modal-img"><img id="modalMainImg" src="${p.image}" alt="${p.model}" onclick="openLightbox(0)" onerror="this.style.display='none'" title="Click to enlarge"></div>
-      ${thumbsHTML}
+      <div class="modal-gallery">
+        ${thumbsHTML}
+        <div class="modal-img"><img id="modalMainImg" src="${p.image}" alt="${p.model}" onclick="openLightbox(0)" onerror="this.style.display='none'" title="Click to enlarge"></div>
+      </div>
       <div class="modal-model">${p.model}</div>
       <div class="modal-type">${p.type_en || p.type_cn || p.category}</div>
+      ${p.year ? '<div class="modal-year">Released ' + p.year + '</div>' : ''}
     </div>
     ${paramsHTML}
   `;
@@ -958,8 +1124,10 @@ function switchModalImg(idx) {
   const imgs = [currentModalProduct.image, currentModalProduct.image2, currentModalProduct.image3].filter(Boolean);
   if (idx < 0 || idx >= imgs.length) return;
   var mainImg = document.getElementById('modalMainImg');
-  if (mainImg) mainImg.src = imgs[idx];
-  mainImg.onclick = function() { openLightbox(idx); };
+  if (mainImg) {
+    mainImg.src = imgs[idx];
+    mainImg.onclick = function() { openLightbox(idx); };
+  }
   document.querySelectorAll('.modal-thumb').forEach(function(t, i) { t.classList.toggle('active', i === idx); });
 }
 
