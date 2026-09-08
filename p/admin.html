@@ -738,11 +738,21 @@ function loadData() {
 }
 
 function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-  if (DATA_VERSION_JS !== 'unknown') {
-    localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    if (DATA_VERSION_JS !== 'unknown') {
+      localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+    }
+  } catch (e) {
+    if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+      showToast('Storage full! Images too large. Try reducing image size or export data.js.', 'danger');
+    } else {
+      showToast('Save failed: ' + e.message, 'danger');
+    }
+    return false;
   }
   updateStatus();
+  return true;
 }
 
 function mergeHubCategory() {
@@ -965,7 +975,11 @@ function handleBatchUpload(input) {
 
 function processBatchFiles(files) {
   const maxImages = 3;
-  const remainingSlots = maxImages - _batchImages.length;
+  const remainingSlots = Math.max(0, maxImages - _batchImages.length);
+  if (remainingSlots === 0) {
+    showToast('Maximum 3 images reached. Remove one first.', 'warn');
+    return;
+  }
   const toAdd = files.slice(0, remainingSlots);
   let processed = 0;
   toAdd.forEach(file => {
@@ -1014,16 +1028,17 @@ function removeBatchImage(idx) {
 
 function saveProduct() {
   // Sync batch images to hidden inputs before saving
-  const img1 = document.getElementById('f_image');
-  const img2 = document.getElementById('f_image2');
-  const img3 = document.getElementById('f_image3');
-  if (img1) img1.value = _batchImages[0] || '';
-  if (img2) img2.value = _batchImages[1] || '';
-  if (img3) img3.value = _batchImages[2] || '';
+  const hiddenImg1 = document.getElementById('f_image');
+  const hiddenImg2 = document.getElementById('f_image2');
+  const hiddenImg3 = document.getElementById('f_image3');
+  if (hiddenImg1) hiddenImg1.value = _batchImages[0] || '';
+  if (hiddenImg2) hiddenImg2.value = _batchImages[1] || '';
+  if (hiddenImg3) hiddenImg3.value = _batchImages[2] || '';
 
   const data = {};
   FIELDS.forEach(f => {
-    data[f.key] = document.getElementById('f_' + f.key).value.trim();
+    const el = document.getElementById('f_' + f.key);
+    data[f.key] = el ? el.value.trim() : '';
   });
   if (!data.model) {
     showToast('Model is required', 'warn');
@@ -1037,7 +1052,9 @@ function saveProduct() {
     products.push(data);
     showToast('Product added', 'success');
   }
-  saveData();
+  // Clear batch images array after save to prevent leakage to next edit
+  _batchImages = [];
+  if (!saveData()) return;
   closeModal();
   renderTable();
   renderQuoteProducts();
@@ -1061,6 +1078,7 @@ function closeModal() {
   document.getElementById('modalBg').classList.remove('show');
   document.getElementById('modalBox').classList.remove('show');
   editingId = null;
+  _batchImages = [];
 }
 
 // ===== REFRESH CATALOG =====
