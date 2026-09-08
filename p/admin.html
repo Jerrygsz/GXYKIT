@@ -569,12 +569,57 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 // ===== DATA =====
 const STORAGE_KEY = 'gxykit_products_v1';
 const STORAGE_VERSION_KEY = 'gxykit_data_version';
+const IMG_PREFIX = 'gxykit_img_';
 const DATA_VERSION_JS = (typeof DATA_VERSION !== 'undefined') ? DATA_VERSION : 'unknown';
 const DEFAULT_PRODUCTS = PRODUCTS || [];
 let products = [];
 let editingId = null;
 let cart = [];
 let _batchImages = [];
+
+function reattachImages() {
+  products.forEach(function(p) {
+    const model = p.model;
+    if (!model) return;
+    ['image', 'image2', 'image3'].forEach(function(key, idx) {
+      if (!p[key]) {
+        const imgData = localStorage.getItem(IMG_PREFIX + model + '_' + idx);
+        if (imgData) p[key] = imgData;
+      }
+    });
+  });
+}
+
+function saveImagesSeparately() {
+  products.forEach(function(p) {
+    const model = p.model;
+    if (!model) return;
+    ['image', 'image2', 'image3'].forEach(function(key, idx) {
+      const imgKey = IMG_PREFIX + model + '_' + idx;
+      if (p[key]) {
+        try { localStorage.setItem(imgKey, p[key]); } catch(ignore) {}
+      } else {
+        localStorage.removeItem(imgKey);
+      }
+    });
+  });
+}
+
+function removeProductImages(model) {
+  if (!model) return;
+  [0, 1, 2].forEach(function(idx) {
+    localStorage.removeItem(IMG_PREFIX + model + '_' + idx);
+  });
+}
+
+function clearAllImageStorage() {
+  const keys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.indexOf(IMG_PREFIX) === 0) keys.push(key);
+  }
+  keys.forEach(function(k) { localStorage.removeItem(k); });
+}
 
 // Fields config for form/table
 const FIELDS = [
@@ -705,6 +750,7 @@ function loadData() {
     const storedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
     if (stored) {
       products = JSON.parse(stored);
+      reattachImages();
       // Version mismatch: data.js was updated, localStorage is stale
       if (DATA_VERSION_JS !== 'unknown' && storedVersion !== DATA_VERSION_JS) {
         const doReload = confirm(
@@ -726,6 +772,7 @@ function loadData() {
     const userDefault = localStorage.getItem(STORAGE_KEY + '_default');
     if (userDefault) {
       products = JSON.parse(userDefault);
+      reattachImages();
       showToast('Loaded from user-set default', 'success');
       return;
     }
@@ -738,21 +785,41 @@ function loadData() {
 }
 
 function saveData() {
+  // Try to save everything including images in one key
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
     if (DATA_VERSION_JS !== 'unknown') {
       localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
     }
+    updateStatus();
+    return true;
   } catch (e) {
     if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
-      showToast('Storage full! Images too large. Try reducing image size or export data.js.', 'danger');
+      // Separate images from main data to avoid quota limit
+      showToast('Storage full - switching to image-separation mode', 'warn');
+      try {
+        const slimProducts = products.map(function(p) {
+          const clone = Object.assign({}, p);
+          delete clone.image; delete clone.image2; delete clone.image3;
+          return clone;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(slimProducts));
+        if (DATA_VERSION_JS !== 'unknown') {
+          localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+        }
+        saveImagesSeparately();
+        updateStatus();
+        showToast('Saved with images separated to individual keys', 'success');
+        return true;
+      } catch (e2) {
+        showToast('Storage full! Even image-separation failed. Export data.js instead.', 'danger');
+        return false;
+      }
     } else {
       showToast('Save failed: ' + e.message, 'danger');
+      return false;
     }
-    return false;
   }
-  updateStatus();
-  return true;
 }
 
 function mergeHubCategory() {
@@ -973,6 +1040,36 @@ function handleBatchUpload(input) {
   processBatchFiles(files);
 }
 
+function compressImage(file, maxWidth, quality) {
+  return new Promise(function(resolve, reject) {
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        let w = img.width;
+        let h = img.height;
+        if (w > maxWidth) {
+          h = Math.round(h * maxWidth / w);
+          w = maxWidth;
+        }
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(dataUrl);
+      };
+      img.onerror = function() { reject(new Error('Image load failed')); };
+      img.src = e.target.result;
+    };
+    reader.onerror = function() { reject(new Error('File read failed')); };
+    reader.readAsDataURL(file);
+  });
+}
+
 function processBatchFiles(files) {
   const maxImages = 3;
   const remainingSlots = Math.max(0, maxImages - _batchImages.length);
@@ -982,17 +1079,22 @@ function processBatchFiles(files) {
   }
   const toAdd = files.slice(0, remainingSlots);
   let processed = 0;
-  toAdd.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      _batchImages.push(e.target.result);
+  let compressCount = 0;
+  toAdd.forEach(function(file) {
+    compressImage(file, 1200, 0.7).then(function(dataUrl) {
+      _batchImages.push(dataUrl);
       processed++;
+      compressCount++;
       if (processed === toAdd.length) {
         updateImagePreviews();
         syncBatchToHidden();
+        if (compressCount > 0) showToast(compressCount + ' image(s) compressed and added', 'success');
       }
-    };
-    reader.readAsDataURL(file);
+    }).catch(function(err) {
+      processed++;
+      showToast('Image compression failed: ' + err.message, 'danger');
+      if (processed === toAdd.length) updateImagePreviews();
+    });
   });
   if (files.length > remainingSlots) {
     showToast('Only ' + remainingSlots + ' of ' + files.length + ' images were added (max 3)', 'warn');
@@ -1064,6 +1166,7 @@ function saveProduct() {
 
 function deleteProduct(idx) {
   if (!confirm('Delete product "' + products[idx].model + '"?')) return;
+  removeProductImages(products[idx].model);
   products.splice(idx, 1);
   saveData();
   renderTable();
@@ -1094,6 +1197,8 @@ function refreshCatalog() {
 
 // ===== EXPORT / IMPORT =====
 function exportDataJS() {
+  // Merge separated images back into products before export
+  reattachImages();
   const json = JSON.stringify(products, null, 2);
   const blob = new Blob(['const PRODUCTS = ' + json + ';'], { type: 'application/javascript' });
   const url = URL.createObjectURL(blob);
