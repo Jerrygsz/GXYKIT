@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-09-v2';
+const DATA_VERSION = '2026-09-09-v4';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -76,7 +76,7 @@ const PRODUCTS = [
     "p_5000": "20.0"
   },
   {
-    "model": "G32Q",
+    "model": "G32-QC",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -88,7 +88,7 @@ const PRODUCTS = [
     "proto": "A2DP, QC3.0"
   },
   {
-    "model": "G32S",
+    "model": "G32-PD",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -127,7 +127,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "G45-C口",
+    "model": "G45-C",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -147,7 +147,7 @@ const PRODUCTS = [
     "acc": "User Manual, 3.5mm Audio Cable"
   },
   {
-    "model": "G47 A+C",
+    "model": "G47-A1C",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -159,7 +159,7 @@ const PRODUCTS = [
     "color": "Black"
   },
   {
-    "model": "G47按键",
+    "model": "G47-Btn",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -171,7 +171,7 @@ const PRODUCTS = [
     "color": "Black"
   },
   {
-    "model": "G47旋钮",
+    "model": "G47-Knob",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -242,7 +242,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "G63带遥控器",
+    "model": "G63-Remote",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙车充杯",
     "type_en": "Bluetooth Car Charger",
@@ -263,7 +263,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "G67 A+C",
+    "model": "G67-A1C",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -277,7 +277,7 @@ const PRODUCTS = [
     "fm": "87.5-108.0 MHz",
     "color": "Black",
     "selling": "⚡ Fast Charging​ - PD20W (USB-C) + QC3.0 18W (USB-A)\n💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
-    "desc": "Product Name: G67 A+C Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-C1 output: PD 20W\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
+    "desc": "Product Name: G67-A1C Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-C1 output: PD 20W\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
     "p_2000": null,
     "p_5000": null,
     "nw": "32.0 g",
@@ -285,7 +285,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "G67按键",
+    "model": "G67-Btn",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -307,7 +307,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "G67旋钮",
+    "model": "G67-Knob",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -381,7 +381,7 @@ const PRODUCTS = [
     "acc": "User Manual x1"
   },
   {
-    "model": "GC01- A+C",
+    "model": "GC01-A1C",
     "category": "Car Charger",
     "type_cn": "一分三车充",
     "type_en": "Smart USB Car Charger",
@@ -445,7 +445,7 @@ const PRODUCTS = [
     "desc": "Product Name: GC03S Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nSpring Cable USB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSpring Cable Length: Max 120cm\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting & Car Battery Voltage LED Display"
   },
   {
-    "model": "GC03S  蓝灯",
+    "model": "GC03S-BlueLED",
     "category": "Car Charger",
     "type_cn": "伸缩弹簧线车载快充",
     "type_en": "Retractable Spring Car Charger",
@@ -511,7 +511,7 @@ const PRODUCTS = [
     "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0"
   },
   {
-    "model": "GC06 35W",
+    "model": "GC06-35W",
     "category": "Car Charger",
     "type_cn": "一分三车充",
     "type_en": "Multi-function Car Charger",
@@ -531,7 +531,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "GC06 PD65W",
+    "model": "GC06-PD65W",
     "category": "Car Charger",
     "type_cn": "一分三车充",
     "type_en": "Multi-function Car Charger",
@@ -551,7 +551,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "GC08 单快充",
+    "model": "GC08-PD",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
@@ -571,7 +571,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "GC08 车充双C 硅胶",
+    "model": "GC08-DualC-Silicone",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
@@ -591,7 +591,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "GC08 车载蓝牙MP3",
+    "model": "GC08-BT-MP3",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
@@ -613,7 +613,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "GC08-单快充双C",
+    "model": "GC08-PD-DualC",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
@@ -633,7 +633,7 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "GC08-双快充",
+    "model": "GC08-DualPD",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
@@ -676,7 +676,7 @@ const PRODUCTS = [
     "p_5000": "65.0"
   },
   {
-    "model": "GC11标配",
+    "model": "GC11-Std",
     "category": "Car Charger",
     "type_cn": "一拖六车充",
     "type_en": "Car Charger",
@@ -699,7 +699,7 @@ const PRODUCTS = [
     "p_5000": null
   },
   {
-    "model": "GC11高配版",
+    "model": "GC11-Pro-V2",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "image": "images/GC11.jpg",
@@ -815,7 +815,7 @@ const PRODUCTS = [
     "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display"
   },
   {
-    "model": "GC21  45W",
+    "model": "GC21-PD45W",
     "category": "Car Charger",
     "type_cn": "车充表情款",
     "image": "images/GC21.jpg",
@@ -826,7 +826,7 @@ const PRODUCTS = [
     "cable": "78CM"
   },
   {
-    "model": "GC21-Z FM",
+    "model": "GC21-FM",
     "category": "Car Charger",
     "type_cn": "车载蓝牙FM",
     "type_en": "Car Charger",
@@ -869,7 +869,7 @@ const PRODUCTS = [
     "acc": "User Manual x1"
   },
   {
-    "model": "GC24升压款",
+    "model": "GC24-Boost",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "image": "images/GC24.jpg",
@@ -1023,7 +1023,7 @@ const PRODUCTS = [
     "proto": "A2DP, AVRCP, HFP/HSP"
   },
   {
-    "model": "GR05 LED（杰里方案）",
+    "model": "GR05-LED-JL",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1045,7 +1045,7 @@ const PRODUCTS = [
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
   },
   {
-    "model": "GR05 LED（钜力方案）",
+    "model": "GR05-LED-QL",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1068,7 +1068,7 @@ const PRODUCTS = [
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
   },
   {
-    "model": "GR05 带屏",
+    "model": "GR05-LCD",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1097,7 +1097,7 @@ const PRODUCTS = [
     "proto": "A2DP, AVRCP, HFP/HSP"
   },
   {
-    "model": "GR05 带线款（杰里方案）",
+    "model": "GR05-Wired-JL",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1119,7 +1119,7 @@ const PRODUCTS = [
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
   },
   {
-    "model": "GR05 带线款（炬力方案）",
+    "model": "GR05-Wired-JL2",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1240,7 +1240,7 @@ const PRODUCTS = [
     "proto": "SBC, aptX HD, aptX LL/Adaptive"
   },
   {
-    "model": "GR11-JL-带线款",
+    "model": "GR11-Wired-JL",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1254,7 +1254,7 @@ const PRODUCTS = [
     "proto": "SBC, A2DP, HFP, HSP, AVRCP"
   },
   {
-    "model": "GR11-QC-带线款",
+    "model": "GR11-Wired-QC",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1377,7 +1377,7 @@ const PRODUCTS = [
   },
   {
     "model": "GZ01",
-    "category": "FM Transmitter",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ01.jpg",
@@ -1401,7 +1401,7 @@ const PRODUCTS = [
   },
   {
     "model": "GZ03",
-    "category": "FM Transmitter",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ03.jpg",
@@ -1425,8 +1425,8 @@ const PRODUCTS = [
     "acc": "User Manual"
   },
   {
-    "model": "GZ03 PD",
-    "category": "FM Transmitter",
+    "model": "GZ03-PD",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ03.jpg",
@@ -1448,7 +1448,7 @@ const PRODUCTS = [
   },
   {
     "model": "GZ07",
-    "category": "FM Transmitter",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ07.jpg",
@@ -1467,8 +1467,8 @@ const PRODUCTS = [
     "p_5000": "15.0"
   },
   {
-    "model": "GZ08-双PD35W",
-    "category": "FM Transmitter",
+    "model": "GZ08-DualPD35W",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ08.png",
@@ -1493,7 +1493,7 @@ const PRODUCTS = [
   },
   {
     "model": "GZ11",
-    "category": "FM Transmitter",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/GZ11.jpg",
@@ -1535,21 +1535,8 @@ const PRODUCTS = [
     "acc": "User Manual x1"
   },
   {
-    "model": "GW05",
-    "category": "Wireless Charger",
-    "type_cn": "无线车充支架",
-    "type_en": "Magnetic Wireless Charger",
-    "image": "images/GW05.jpg",
-    "power": "Wireless 15W/10W/7.5W/5W",
-    "ports": "PD",
-    "features": "Fast Charge, 360° Landscape, One-hand Operation, Magnetic",
-    "dim": "90 x 41 x 118 mm",
-    "weight": "40g",
-    "color": "Black"
-  },
-  {
     "model": "AP06",
-    "category": "Other",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/AP06.jpg",
@@ -1573,25 +1560,8 @@ const PRODUCTS = [
     "acc": "User Manual, 3.5mm Audio Cable"
   },
   {
-    "model": "ER9",
-    "category": "Other",
-    "type_cn": "车载蓝牙耳机",
-    "type_en": "Car MP3 Player",
-    "image": "images/ER9.jpg",
-    "bt": "BT 5.3",
-    "chip": "CSR",
-    "ports": "2x USB-A, 3.5mm AUX, TF Card Slot",
-    "features": "Lossless Sound, Voltage Monitor, TF Card Slot, Private Answer, Universal for Cars, Noise Reduction",
-    "signal": "10-15 m",
-    "dim": "108 x 44 x 122 mm",
-    "fm": "87.5-108.0 MHz",
-    "color": "Black",
-    "selling": "🌈Built-in Bluetooth Earphone​ - Private calls while driving\n 🔥Bluetooth 5.3​ - 10m stable connection",
-    "desc": "Product Name: ER9 Car FM Transmitter with Built-in Bluetooth earphone\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nBuilt-in Bluetooth earphone: easy private calls while driving\nOutput ports: 2\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nTF card Slot: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
-  },
-  {
     "model": "M7",
-    "category": "Other",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
     "image": "images/M7.jpg",
@@ -1682,7 +1652,7 @@ const PRODUCTS = [
   },
   {
     "model": "G21",
-    "category": "FM Transmitter",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载FM发射器",
     "type_en": "Car FM Transmitter",
     "image": "images/G21.jpg",
@@ -1693,8 +1663,8 @@ const PRODUCTS = [
     "desc": "Product Name: G21 Car FM Transmitter with LED Screen & \nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nUSB-A3 output: QC3.0 18W\nTF card Slot: 1\n3.5mm Aux Input Port: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFrequency Range: DAB Band III (174-240MHz); FM 87.5-108MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
   },
   {
-    "model": "G32通用尺寸",
-    "category": "FM Transmitter",
+    "model": "G32-Uni",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载FM发射器",
     "type_en": "Car FM Transmitter",
     "image": "images/G32.jpg",
@@ -1706,8 +1676,8 @@ const PRODUCTS = [
     "desc": "Product Name: G32 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 2\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
   },
   {
-    "model": "G47通用尺寸",
-    "category": "FM Transmitter",
+    "model": "G47-Uni",
+    "category": "Car Bluetooth MP3",
     "type_cn": "车载FM发射器",
     "type_en": "Car FM Transmitter",
     "image": "images/G47.jpg",
@@ -1775,7 +1745,7 @@ const PRODUCTS = [
     "acc": "User Manual x1"
   },
   {
-    "model": "GC08 2C",
+    "model": "GC08-DualC",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1795,7 +1765,7 @@ const PRODUCTS = [
     "p_5000": null
   },
   {
-    "model": "GC08 1C1L",
+    "model": "GC08-C1L",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1815,7 +1785,7 @@ const PRODUCTS = [
     "p_5000": null
   },
   {
-    "model": "GC08 1A3C",
+    "model": "GC08-A1C3",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1835,7 +1805,7 @@ const PRODUCTS = [
     "p_5000": null
   },
   {
-    "model": "GC11高配",
+    "model": "GC11-Pro",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1855,7 +1825,7 @@ const PRODUCTS = [
     "p_5000": null
   },
   {
-    "model": "GR05 LED钜力/杰里",
+    "model": "GR05-LED",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙收发器",
     "type_en": "Bluetooth Transceiver",
@@ -1907,7 +1877,7 @@ const PRODUCTS = [
     "proto": "A2DP, AVRCP, HFP/HSP"
   },
   {
-    "model": "GC21 Eyes",
+    "model": "GC21-Eyes",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1921,7 +1891,7 @@ const PRODUCTS = [
     "p_5000": "41.0"
   },
   {
-    "model": "GC21 Emoji",
+    "model": "GC21-Emoji",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",

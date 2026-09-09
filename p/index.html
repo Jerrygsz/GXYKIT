@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-<script src="data.js?v=2026-09-09-v2"></script>
+<script src="data.js?v=2026-09-09-v4"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1082,14 +1082,12 @@ const CATEGORIES = [
   { key: 'Car Charger', label: 'Car Chargers', icon: 'POWER', color: '#ff9500' },
   { key: 'Car Bluetooth MP3', label: 'Car Bluetooth MP3', icon: 'MUSIC', color: '#5e5ce6' },
   { key: 'Bluetooth Receiver', label: 'BT Receivers', icon: 'BT', color: '#0071e3' },
-  { key: 'Other', label: 'Others', icon: 'MORE', color: '#aeaeb2' },
 ];
 
 const CAT_ICONS = {
   'Car Charger': { emoji: 'power', bg: 'rgba(255,149,0,0.12)', text: '#ff9500' },
   'Car Bluetooth MP3': { emoji: 'music', bg: 'rgba(94,92,230,0.12)', text: '#5e5ce6' },
   'Bluetooth Receiver': { emoji: 'bluetooth', bg: 'rgba(0,113,227,0.12)', text: '#0071e3' },
-  'Other': { emoji: 'other', bg: 'rgba(174,174,178,0.12)', text: '#aeaeb2' },
 };
 
 // Series definitions per category (auto-detected from product fields)
@@ -1108,9 +1106,6 @@ const SERIES_CONFIG = {
   ],
   'Bluetooth Receiver': [
     { key: 'all', label: 'All Receivers', color: '#0071e3', bg: 'rgba(0,113,227,0.08)' },
-  ],
-  'Other': [
-    { key: 'all', label: 'All Others', color: '#86868b', bg: 'rgba(134,134,139,0.08)' },
   ],
 };
 
@@ -1162,14 +1157,9 @@ function renderTabs() {
   const container = document.getElementById('catTabs');
   container.innerHTML = '';
   CATEGORIES.forEach(cat => {
-    // For Car Bluetooth MP3, count includes FM Transmitter
     let count;
-    if (cat.key === 'Car Bluetooth MP3') {
-      count = PRODUCTS.filter(p => p.category === 'Car Bluetooth MP3' || p.category === 'FM Transmitter').length;
-    } else if (cat.key === 'all') {
+    if (cat.key === 'all') {
       count = PRODUCTS.length;
-    } else if (cat.key === 'Other') {
-      count = PRODUCTS.filter(p => p.category === 'Other' || p.category === 'Wireless Charger').length;
     } else {
       count = PRODUCTS.filter(p => p.category === cat.key).length;
     }
@@ -1275,10 +1265,6 @@ function renderProducts(cat, series) {
   let products;
   if (cat === 'all') {
     products = PRODUCTS.slice();
-  } else if (cat === 'Car Bluetooth MP3') {
-    products = PRODUCTS.filter(p => p.category === 'Car Bluetooth MP3' || p.category === 'FM Transmitter');
-  } else if (cat === 'Other') {
-    products = PRODUCTS.filter(p => p.category === 'Other' || p.category === 'Wireless Charger');
   } else {
     products = PRODUCTS.filter(p => p.category === cat);
   }
@@ -1297,7 +1283,7 @@ function renderProducts(cat, series) {
   });
 
   if (cat !== 'all') {
-    const icon = CAT_ICONS[cat] || CAT_ICONS['Other'];
+    const icon = CAT_ICONS[cat] || { emoji: 'other', bg: 'rgba(174,174,178,0.12)', text: '#aeaeb2' };
     hero.style.display = 'block';
     document.getElementById('heroIcon').style.background = icon.bg;
     document.getElementById('heroIcon').style.color = icon.text;
