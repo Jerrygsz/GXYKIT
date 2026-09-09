@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-<script src="data.js?v=2026-09-09-v5"></script>
+<script src="data.js?v=2026-09-09-v6"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -506,6 +506,10 @@ body {
 .badge-power { background: var(--accent-orange); }
 .badge-fm { background: var(--accent-purple); }
 .badge-new { background: var(--accent-green); }
+.badge-options { background: var(--accent-purple); }
+.card-img-wrap .card-badge:nth-of-type(1) { top: 12px; right: 12px; }
+.card-img-wrap .card-badge:nth-of-type(2) { top: 40px; right: 12px; }
+.card-img-wrap .card-badge:nth-of-type(3) { top: 68px; right: 12px; }
 
 .card-gallery {
   display: flex;
@@ -736,6 +740,68 @@ body {
   line-height: 1.8;
   white-space: pre-wrap;
   color: var(--text-primary);
+}
+
+/* ===== Options / Variants in Modal ===== */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.option-item {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.option-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.option-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.option-model {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.option-diffs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.option-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.option-diff-label {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+.option-diff-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-purple);
+}
+@media (max-width: 480px) {
+  .option-diffs { grid-template-columns: 1fr; }
 }
 .price-table {
   display: grid;
@@ -990,7 +1056,7 @@ body {
         <div class="cover-stat-label">Categories</div>
       </div>
       <div class="cover-stat">
-        <div class="cover-stat-num">8</div>
+        <div class="cover-stat-num" id="stat-series">0</div>
         <div class="cover-stat-label">Series</div>
       </div>
     </div>
@@ -1121,6 +1187,11 @@ function init() {
   document.getElementById('stat-products').textContent = PRODUCTS.length;
   const cats = new Set(PRODUCTS.map(p => p.category));
   document.getElementById('stat-categories').textContent = cats.size;
+  let seriesCount = 0;
+  Object.keys(SERIES_CONFIG).forEach(cat => {
+    seriesCount += SERIES_CONFIG[cat].filter(s => s.key !== 'all').length;
+  });
+  document.getElementById('stat-series').textContent = seriesCount;
   renderTabs();
 }
 
@@ -1330,6 +1401,12 @@ function createCard(p) {
   let badges = '';
   if (p.bt) badges += '<div class="card-badge badge-bt">' + p.bt + '</div>';
   else if (p.power) badges += '<div class="card-badge badge-power">' + extractPower(p.power) + '</div>';
+
+  // Options / Variants badge
+  const optCount = (p.options && p.options.length) || 0;
+  if (optCount > 0) {
+    badges += '<div class="card-badge badge-options">' + optCount + ' Variant' + (optCount > 1 ? 's' : '') + '</div>';
+  }
 
   // Multiple images thumbnail strip
   const imgs = [p.image, p.image2, p.image3].filter(Boolean);
@@ -1622,6 +1699,27 @@ function openModal(p) {
   // Description
   if (p.desc) {
     paramsHTML += '<div class="modal-section"><div class="modal-section-title">Product Description</div><div style="font-size:0.85rem;line-height:1.7;color:var(--text-secondary);white-space:pre-wrap">' + p.desc + '</div></div>';
+  }
+
+  // Options / Variants
+  if (p.options && p.options.length > 0) {
+    paramsHTML += '<div class="modal-section"><div class="modal-section-title">Variants (' + p.options.length + ')</div><div class="options-list">';
+    p.options.forEach((opt, i) => {
+      const diffFields = [];
+      const diffLabels = {model:'Model', power:'Power', ports:'Ports', features:'Features', bt:'Bluetooth', fm:'FM', screen:'Screen', chip:'Chip', proto:'Protocols', battery:'Battery', cable:'Cable', color:'Color', dim:'Dimensions', weight:'Weight', nw:'N.W.', gw:'G.W.', input_v:'Input Voltage', material:'Material', cert:'Certifications', safety:'Safety', acc:'Accessories', rxtx:'RX/TX', audio:'Audio Codecs', year:'Year', p_sample:'Sample Price', p_500:'500pcs', p_2000:'2000pcs', p_5000:'5000pcs'};
+      Object.keys(diffLabels).forEach(key => {
+        const mainVal = p[key];
+        const optVal = opt[key];
+        if (optVal !== undefined && optVal !== null && optVal !== '' && optVal !== mainVal) {
+          diffFields.push('<div class="option-diff"><span class="option-diff-label">' + diffLabels[key] + '</span><span class="option-diff-value">' + optVal + '</span></div>');
+        }
+      });
+      paramsHTML += '<div class="option-item">' +
+        '<div class="option-header"><span class="option-num">#' + (i + 1) + '</span><span class="option-model">' + opt.model + '</span></div>' +
+        (diffFields.length > 0 ? '<div class="option-diffs">' + diffFields.join('') + '</div>' : '<div class="option-diffs"><div class="option-diff"><span class="option-diff-label">Note</span><span class="option-diff-value">Same as base spec</span></div></div>' ) +
+        '</div>';
+    });
+    paramsHTML += '</div></div>';
   }
 
   // Collect product images
