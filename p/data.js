@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-07-v2';
+const DATA_VERSION = '2026-09-08-v1';
 const PRODUCTS = [
   {
     "model": "G13",

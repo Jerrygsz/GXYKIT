@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GXYKIT Product Admin</title>
-<script src="data.js"></script>
+<script src="data.js?v=2026-09-08-v1"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
 /* ===== Reset & Base ===== */
@@ -1200,7 +1200,8 @@ function exportDataJS() {
   // Merge separated images back into products before export
   reattachImages();
   const json = JSON.stringify(products, null, 2);
-  const blob = new Blob(['const PRODUCTS = ' + json + ';'], { type: 'application/javascript' });
+  const version = (typeof DATA_VERSION !== 'undefined') ? DATA_VERSION : 'unknown';
+  const blob = new Blob(['const DATA_VERSION = \'' + version + '\';\nconst PRODUCTS = ' + json + ';'], { type: 'application/javascript' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
