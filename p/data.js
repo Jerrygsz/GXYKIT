@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-09-v4';
+const DATA_VERSION = '2026-09-09-v5';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -60,7 +60,7 @@ const PRODUCTS = [
     "proto": "A2DP, QC3.0"
   },
   {
-    "model": "G32",
+    "model": "G32-Standard",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -73,34 +73,29 @@ const PRODUCTS = [
     "p_sample": "23.0",
     "p_500": "22.0",
     "p_2000": "21.0",
-    "p_5000": "20.0"
+    "p_5000": "20.0",
+    "options": [
+      {
+        "model": "G32-PD",
+        "ports": "PD",
+        "features": "Fast Charge, One Key Answer, Hands-free Call, TF Card Slot, U Disk Play, Universal for Cars"
+      },
+      {
+        "model": "G32-QC",
+        "ports": "QC3.0",
+        "features": "QC3.0, One Key Answer, Hands-free Call, TF Card Slot, U Disk Play, Universal for Cars",
+        "proto": "A2DP, QC3.0"
+      },
+      {
+        "model": "G32-Uni",
+        "ports": "2x USB-A, TF Card Slot",
+        "bt": "BT 5.3",
+        "fm": "87.5-108.0 MHz"
+      }
+    ]
   },
   {
-    "model": "G32-QC",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G32.jpg",
-    "bt": "BT 5.4",
-    "ports": "QC3.0",
-    "features": "QC3.0, One Key Answer, Hands-free Call, TF Card Slot, U Disk Play, Universal for Cars",
-    "dim": "70.5 x 46 x 98 mm",
-    "proto": "A2DP, QC3.0"
-  },
-  {
-    "model": "G32-PD",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G32.jpg",
-    "bt": "BT 5.4",
-    "ports": "PD",
-    "features": "Fast Charge, One Key Answer, Hands-free Call, TF Card Slot, U Disk Play, Universal for Cars",
-    "dim": "70.5 x 46 x 98 mm",
-    "proto": "A2DP"
-  },
-  {
-    "model": "G45",
+    "model": "G45-Standard",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -124,63 +119,38 @@ const PRODUCTS = [
     "nw": "94.8 g",
     "gw": "140.0 g",
     "acc": "User Manual, 3.5mm Audio Cable",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "options": [
+      {
+        "model": "G45-C",
+        "features": "Lossless Sound, HD Sound, Voice Assistant, One Key Answer, Hands-free Call, TF Card Slot",
+        "bt": "BT 5.4"
+      }
+    ]
   },
   {
-    "model": "G45-C",
+    "model": "G47-Standard",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
-    "image": "images/G45.jpg",
+    "image": "images/G47.jpg",
     "bt": "BT 5.4",
-    "features": "Lossless Sound, HD Sound, Voice Assistant, One Key Answer, Hands-free Call, TF Card Slot",
-    "signal": "10 m",
-    "dim": "105 x 57.5 x 136 mm",
-    "weight": "94.8 g",
+    "ports": "Dual USB-A",
+    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, TF Card Slot, U Disk Play, Power-off Memory",
+    "dim": "70.5 x 46 x 98 mm",
     "color": "Black",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "94.8 g",
-    "gw": "140.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable"
-  },
-  {
-    "model": "G47-A1C",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G47.jpg",
-    "bt": "BT 5.4",
-    "ports": "Dual USB-A",
-    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, TF Card Slot, U Disk Play, Power-off Memory",
-    "dim": "70.5 x 46 x 98 mm",
-    "color": "Black"
-  },
-  {
-    "model": "G47-Btn",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G47.jpg",
-    "bt": "BT 5.4",
-    "ports": "Dual USB-A",
-    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, TF Card Slot, U Disk Play, Power-off Memory",
-    "dim": "70.5 x 46 x 98 mm",
-    "color": "Black"
-  },
-  {
-    "model": "G47-Knob",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G47.jpg",
-    "bt": "BT 5.4",
-    "ports": "Dual USB-A",
-    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, U Disk Play, Power-off Memory",
-    "dim": "70.5 x 46 x 98 mm",
-    "color": "Black"
+    "options": [
+      {
+        "model": "G47-Knob",
+        "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, U Disk Play, Power-off Memory"
+      },
+      {
+        "model": "G47-Uni",
+        "ports": "2x USB-A, 1x USB-C, TF Card Slot",
+        "bt": "BT 5.3",
+        "fm": "87.5-108.0 MHz"
+      }
+    ]
   },
   {
     "model": "G52",
@@ -242,28 +212,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "G63-Remote",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙车充杯",
-    "type_en": "Bluetooth Car Charger",
-    "image": "images/G63.jpg",
-    "bt": "BT 5.0",
-    "ports": "PD",
-    "features": "Lossless Sound, Fast Charge, Voice Navigation, Hands-free Call, TF Card Slot, U Disk Play",
-    "signal": "10 m",
-    "dim": "106 x 83 x 161 mm",
-    "weight": "133.8 g",
-    "color": "Black",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "133.8 g",
-    "gw": "215.9 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "G67-A1C",
+    "model": "G67-Standard",
     "category": "Car Bluetooth MP3",
     "type_cn": "车载蓝牙MP3",
     "type_en": "Car MP3 Player",
@@ -278,50 +227,6 @@ const PRODUCTS = [
     "color": "Black",
     "selling": "⚡ Fast Charging​ - PD20W (USB-C) + QC3.0 18W (USB-A)\n💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
     "desc": "Product Name: G67-A1C Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-C1 output: PD 20W\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "32.0 g",
-    "gw": "55.0 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "G67-Btn",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G67.jpg",
-    "bt": "BT 5.3",
-    "ports": "2x USB-A, 1x USB-C, TF Card Slot",
-    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, Voice Navigation, TF Card Slot, U Disk Play, Stereo, Universal for Cars, Power-off Memory, FM Transmit",
-    "signal": "10-15 m",
-    "dim": "70.5 x 46 x 98 mm",
-    "weight": "32.0 g",
-    "fm": "87.5-108.0 MHz",
-    "color": "Black",
-    "selling": "⚡ Fast Charging​ - QC3.0 18W (USB-A)\n💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
-    "desc": "Product Name: G67 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3.0A\nUSB-C1 output: 5V/3.0A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "32.0 g",
-    "gw": "55.0 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "G67-Knob",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/G67.jpg",
-    "bt": "BT 5.3",
-    "ports": "2x USB-A, 1x USB-C, TF Card Slot",
-    "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, Voice Navigation, TF Card Slot, U Disk Play, Stereo, Universal for Cars, Power-off Memory, FM Transmit",
-    "signal": "10-15 m",
-    "dim": "70.5 x 46 x 98 mm",
-    "weight": "32.0 g",
-    "fm": "87.5-108.0 MHz",
-    "color": "Black",
-    "selling": "💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
-    "desc": "Product Name: G67 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3.0A\nUSB-C1 output: 5V/3.0A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
     "p_2000": null,
     "p_5000": null,
     "nw": "32.0 g",
@@ -409,7 +314,7 @@ const PRODUCTS = [
     "proto": "QC3.0"
   },
   {
-    "model": "GC03",
+    "model": "GC03-Standard",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -423,39 +328,27 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "⚡ PD 36W USB-C Port​ - Fast charge compatible devices\n🔌1A2C Multi-Output​ - Charge three devices at once\n🛡Safe & Stylish​ - Fireproof build with ambient lighting",
-    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting"
-  },
-  {
-    "model": "GC03S",
-    "category": "Car Charger",
-    "type_cn": "伸缩弹簧线车载快充",
-    "type_en": "Retractable Spring Car Charger",
-    "image": "images/GC03S.jpg",
-    "power": "PD 65W | Total 65W+18W",
-    "ports": "1x USB-A, 2x USB-C",
-    "features": "Colorful Lights, Voltage Monitor, Universal for Cars",
-    "dim": "35 x 40 x 71.5 mm",
-    "weight": "55.2g",
-    "cable": "1.3 m",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "⚡  36W PD Fast Charge​ - Spring cable USB-C port\n🔌 1A2C Multi-Output​ - Charge three devices at once\n🛡 Safe & Smart​ - Fireproof build with ambient lighting & voltage display",
-    "desc": "Product Name: GC03S Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nSpring Cable USB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSpring Cable Length: Max 120cm\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting & Car Battery Voltage LED Display"
-  },
-  {
-    "model": "GC03S-BlueLED",
-    "category": "Car Charger",
-    "type_cn": "伸缩弹簧线车载快充",
-    "type_en": "Retractable Spring Car Charger",
-    "image": "images/GC03.jpg",
-    "power": "PD 65W | Total 65W+18W",
-    "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "Colorful Lights, Voltage Monitor, Universal for Cars",
-    "dim": "35 x 40 x 71.5 mm",
-    "weight": "55.2g",
-    "cable": "1.3 m"
+    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting",
+    "options": [
+      {
+        "model": "GC03C",
+        "power": "Total 54W",
+        "ports": "3x USB-C"
+      },
+      {
+        "model": "GC03S",
+        "power": "PD 65W | Total 65W+18W",
+        "features": "Colorful Lights, Voltage Monitor, Universal for Cars",
+        "cable": "1.3 m"
+      },
+      {
+        "model": "GC03S-BlueLED",
+        "power": "PD 65W | Total 65W+18W",
+        "ports": "USB-A + USB-C | PD | Retractable Cable",
+        "features": "Colorful Lights, Voltage Monitor, Universal for Cars",
+        "cable": "1.3 m"
+      }
+    ]
   },
   {
     "model": "GC05",
@@ -511,46 +404,6 @@ const PRODUCTS = [
     "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0"
   },
   {
-    "model": "GC06-35W",
-    "category": "Car Charger",
-    "type_cn": "一分三车充",
-    "type_en": "Multi-function Car Charger",
-    "image": "images/GC06.jpg",
-    "power": "PD 35W | Total 120W",
-    "ports": "3x USB-A | 2x USB-A | Type-C | PD | QC3.0",
-    "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
-    "dim": "129 x 67.9 x 40.3 mm",
-    "weight": "193.0 g",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "193.0 g",
-    "gw": "250.0 g",
-    "acc": "User Manual, Power Cable",
-    "proto": "QC3.0"
-  },
-  {
-    "model": "GC06-PD65W",
-    "category": "Car Charger",
-    "type_cn": "一分三车充",
-    "type_en": "Multi-function Car Charger",
-    "image": "images/GC06.jpg",
-    "power": "PD 65W | Total 120W",
-    "ports": "3x USB-A | 2x USB-A | Type-C | PD | QC3.0",
-    "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
-    "dim": "129 x 67.9 x 40.3 mm",
-    "weight": "193.0 g",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "193.0 g",
-    "gw": "250.0 g",
-    "acc": "User Manual, Power Cable",
-    "proto": "QC3.0"
-  },
-  {
     "model": "GC08-PD",
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
@@ -569,149 +422,6 @@ const PRODUCTS = [
     "nw": "143.8 g",
     "gw": "178 g",
     "acc": "User Manual"
-  },
-  {
-    "model": "GC08-DualC-Silicone",
-    "category": "Car Charger",
-    "type_cn": "伸缩线车充",
-    "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Total 45W+18W",
-    "ports": "PD | Retractable Cable",
-    "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
-    "dim": "74 x 38 x 171 mm",
-    "weight": "143.8 g",
-    "cable": "80CM",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "143.8 g",
-    "gw": "178 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GC08-BT-MP3",
-    "category": "Car Charger",
-    "type_cn": "伸缩线车充",
-    "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
-    "bt": "BT 5.4",
-    "power": "Total 65W + 18W",
-    "ports": "Type-C | Retractable Cable",
-    "features": "Colorful Lights, Smart Protection, Universal for Cars, Aluminum Body",
-    "dim": "74 x 38 x 171 mm",
-    "weight": "143.8 g",
-    "fm": "87.5-108MHz",
-    "material": "Aluminum Alloy + PC + ABS",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "143.8 g",
-    "gw": "178 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GC08-PD-DualC",
-    "category": "Car Charger",
-    "type_cn": "伸缩线车充",
-    "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Total 65W+25W",
-    "ports": "Type-C | PD | Retractable Cable",
-    "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
-    "dim": "74 x 38 x 171 mm",
-    "weight": "143.8 g",
-    "cable": "80CM",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "143.8 g",
-    "gw": "178 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GC08-DualPD",
-    "category": "Car Charger",
-    "type_cn": "伸缩线车充",
-    "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Dual PD | Total 65W+65W+15W",
-    "ports": "2x USB-C | PD | Retractable Cable",
-    "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
-    "dim": "74 x 38 x 171 mm",
-    "weight": "143.8 g",
-    "cable": "80CM",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "143.8 g",
-    "gw": "178 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GC11S",
-    "category": "Car Charger",
-    "type_cn": "九合一车充",
-    "type_en": "Car Charger",
-    "image": "images/GC11S.jpg",
-    "power": "Total 120W",
-    "ports": "3x USB-A, 3x USB-C",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
-    "dim": "Product Dimensions: 130.6* 91.2* 38mm\nColor Box Dimensions: 153* 42* 169mm\nN.W.: 245.4g",
-    "cable": "1.0m",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 8-in-1 Power Hub​ - Combines 3 cigarette lighter sockets, 3 USB-A, and 2 USB-C ports, including a retractable 65W USB-C cable.\n⚡ 120W High Power​ - Supports high-power car appliances and fast charging for multiple devices simultaneously.\n🛡 Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1 PD Retractable Cable Output:\n5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nExpansion Output\nUSB-A Output: 5V 3.0A,9V 2.0A,12V 1.5A (18W)\nUSB-C Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "acc": "User Manual x1",
-    "p_sample": "70.0",
-    "p_500": "70.0",
-    "p_2000": "68.0",
-    "p_5000": "65.0"
-  },
-  {
-    "model": "GC11-Std",
-    "category": "Car Charger",
-    "type_cn": "一拖六车充",
-    "type_en": "Car Charger",
-    "image": "images/GC11.jpg",
-    "power": "Total 120W",
-    "ports": "2x USB-A, 2x USB-C",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
-    "dim": "51.5 x 30.5 x 38 mm",
-    "cable": "1.0m",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 2-in-1 Power Hub​ - Combines 2 cigarette lighter sockets and 5 USB ports (2A+2C), including a retractable 65W USB-C cable.\n⚡ 120W High Power​ - Supports high-power car appliances and fast charging for multiple devices simultaneously.\n🛡 Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Product Name: GC11 2-Socket Cigarette Lighter Splitter with 5-Port USB Car Charger (2A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-A + 2 USB-C + 2 Cigarette Sockets\nUSB-A1 Output: 5V/3.6A\nUSB-A2 Output: 5V/3.6A\n\nRetracetable Cable USB-C1 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nUSB-C2 Output: 5V/3.6A\n\nA1 + A2 + C2 Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 120W Max\n\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nCable Length: 1.0m \nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display",
-    "acc": "Power Cable",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
-  },
-  {
-    "model": "GC11-Pro-V2",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "image": "images/GC11.jpg",
-    "power": "PD 65W | Total 120W",
-    "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
-    "dim": "130.6 x 91.2 x 38 mm",
-    "acc": "Power Cable",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
   },
   {
     "model": "GC13-45W",
@@ -797,7 +507,7 @@ const PRODUCTS = [
     "acc": "User Manual x1"
   },
   {
-    "model": "GC21",
+    "model": "GC21-Standard",
     "category": "Car Charger",
     "type_cn": "车充表情款",
     "type_en": "Car Charger",
@@ -812,38 +522,20 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "🦉 Cute Emoji Faces & Real-Time Voltage Display​ - Exclusive Cute Emojis, Switch Anytime You Like.\n⚡  Power 83W​ - a PD 65W Retractable Cable + 1A1C 18W for fast charging laptops and multiple devices.\n🛡Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display"
-  },
-  {
-    "model": "GC21-PD45W",
-    "category": "Car Charger",
-    "type_cn": "车充表情款",
-    "image": "images/GC21.jpg",
-    "power": "PD 45W | Total 45W+18W",
-    "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "Voltage Monitor, Smart Protection, Universal for Cars, Emoji Display",
-    "dim": "85 x 44 x 183 mm",
-    "cable": "78CM"
-  },
-  {
-    "model": "GC21-FM",
-    "category": "Car Charger",
-    "type_cn": "车载蓝牙FM",
-    "type_en": "Car Charger",
-    "image": "images/GC21.jpg",
-    "bt": "BT 5.4",
-    "power": "Total 83W",
-    "ports": "Retractable Cable",
-    "features": "Hands-free Call, Universal for Cars, FM Transmit",
-    "dim": "85 x 44 x 183 mm",
-    "cable": "78CM",
-    "fm": "87.5 - 108.0 MHz",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🦉 Cute Emoji Faces & Real-Time Voltage Display​ - Exclusive Cute Emojis, Switch Anytime You Like.\n⚡  Power 83W​ - a PD 65W Retractable Cable + 1A1C 18W for fast charging laptops and multiple devices.\n🛡Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display"
+    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display",
+    "options": [
+      {
+        "model": "GC21-FM",
+        "features": "Hands-free Call, Universal for Cars, FM Transmit",
+        "bt": "BT 5.4",
+        "fm": "87.5 - 108.0 MHz"
+      },
+      {
+        "model": "GC21-PD45W",
+        "power": "PD 45W | Total 45W+18W",
+        "ports": "USB-A + USB-C | PD | Retractable Cable"
+      }
+    ]
   },
   {
     "model": "GC24",
@@ -1023,124 +715,6 @@ const PRODUCTS = [
     "proto": "A2DP, AVRCP, HFP/HSP"
   },
   {
-    "model": "GR05-LED-JL",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.4",
-    "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Long Battery Life",
-    "battery": "300mAh",
-    "signal": "10M",
-    "dim": "90 x 21 x 128 mm",
-    "weight": "21.5 g",
-    "input_v": "DC 5V",
-    "rxtx": "RX + TX",
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
-  },
-  {
-    "model": "GR05-LED-QL",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.0",
-    "chip": "Actions (炬力)",
-    "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Multi-point, Long Battery Life",
-    "battery": "300mAh",
-    "signal": "10 m",
-    "dim": "90 x 21 x 128 mm",
-    "weight": "21.5 g",
-    "input_v": "DC 5V",
-    "rxtx": "RX + TX",
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
-  },
-  {
-    "model": "GR05-LCD",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.4",
-    "chip": "Actions (炬力)",
-    "ports": "3.5mm AUX",
-    "features": "Stereo, Smart Chip, Long Battery Life",
-    "battery": "300mAh",
-    "signal": "10 m",
-    "dim": "70 x 20 x 130 mm",
-    "weight": "21.5 g",
-    "input_v": "DC 5V",
-    "color": "White",
-    "cert": "CE, FCC, RoHS",
-    "audio": "SBC, AAC",
-    "rxtx": "RX/TX",
-    "selling": "📺 LCD Screen Display​ – Shows real-time working status and mode clearly.\n🔄 TX/RX Dual Mode​ – Functions as both Bluetooth transmitter and receiver.\n🔋 Rechargeable Battery​ – Built-in 300mAh battery with up to 18h RX standby time.",
-    "desc": "Product Name: GR05LCD 2 in 1 Bluetooth Receiver & Transmitter with LCD Screen\nBluetooth Version: 5.4\nBluetooth Profiles: A2DP, AVRCP, HFP/HSP\nAudio Codecs: SBC, AAC\n\nWireless Range: 10m (open space, line-of-sight)\nMicrophone Effective Distance: 0–1.0m\n\nWorking Voltage: DC 5V\n\nUSB-C Input: 5V / 30mA (Max)\n\n3.5mm Aux Output: 1 × 3.5mm Stereo Jack\nSupported Audio Formats: MP3, WMA\nOperating Temperature: 0°C – 45°C\n\nBattery Capacity: Built-in 300mAh rechargeable lithium battery\nRX Standby Time: Up to 18 hours\nTX Standby Time: Up to 10 hours\nCharging Time: Approx. 2 hours\n\nCertifications: CE, FCC, RoHS",
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "A2DP, AVRCP, HFP/HSP"
-  },
-  {
-    "model": "GR05-Wired-JL",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.4",
-    "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
-    "battery": "300mAh",
-    "signal": "10M",
-    "dim": "90 x 21 x 128 mm",
-    "weight": "21.5 g",
-    "input_v": "DC 5V",
-    "rxtx": "RX + TX",
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
-  },
-  {
-    "model": "GR05-Wired-JL2",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.0",
-    "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
-    "battery": "300mAh",
-    "signal": "10M",
-    "dim": "90 x 21 x 128 mm",
-    "weight": "21.5 g",
-    "input_v": "DC 5V",
-    "rxtx": "RX + TX",
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
-  },
-  {
     "model": "GR07",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收器",
@@ -1191,7 +765,7 @@ const PRODUCTS = [
     "p_500": "11.0"
   },
   {
-    "model": "GR11-JL",
+    "model": "GR11-Standard",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射二合一",
     "type_en": "BT Audio RX/TX 2-in-1",
@@ -1213,59 +787,27 @@ const PRODUCTS = [
     "nw": "30.7 g",
     "gw": "64.5 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, A2DP, HFP, HSP, AVRCP"
-  },
-  {
-    "model": "GR11-QC",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR11-alt.jpg",
-    "bt": "BT 5.2",
-    "chip": "Qualcomm (高通)",
-    "features": "Stereo, Multi-point, Aluminum Body, Long Battery Life",
-    "battery": "250mAh",
-    "signal": "10M",
-    "dim": "90 x 24 x 129 mm",
-    "weight": "30.7 g",
-    "input_v": "DC 5V",
-    "rxtx": "RX + TX",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "30.7 g",
-    "gw": "64.5 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, aptX HD, aptX LL/Adaptive"
-  },
-  {
-    "model": "GR11-Wired-JL",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR11-alt.jpg",
-    "bt": "BT 5.4",
-    "chip": "JieLi (杰理)",
-    "features": "Stereo, Multi-point, Noise Reduction, Aluminum Body, Long Battery Life",
-    "signal": "10M",
-    "dim": "90 x 24 x 129 mm",
-    "rxtx": "RX + TX",
-    "proto": "SBC, A2DP, HFP, HSP, AVRCP"
-  },
-  {
-    "model": "GR11-Wired-QC",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙接收发射二合一",
-    "type_en": "BT Audio RX/TX 2-in-1",
-    "image": "images/GR11-alt.jpg",
-    "bt": "BT 5.2",
-    "chip": "Qualcomm (高通)",
-    "features": "Stereo, Multi-point, Aluminum Body, Long Battery Life",
-    "signal": "10M",
-    "dim": "90 x 24 x 129 mm",
-    "rxtx": "RX + TX",
-    "proto": "SBC, aptX HD, aptX LL/Adaptive"
+    "proto": "SBC, A2DP, HFP, HSP, AVRCP",
+    "options": [
+      {
+        "model": "GR11-QC",
+        "features": "Stereo, Multi-point, Aluminum Body, Long Battery Life",
+        "bt": "BT 5.2",
+        "chip": "Qualcomm (高通)",
+        "proto": "SBC, aptX HD, aptX LL/Adaptive"
+      },
+      {
+        "model": "GR11-Wired-JL",
+        "features": "Stereo, Multi-point, Noise Reduction, Aluminum Body, Long Battery Life"
+      },
+      {
+        "model": "GR11-Wired-QC",
+        "features": "Stereo, Multi-point, Aluminum Body, Long Battery Life",
+        "bt": "BT 5.2",
+        "chip": "Qualcomm (高通)",
+        "proto": "SBC, aptX HD, aptX LL/Adaptive"
+      }
+    ]
   },
   {
     "model": "GR13",
@@ -1600,37 +1142,7 @@ const PRODUCTS = [
     "acc": "OEM Only,MOQ: 2000pcs"
   },
   {
-    "model": "G63-Remote",
-    "category": "Car Bluetooth MP3",
-    "image": "images/G63.jpg",
-    "bt": "BT 5.3",
-    "signal": "10 m",
-    "dim": "85 x 75 x 60 mm",
-    "weight": "133.8 g",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "133.8 g",
-    "gw": "239.3 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GC08-FM",
-    "category": "Car Charger",
-    "image": "images/GC08-FM.jpg",
-    "bt": "BT 5.4",
-    "dim": "61 x 33.5 x 153 mm",
-    "weight": "143.8 g",
-    "p_2000": "53.0",
-    "p_5000": "52.0",
-    "nw": "143.8 g",
-    "acc": "User Manual",
-    "p_sample": "55.0",
-    "p_500": "54.0"
-  },
-  {
-    "model": "GR05-LCD",
+    "model": "GR05-Standard",
     "category": "Bluetooth Receiver",
     "type_cn": "蓝牙接收发射器",
     "type_en": "Bluetooth Transceiver",
@@ -1648,7 +1160,45 @@ const PRODUCTS = [
     "p_5000": "35.0",
     "nw": "21.5 g",
     "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
+    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
+    "options": [
+      {
+        "model": "GR05-LED",
+        "ports": "3.5mm AUX",
+        "bt": "BT 5.4",
+        "proto": "A2DP, AVRCP, HFP/HSP",
+        "battery": "300mAh"
+      },
+      {
+        "model": "GR05-LED-JL",
+        "ports": "Type-C",
+        "features": "TF Card Slot, Stereo, Smart Chip, Long Battery Life",
+        "bt": "BT 5.4",
+        "battery": "300mAh"
+      },
+      {
+        "model": "GR05-LED-QL",
+        "ports": "Type-C",
+        "features": "TF Card Slot, Stereo, Smart Chip, Multi-point, Long Battery Life",
+        "bt": "BT 5.0",
+        "chip": "Actions (炬力)",
+        "battery": "300mAh"
+      },
+      {
+        "model": "GR05-Wired-JL",
+        "ports": "Type-C",
+        "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
+        "bt": "BT 5.4",
+        "battery": "300mAh"
+      },
+      {
+        "model": "GR05-Wired-JL2",
+        "ports": "Type-C",
+        "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
+        "bt": "BT 5.0",
+        "battery": "300mAh"
+      }
+    ]
   },
   {
     "model": "G21",
@@ -1663,33 +1213,7 @@ const PRODUCTS = [
     "desc": "Product Name: G21 Car FM Transmitter with LED Screen & \nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nUSB-A3 output: QC3.0 18W\nTF card Slot: 1\n3.5mm Aux Input Port: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFrequency Range: DAB Band III (174-240MHz); FM 87.5-108MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
   },
   {
-    "model": "G32-Uni",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载FM发射器",
-    "type_en": "Car FM Transmitter",
-    "image": "images/G32.jpg",
-    "bt": "BT 5.3",
-    "ports": "2x USB-A, TF Card Slot",
-    "signal": "10-15 m",
-    "fm": "87.5-108.0 MHz",
-    "selling": "✅ Bluetooth 5.3​ - 10m stable connection\n✅ Dual USB ports​ - 5V/1A (music playback) + 5V/2.1A (fast charge)\n✅ Multi-playback​ - Supports TF card/USB/Bluetooth/FM",
-    "desc": "Product Name: G32 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 2\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
-  },
-  {
-    "model": "G47-Uni",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载FM发射器",
-    "type_en": "Car FM Transmitter",
-    "image": "images/G47.jpg",
-    "bt": "BT 5.3",
-    "ports": "2x USB-A, 1x USB-C, TF Card Slot",
-    "signal": "10-15 m",
-    "fm": "87.5-108.0 MHz",
-    "selling": "💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
-    "desc": "Product Name: G47 Car FM Transmitter with Built-in ambient lighting\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3.0A\nUSB-C1 output: 5V/3.0A \nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting"
-  },
-  {
-    "model": "G63",
+    "model": "G63-Standard",
     "category": "Car Charger",
     "type_cn": "车载FM发射器",
     "type_en": "Car FM Transmitter",
@@ -1705,25 +1229,18 @@ const PRODUCTS = [
     "p_2000": "61.0",
     "p_5000": "60.0",
     "dim": "Product Dimensions:\n85*75*60mm\nN.W.: 133.8g\nG.W.: 215.9g\nColor Box Dimensions:\n108*165*85mm\nCarton Dimensions:\n44.5*34*56cm\nQty/Carton: 50pcs/carton\nN.W.: 10.80kg\nG.W.: 12.00kg",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "options": [
+      {
+        "model": "G63-Remote",
+        "ports": "PD",
+        "features": "Lossless Sound, Fast Charge, Voice Navigation, Hands-free Call, TF Card Slot, U Disk Play",
+        "bt": "BT 5.0"
+      }
+    ]
   },
   {
-    "model": "GC03C",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "images/GC03.jpg",
-    "power": "Total 54W",
-    "ports": "3x USB-C",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "⚡ Triple USB-C PD Fast Charge​ - 36W USB-C port plus two 5V/3.6A USB-C ports\n🔌54W Total Power​ - High output for multiple devices\n🛡Safe & Stylish​ - Fireproof PC+ABS with ambient lighting",
-    "desc": "Product Name: GC03C Car Charger 54W (3C)\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 54W\nOutput Port(s): 3 USB-C\nUSB-C1 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nUSB-C2 Output: 5V/3.6A\nUSB-C3 Output: 5V/3.6A\nSocket Extension: 54W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting"
-  },
-  {
-    "model": "GC06",
+    "model": "GC06-Standard",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1742,105 +1259,23 @@ const PRODUCTS = [
     "p_2000": "41.0",
     "p_5000": "40.0",
     "dim": "Product Dimensions:\n130*68*40mm\n46*20*65mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n129*40*68mm",
-    "acc": "User Manual x1"
-  },
-  {
-    "model": "GC08-DualC",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Total 65W",
-    "ports": "1x USB-A, 3x USB-C, Retractable Cable",
-    "cable": "78cm",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 Built-in Retractable Cables​ - Features 2 retractable USB-C cables (78cm) plus 1 USB-A port for a clean, tangle-free setup.\n⚡ 65W PD Fast Charging​ - The retractable USB-C1 port supports up to 65W PD output for high-power devices.\n🛡️ Safe & Smart​ - Equipped with fireproof PC+ABS, comprehensive safety protections, and a car battery voltage LED display.",
-    "desc": "Product Name: GC08 Car Charger with 2 Retractable Cables Max 65W(1A3C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 65W\nOutput Port(s): 1 USB-A + 3 USB-C\nUSB-A1 Output: 5V/3.6A\nRetractable Cable USB-C1 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nRetractable Cable USB-C2 Output: 5V/3.6A\nUSB-C3 Output: 5V/3.6A\n\nA1 + C2 + C3 Total Output: 5V/3A 15W Shared\n\nRetractable  Cable Length: 78cm ±2cm\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting & Car Battery Voltage LED Display",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
-  },
-  {
-    "model": "GC08-C1L",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Total 65W",
-    "ports": "1x USB-A, 2x USB-C, Retractable Cable",
-    "cable": "78cm",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 2-in-1 Retractable Cables​ - Features a 78cm USB-C and a Lightning cable, plus an extra USB-A port.\n⚡  65W PD Fast Charging​ - The retractable USB-C port supports up to 65W PD output for laptops and tablets.\n🛡 Safe & Smart​ - Built with fireproof PC+ABS, comprehensive safety protections, and a car battery voltage LED display.",
-    "desc": "Product Name: GC08 Car Charger with 2 Retractable Cables Max 65W(1A2C1L) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 65W\nOutput Port(s): 1 USB-A + 3 USB-C\nUSB-A1 Output: 5V/3.6A\nRetractable Cable USB-C1 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nRetractable Cable iOS L Output: 5V/2.4A\nUSB-C2 Output: 5V/3.6A\n\nA1 + C2 Total Output: 5V/3A 15W Shared\n\nRetractable  Cable Length: 78cm ±2cm\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting & Car Battery Voltage LED Display",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
-  },
-  {
-    "model": "GC08-A1C3",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "images/GC08.jpg",
-    "power": "Total 65W",
-    "ports": "1x USB-A, 3x USB-C, Retractable Cable",
-    "cable": "78cm",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS + Aluminum alloy frame",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 Dual 65W PD Retractable Cables​ - Two built-in 78cm USB-C cables support up to 65W PD fast charging each.\n⚡ 65W High-Power Output​ - Powerful enough to fast charge laptops, tablets, and phones simultaneously.\n🛡 Safe & Smart Design​ - Combines fireproof PC+ABS with an aluminum alloy frame, plus ambient lighting and a car battery voltage display.",
-    "desc": "Product Name: GC08 Car Charger with 2 Retractable Cables Max 65W(1A3C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 65W\nOutput Port(s): 1 USB-A + 3 USB-C\nUSB-A1 Output: 5V/3.6A\nRetractable Cable USB-C1 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nRetractable Cable USB-C2 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nUSB-C3 Output: 5V/3.6A\nA1 + C3 Total Output: 5V/3A 15W Shared\n\nRetractable  Cable Length: 78cm ±2cm\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS + Aluminum alloy frame\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting & Car Battery Voltage LED Display",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
-  },
-  {
-    "model": "GC11-Pro",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "images/GC11.jpg",
-    "power": "Total 120W",
-    "ports": "2x USB-A, 3x USB-C",
-    "cable": "1.0m",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 7-in-1 Power Hub​ - Combines 2 cigarette lighter sockets and 5 USB ports (2A+3C), including a retractable 65W USB-C cable.\n⚡ 120W High Power​ - Supports high-power car appliances and fast charging for multiple devices simultaneously.\n🛡 Safe & Smart​ - Built-in car battery voltage display, replaceable fuse, and comprehensive safety protections.",
-    "desc": "Product Name: GC11 2-Socket Cigarette Lighter Splitter with 5-Port USB Car Charger (2A3C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-A + 3 USB-C + 2 Cigarette Sockets\nUSB-A1 Output: 5V/3.6A\nUSB-A2 Output: 5V/3.6A\n\nRetracetable Cable USB-C1 Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\nUSB-C2 Output: 5V/3.6A\nUSB-C3 Output: 5V/3.6A\n\nA1 + A2 + C2 Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 120W Max\n\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nCable Length: 1.0m \nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display & Built-in Replaceable Fuse on the plug",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
-  },
-  {
-    "model": "GR05-LED",
-    "category": "Bluetooth Receiver",
-    "type_cn": "蓝牙收发器",
-    "type_en": "Bluetooth Transceiver",
-    "image": "images/GR05-LED.jpg",
-    "bt": "BT 5.4",
-    "ports": "3.5mm AUX",
-    "battery": "300mAh",
-    "signal": "10 m",
-    "input_v": "DC 5V",
-    "cert": "CE, FCC, RoHS",
-    "audio": "SBC, AAC",
-    "rxtx": "RX/TX",
-    "selling": "🔋 Rechargeable 2-in-1 Device:​ Built-in 300mAh battery with up to 21h RX or 13h TX standby time.\n🔄 TX/RX Dual Mode:​ Works as both Bluetooth transmitter and receiver.\n🌈 LED Indicator:​ Features LED for clear working status display.",
-    "desc": "Product Name: GR05LED 2 in 1 Bluetooth Receiver & Transmitter\nBluetooth Version: 5.4\nBluetooth Profiles: A2DP, AVRCP, HFP/HSP\nAudio Codecs: SBC, AAC\n\nWireless Range: 10m (open space, line-of-sight)\nMicrophone Effective Distance: 0–1.0m\n\nWorking Voltage: DC 5V\n\nUSB-C Input: 5V / 30mA (Max)\n\n3.5mm Aux Output: 1 × 3.5mm Stereo Jack\n\nSupported Audio Formats: MP3, WMA\nOperating Temperature: 0°C – 45°C\n\nBattery Capacity: Built-in 300mAh rechargeable lithium battery\nRX Standby Time: Up to 21 hours\nTX Standby Time: Up to 13 hours\nCharging Time: Approx. 2 hours\n\nCertifications: CE, FCC, RoHS",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "acc": "User Manual x1",
+    "options": [
+      {
+        "model": "GC06-35W",
+        "power": "PD 35W | Total 120W",
+        "ports": "3x USB-A | 2x USB-A | Type-C | PD | QC3.0",
+        "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
+        "proto": "QC3.0"
+      },
+      {
+        "model": "GC06-PD65W",
+        "power": "PD 65W | Total 120W",
+        "ports": "3x USB-A | 2x USB-A | Type-C | PD | QC3.0",
+        "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
+        "proto": "QC3.0"
+      }
+    ]
   },
   {
     "model": "GR21",
@@ -1877,35 +1312,7 @@ const PRODUCTS = [
     "proto": "A2DP, AVRCP, HFP/HSP"
   },
   {
-    "model": "GC21-Eyes",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "",
-    "desc": "Total Output: Max 83W\nWorking Voltage: 12V-24V\nVoltage Limit Range: 9-26V\nOutput Ports: 3\n\nUSB-A Output: 5V/3.6A\n\nUSB-C2 Output: 5V/3.6A\n\nUSB-C1 Retractable Cable Output (Independent Circuit): 5V/3A,9V/3A,12V/3A,15V/3A, 20V/3.25A(Max PD 65W 15V/20V only for 24V vehicles, e.g. trucks, buses)\nRetractable Cable Length: Total Length 80cm\n(Effective Length 78cm ± 1cm)\nCar Charger Material: PC+ABS\nLED Screen: Car Battery Voltage & Output Power Display；Cute Expression Carousel/Lock",
-    "dim": "Color Box Dimensions:\n7.4*3.8*17.0cm\nN.W.: 152g\nG.W.: 178g\nCarton Dimensions:\n40.5*35.8*31.8cm\nQty/Carton: 80pcs/carton",
-    "acc": "User Manual x1",
-    "p_sample": "50.0",
-    "p_500": "45.0",
-    "p_2000": "42.0",
-    "p_5000": "41.0"
-  },
-  {
-    "model": "GC21-Emoji",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "",
-    "desc": "Total Output: Max 83W\nWorking Voltage: 12V-24V\n\nVoltage Limit Range: 9-26V\n\nOutput Ports: 3\n\nUSB-A1 Output: 5V/3.6A\n\nUSB-A2 Output: 5V/3.6A\n\nUSB-C Retractable Cable Output: PD Fast Charging 65W(Max 65W 15V/20V only for 24V vehicles, e.g. trucks, buses)\nLED Screen: Car Battery Voltage & Output Power Display；Cute Emoji Carousel/Lock\n\nBass Effect: One-Touch Switch\nCertification: CE FCC RoHS Design Patent",
-    "dim": "Color Box Dimensions:\n7.4*3.8*17.0cm\nN.W.: 152g\nG.W.: 178g\nCarton Dimensions:\n40.5*35.8*31.8cm\nQty/Carton: 80pcs/carton",
-    "acc": "User Manual x1",
-    "p_sample": "45.0",
-    "p_500": "37.0",
-    "p_2000": "36.0",
-    "p_5000": "35.0"
-  },
-  {
-    "model": "GC08",
+    "model": "GC08-Standard",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1916,10 +1323,70 @@ const PRODUCTS = [
     "p_sample": "50.0",
     "p_500": "45.0",
     "p_2000": "43.0",
-    "p_5000": "42.0"
+    "p_5000": "42.0",
+    "options": [
+      {
+        "model": "GC08-FM",
+        "bt": "BT 5.4"
+      },
+      {
+        "model": "GC08-PD-DualC",
+        "power": "Total 65W+25W",
+        "ports": "Type-C | PD | Retractable Cable",
+        "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
+        "cable": "80CM"
+      },
+      {
+        "model": "GC08-DualPD",
+        "power": "Dual PD | Total 65W+65W+15W",
+        "ports": "2x USB-C | PD | Retractable Cable",
+        "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
+        "cable": "80CM"
+      },
+      {
+        "model": "GC08-A1C3",
+        "power": "Total 65W",
+        "ports": "1x USB-A, 3x USB-C, Retractable Cable",
+        "cable": "78cm",
+        "material": "Fireproof PC + ABS + Aluminum alloy frame",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC08-C1L",
+        "power": "Total 65W",
+        "ports": "1x USB-A, 2x USB-C, Retractable Cable",
+        "cable": "78cm",
+        "material": "Fireproof PC + ABS",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC08-DualC",
+        "power": "Total 65W",
+        "ports": "1x USB-A, 3x USB-C, Retractable Cable",
+        "cable": "78cm",
+        "material": "Fireproof PC + ABS",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC08-DualC-Silicone",
+        "power": "Total 45W+18W",
+        "ports": "PD | Retractable Cable",
+        "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
+        "cable": "80CM"
+      },
+      {
+        "model": "GC08-BT-MP3",
+        "power": "Total 65W + 18W",
+        "ports": "Type-C | Retractable Cable",
+        "features": "Colorful Lights, Smart Protection, Universal for Cars, Aluminum Body",
+        "bt": "BT 5.4",
+        "fm": "87.5-108MHz",
+        "material": "Aluminum Alloy + PC + ABS"
+      }
+    ]
   },
   {
-    "model": "GC11",
+    "model": "GC11-Standard",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1930,7 +1397,41 @@ const PRODUCTS = [
     "p_sample": "65.0",
     "p_500": "58.0",
     "p_2000": "57.0",
-    "p_5000": "55.0"
+    "p_5000": "55.0",
+    "options": [
+      {
+        "model": "GC11S",
+        "power": "Total 120W",
+        "ports": "3x USB-A, 3x USB-C",
+        "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
+        "cable": "1.0m",
+        "material": "Fireproof PC + ABS",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC11-Std",
+        "power": "Total 120W",
+        "ports": "2x USB-A, 2x USB-C",
+        "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
+        "cable": "1.0m",
+        "material": "Fireproof PC + ABS",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC11-Pro",
+        "power": "Total 120W",
+        "ports": "2x USB-A, 3x USB-C",
+        "cable": "1.0m",
+        "material": "Fireproof PC + ABS",
+        "input_v": "DC 12V"
+      },
+      {
+        "model": "GC11-Pro-V2",
+        "power": "PD 65W | Total 120W",
+        "ports": "USB-A + USB-C | PD | Retractable Cable",
+        "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars"
+      }
+    ]
   },
   {
     "model": "ZNB01",
@@ -1945,19 +1446,5 @@ const PRODUCTS = [
     "p_500": "35.0",
     "p_2000": "34.0",
     "p_5000": "32.0"
-  },
-  {
-    "model": "G63-Remote-Car",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "",
-    "desc": "Bluetooth Version: V5.3\nWorking Voltage: 12V-24V\nVoltage Limit: 9-26V\nTransmission Distance: 10-15m\nOutput Ports: 2\nUSB Output: 5V/1A(Read USB Drive for Music Playback)\nType-C Output: PD 25W\n2-Port Power: 80W\nTF Card Slot: 1\nFM Frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0m\nBluetooth Effective Range: 10m\nFM Effective Range: 2-3m\n2Cigarette Lighter Sockets\nCertification: CE FCC RoHS Design Patent",
-    "dim": "Product Dimensions:\n85*75*60mm\nN.W.: 133.8g\nG.W.: 215.9g\nColor Box Dimensions:\n108*165*85mm\nCarton Dimensions:\n44.5*34*56cm\nQty/Carton: 50pcs/carton\nN.W.: 10.80kg\nG.W.: 12.00kg",
-    "acc": "User Manual x1",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null
   }
 ];
