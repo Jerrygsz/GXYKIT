@@ -384,6 +384,19 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .variant-grid .form-field { gap: 3px; }
 .variant-grid .form-field label { font-size: 0.7rem; }
 .variant-grid .form-field input, .variant-grid .form-field textarea { padding: 6px 8px; font-size: 0.8rem; }
+/* Table Thumbnail (Product List) */
+.table-thumb {
+  width: 48px; height: 48px; object-fit: contain; border-radius: 6px;
+  background: var(--bg-card); border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer; transition: transform 0.2s; display: block;
+}
+.table-thumb:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.table-thumb-placeholder {
+  width: 48px; height: 48px; border-radius: 6px; background: var(--bg);
+  border: 1px dashed rgba(0,0,0,0.1); display: flex;
+  align-items: center; justify-content: center;
+  color: var(--text-ter); font-size: 0.75rem;
+}
 /* Variant Image */
 .variant-image-section {
   grid-column: 1 / -1;
@@ -620,7 +633,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         <thead>
           <tr>
             <th style="width:40px"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></th>
-            <th>Model</th>
+            <th style="width:70px">Image</th>
+        <th>Model</th>
             <th>Category</th>
             <th>Type</th>
             <th>Bluetooth</th>
@@ -1063,7 +1077,11 @@ function renderTable() {
   pageItems.forEach((p, idx) => {
     const realIdx = products.indexOf(p);
     const tr = document.createElement('tr');
+    const thumbHtml = p.image ?
+      '<img src="' + p.image + '" class="table-thumb" onclick="openVariantLightbox(\'' + p.image + '\')" alt="">' :
+      '<div class="table-thumb-placeholder">--</div>';
     tr.innerHTML = '<td><input type="checkbox" class="row-check" data-idx="' + realIdx + '" onchange="updateBatchInfo()"></td>' +
+      '<td>' + thumbHtml + '</td>' +
       '<td class="td-model">' + (p.model || '') + '</td>' +
       '<td class="td-category">' + (p.category || '') + '</td>' +
       '<td>' + (p.type_en || p.type_cn || '') + '</td>' +
