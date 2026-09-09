@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-<script src="data.js?v=2026-09-08-v1"></script>
+<script src="data.js?v=2026-09-09-v2"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -212,6 +212,241 @@ body {
 .cat-tab:hover:not(.active) {
   background: var(--bg-tertiary);
 }
+
+/* ===== Series Tabs ===== */
+.series-bar {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.series-bar::-webkit-scrollbar { display: none; }
+.series-tab {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+  border: 2px solid transparent;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+.series-tab.active {
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ===== Compare Checkbox ===== */
+.compare-check {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.product-card:hover .compare-check,
+.compare-check.checked {
+  opacity: 1;
+}
+.compare-check.checked {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+.compare-check svg {
+  width: 14px; height: 14px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Compare Bar ===== */
+.compare-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--bg-tertiary);
+  padding: 12px 16px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.compare-bar.show { display: flex; }
+.compare-selected {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  overflow-x: auto;
+}
+.compare-chip {
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: var(--bg-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.compare-chip-close {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.compare-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.compare-btn:hover { background: var(--accent-blue-hover); }
+.compare-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.compare-clear {
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--bg-tertiary);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* ===== Compare Modal ===== */
+.compare-modal-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  display: none; opacity: 0; transition: opacity 0.3s var(--ease);
+}
+.compare-modal-overlay.show { display: flex; opacity: 1; }
+.compare-modal {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  width: 94%; max-width: 1000px;
+  max-height: 90vh;
+  margin: auto;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95); transition: transform 0.3s var(--spring);
+}
+.compare-modal-overlay.show .compare-modal {
+  transform: scale(1);
+}
+.compare-modal-header {
+  padding: 20px 24px 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.compare-modal-title { font-size: 1.2rem; font-weight: 700; }
+.compare-modal-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-tertiary); border: none;
+  cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+}
+.compare-table-wrap {
+  overflow: auto;
+  padding: 16px 24px 24px;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.compare-table th, .compare-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.compare-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  position: sticky; top: 0;
+}
+.compare-table td {
+  color: var(--text-primary);
+  vertical-align: top;
+}
+.compare-table tr:hover td {
+  background: var(--bg-primary);
+}
+.compare-table .diff-highlight {
+  background: rgba(255,149,0,0.12) !important;
+  font-weight: 600;
+  color: #ff9500;
+}
+.compare-table .same-val {
+  color: var(--text-tertiary);
+}
+.compare-product-header {
+  text-align: center !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.compare-product-img {
+  width: 60px; height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--bg-tertiary);
+}
+
+/* ===== Selling Points on Card ===== */
+.card-selling {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px 12px 12px;
+}
+.sell-point {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.sell-bt { background: rgba(0,113,227,0.1); color: #0071e3; }
+.sell-power { background: rgba(255,149,0,0.1); color: #ff9500; }
+.sell-ports { background: rgba(94,92,230,0.1); color: #5e5ce6; }
+.sell-screen { background: rgba(175,82,222,0.1); color: #af52de; }
+.sell-year { background: rgba(52,199,89,0.1); color: #34c759; }
 
 /* ===== Product Grid ===== */
 .product-grid {
@@ -775,6 +1010,7 @@ body {
   </div>
 
   <div class="cat-tabs" id="catTabs"></div>
+  <div class="series-bar" id="seriesTabs" style="display:none"></div>
 
   <div class="cat-hero" id="catHero" style="display:none">
     <div class="cat-hero-icon" id="heroIcon"></div>
@@ -786,6 +1022,28 @@ body {
 
   <div class="bottom-nav show" id="bottomNav">
     <button class="nav-btn active" onclick="scrollToTop()">Top</button>
+  </div>
+
+  <!-- Compare Bar -->
+  <div class="compare-bar" id="compareBar">
+    <div class="compare-selected" id="compareSelected"></div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="compare-clear" onclick="clearCompare()">Clear</button>
+      <button class="compare-btn" id="compareBtn" onclick="openCompareModal()" disabled>Compare (0)</button>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="compare-modal-overlay" id="compareModalOverlay" onclick="closeCompareModal(event)">
+    <div class="compare-modal" onclick="event.stopPropagation()">
+      <div class="compare-modal-header">
+        <div class="compare-modal-title">Product Comparison</div>
+        <button class="compare-modal-close" onclick="closeCompareModal()">&times;</button>
+      </div>
+      <div class="compare-table-wrap">
+        <table class="compare-table" id="compareTable"></table>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -818,28 +1076,46 @@ try {
   }
 } catch(e) {}
 // Category config
+// ===== Category & Series Config =====
 const CATEGORIES = [
   { key: 'all', label: 'All', icon: 'GRID', color: '#0071e3' },
   { key: 'Car Charger', label: 'Car Chargers', icon: 'POWER', color: '#ff9500' },
   { key: 'Car Bluetooth MP3', label: 'Car Bluetooth MP3', icon: 'MUSIC', color: '#5e5ce6' },
   { key: 'Bluetooth Receiver', label: 'BT Receivers', icon: 'BT', color: '#0071e3' },
-  { key: 'FM Transmitter', label: 'FM Transmitters', icon: 'FM', color: '#34c759' },
-  { key: 'Wireless Charger', label: 'Wireless', icon: 'WIRELESS', color: '#5e5ce6' },
-  { key: 'CarPlay', label: 'CarPlay', icon: 'CAR', color: '#86868b' },
-  { key: 'Other', label: 'Other', icon: 'MORE', color: '#aeaeb2' },
+  { key: 'Other', label: 'Others', icon: 'MORE', color: '#aeaeb2' },
 ];
 
 const CAT_ICONS = {
   'Car Charger': { emoji: 'power', bg: 'rgba(255,149,0,0.12)', text: '#ff9500' },
   'Car Bluetooth MP3': { emoji: 'music', bg: 'rgba(94,92,230,0.12)', text: '#5e5ce6' },
   'Bluetooth Receiver': { emoji: 'bluetooth', bg: 'rgba(0,113,227,0.12)', text: '#0071e3' },
-  'FM Transmitter': { emoji: 'fm', bg: 'rgba(52,199,89,0.12)', text: '#34c759' },
-  'Wireless Charger': { emoji: 'wireless', bg: 'rgba(94,92,230,0.12)', text: '#5e5ce6' },
-  'CarPlay': { emoji: 'car', bg: 'rgba(134,134,139,0.12)', text: '#86868b' },
   'Other': { emoji: 'other', bg: 'rgba(174,174,178,0.12)', text: '#aeaeb2' },
 };
 
+// Series definitions per category (auto-detected from product fields)
+const SERIES_CONFIG = {
+  'Car Charger': [
+    { key: 'quick', label: 'Quick Charge', color: '#0071e3', bg: 'rgba(0,113,227,0.08)' },
+    { key: 'multi', label: 'Multi-Port', color: '#ff9500', bg: 'rgba(255,149,0,0.08)' },
+    { key: 'retractable', label: 'Retractable', color: '#34c759', bg: 'rgba(52,199,89,0.08)' },
+    { key: 'standard', label: 'Standard', color: '#86868b', bg: 'rgba(134,134,139,0.08)' },
+  ],
+  'Car Bluetooth MP3': [
+    { key: 'premium', label: 'Premium', color: '#af52de', bg: 'rgba(175,82,222,0.08)' },
+    { key: 'pro', label: 'Pro', color: '#0071e3', bg: 'rgba(0,113,227,0.08)' },
+    { key: 'standard', label: 'Standard', color: '#ff9500', bg: 'rgba(255,149,0,0.08)' },
+    { key: 'entry', label: 'Entry', color: '#86868b', bg: 'rgba(134,134,139,0.08)' },
+  ],
+  'Bluetooth Receiver': [
+    { key: 'all', label: 'All Receivers', color: '#0071e3', bg: 'rgba(0,113,227,0.08)' },
+  ],
+  'Other': [
+    { key: 'all', label: 'All Others', color: '#86868b', bg: 'rgba(134,134,139,0.08)' },
+  ],
+};
+
 let currentCategory = 'all';
+let currentSeries = 'all';
 let productsRendered = false;
 let currentModalProduct = null;
 let currentLightboxIdx = 0;
@@ -870,7 +1146,7 @@ function showCatalog() {
     showLoading();
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        renderProducts('all');
+        renderProducts('all', 'all');
         productsRendered = true;
       });
     });
@@ -886,27 +1162,131 @@ function renderTabs() {
   const container = document.getElementById('catTabs');
   container.innerHTML = '';
   CATEGORIES.forEach(cat => {
-    const count = cat.key === 'all' ? PRODUCTS.length : PRODUCTS.filter(p => p.category === cat.key).length;
+    // For Car Bluetooth MP3, count includes FM Transmitter
+    let count;
+    if (cat.key === 'Car Bluetooth MP3') {
+      count = PRODUCTS.filter(p => p.category === 'Car Bluetooth MP3' || p.category === 'FM Transmitter').length;
+    } else if (cat.key === 'all') {
+      count = PRODUCTS.length;
+    } else if (cat.key === 'Other') {
+      count = PRODUCTS.filter(p => p.category === 'Other' || p.category === 'Wireless Charger').length;
+    } else {
+      count = PRODUCTS.filter(p => p.category === cat.key).length;
+    }
     if (cat.key !== 'all' && count === 0) return;
     const tab = document.createElement('div');
     tab.className = 'cat-tab' + (cat.key === currentCategory ? ' active' : '');
     tab.textContent = cat.label + ' (' + count + ')';
     tab.onclick = () => {
       currentCategory = cat.key;
+      currentSeries = 'all';
       document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      renderProducts(cat.key);
+      renderSeriesTabs();
+      renderProducts(currentCategory, currentSeries);
+    };
+    container.appendChild(tab);
+  });
+  renderSeriesTabs();
+}
+
+function renderSeriesTabs() {
+  const container = document.getElementById('seriesTabs');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  const seriesList = SERIES_CONFIG[currentCategory];
+  if (!seriesList || seriesList.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'flex';
+  
+  seriesList.forEach(series => {
+    const tab = document.createElement('div');
+    tab.className = 'series-tab' + (series.key === currentSeries ? ' active' : '');
+    tab.textContent = series.label;
+    tab.style.setProperty('--series-color', series.color);
+    if (series.key === currentSeries) {
+      tab.style.background = series.color;
+      tab.style.borderColor = series.color;
+    } else {
+      tab.style.background = series.bg;
+      tab.style.borderColor = series.bg;
+      tab.style.color = series.color;
+    }
+    tab.onclick = () => {
+      currentSeries = series.key;
+      document.querySelectorAll('.series-tab').forEach(t => {
+        t.classList.remove('active');
+        const sKey = SERIES_CONFIG[currentCategory]?.find(s => s.label === t.textContent)?.key;
+        const sCfg = SERIES_CONFIG[currentCategory]?.find(s => s.key === sKey);
+        if (sCfg) {
+          t.style.background = sCfg.bg;
+          t.style.borderColor = sCfg.bg;
+          t.style.color = sCfg.color;
+        }
+      });
+      tab.classList.add('active');
+      tab.style.background = series.color;
+      tab.style.borderColor = series.color;
+      tab.style.color = '#fff';
+      renderProducts(currentCategory, currentSeries);
     };
     container.appendChild(tab);
   });
 }
 
-function renderProducts(cat) {
+function detectSeries(product, category) {
+  if (category === 'Car Charger') {
+    const combined = (product.power + ' ' + product.ports + ' ' + product.features).toLowerCase();
+    const hasRetractable = combined.includes('retractable') || combined.includes('coiled') || combined.includes('spring');
+    const hasQC = combined.includes('qc3.0') || combined.includes('quick charge');
+    const hasPD = combined.includes('pd') || combined.includes('power delivery');
+    const hasFast = combined.includes('fast charge') || combined.includes('18w') || combined.includes('30w') || combined.includes('48w');
+    const usbMatch = product.ports ? product.ports.match(/(\d+)x\s*USB/i) : null;
+    const usbCount = usbMatch ? parseInt(usbMatch[1]) : 0;
+    
+    if (hasRetractable) return 'retractable';
+    if (hasQC || hasPD || hasFast) return 'quick';
+    if (usbCount >= 3) return 'multi';
+    return 'standard';
+  }
+  if (category === 'Car Bluetooth MP3') {
+    const combined = (product.bt + ' ' + product.power + ' ' + product.features + ' ' + product.ports).toLowerCase();
+    const hasScreen = product.screen;
+    const hasQC = combined.includes('qc3.0');
+    const hasPD = combined.includes('pd');
+    const btVersion = product.bt ? parseFloat(product.bt.replace(/[^0-9.]/g, '')) : 0;
+    
+    if (hasScreen && (hasQC || hasPD)) return 'premium';
+    if (btVersion >= 5.3 && (hasQC || hasPD)) return 'pro';
+    if (btVersion >= 5.3) return 'standard';
+    return 'entry';
+  }
+  return 'all';
+}
+
+function renderProducts(cat, series) {
   const grid = document.getElementById('productGrid');
   const hero = document.getElementById('catHero');
   const navTitle = document.getElementById('navTitle');
 
-  let products = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
+  let products;
+  if (cat === 'all') {
+    products = PRODUCTS.slice();
+  } else if (cat === 'Car Bluetooth MP3') {
+    products = PRODUCTS.filter(p => p.category === 'Car Bluetooth MP3' || p.category === 'FM Transmitter');
+  } else if (cat === 'Other') {
+    products = PRODUCTS.filter(p => p.category === 'Other' || p.category === 'Wireless Charger');
+  } else {
+    products = PRODUCTS.filter(p => p.category === cat);
+  }
+
+  // Series filter
+  if (series && series !== 'all' && (cat === 'Car Charger' || cat === 'Car Bluetooth MP3')) {
+    products = products.filter(p => detectSeries(p, cat) === series);
+  }
 
   // Sort by year descending, then by model ascending
   products.sort((a, b) => {
@@ -948,7 +1328,17 @@ function renderProducts(cat) {
 function createCard(p) {
   const card = document.createElement('div');
   card.className = 'product-card';
-  card.onclick = () => openModal(p);
+  card.dataset.model = p.model;
+  card.onclick = (e) => {
+    if (e.target.closest('.compare-check')) return;
+    openModal(p);
+  };
+
+  // Compare checkbox
+  const isCompared = compareList.includes(p.model);
+  const compareHTML = `<div class="compare-check ${isCompared ? 'checked' : ''}" onclick="event.stopPropagation();toggleCompare('${p.model}', this)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>`;
 
   // Badges
   let badges = '';
@@ -966,24 +1356,16 @@ function createCard(p) {
       '</div>';
   }
 
-  // Param chips
-  let chips = '';
-  const paramOrder = ['bt','power','ports','signal','dim','fm','battery','input_v','material','cert'];
-  const chipLabels = {
-    bt: p.bt, power: extractPower(p.power), ports: p.ports, signal: p.signal,
-    dim: p.dim, fm: p.fm, battery: p.battery, input_v: p.input_v, material: p.material, cert: p.cert
-  };
-  paramOrder.forEach(key => {
-    const val = chipLabels[key];
-    if (val) {
-      const isHighlight = (key === 'bt' || key === 'power');
-      chips += '<span class="param-chip' + (isHighlight ? ' highlight' : '') + '">' + val + '</span>';
-    }
-  });
+  // 5 Core Selling Points
+  const sellingPoints = extractSellingPoints(p);
+  const sellingHTML = sellingPoints.map(sp =>
+    `<span class="sell-point sell-${sp.type}">${sp.icon} ${sp.text}</span>`
+  ).join('');
 
   const mainImg = p.image || '';
   const imgCount = imgs.length;
   card.innerHTML = `
+    ${compareHTML}
     <div class="card-gallery">
       ${imgCount > 1 ? thumbsHTML : ''}
       <div class="card-img-wrap">
@@ -995,7 +1377,7 @@ function createCard(p) {
       <div class="card-model">${p.model}</div>
       <div class="card-type">${p.type_en || p.type_cn || p.category}</div>
       ${p.year ? '<div class="card-year"><span>' + p.year + '</span></div>' : ''}
-      <div class="card-params">${chips}</div>
+      <div class="card-selling">${sellingHTML}</div>
     </div>
   `;
   // Wire thumbnail click to switch main image
@@ -1012,6 +1394,175 @@ function createCard(p) {
     });
   }
   return card;
+}
+
+function extractSellingPoints(p) {
+  const points = [];
+  
+  // 1. Bluetooth version
+  if (p.bt) {
+    points.push({ type: 'bt', icon: '', text: p.bt });
+  }
+  
+  // 2. Fast Charge / Power
+  const powerCombined = (p.power + ' ' + p.ports + ' ' + p.features).toLowerCase();
+  if (powerCombined.includes('qc3.0')) {
+    points.push({ type: 'power', icon: '', text: 'QC3.0' });
+  } else if (powerCombined.includes('pd')) {
+    points.push({ type: 'power', icon: '', text: 'PD Fast Charge' });
+  } else if (powerCombined.includes('18w')) {
+    points.push({ type: 'power', icon: '', text: '18W Fast' });
+  } else if (powerCombined.includes('30w')) {
+    points.push({ type: 'power', icon: '', text: '30W Fast' });
+  } else if (powerCombined.includes('48w')) {
+    points.push({ type: 'power', icon: '', text: '48W Fast' });
+  } else if (p.power) {
+    const pw = extractPower(p.power);
+    if (pw) points.push({ type: 'power', icon: '', text: pw });
+  }
+  
+  // 3. Port config
+  if (p.ports) {
+    const usbMatch = p.ports.match(/(\d+)x\s*USB/i);
+    const usbCount = usbMatch ? parseInt(usbMatch[1]) : 0;
+    const hasTypeC = /type-?c/i.test(p.ports);
+    const hasRetractable = /retractable|coiled|spring/i.test(p.ports + ' ' + p.features);
+    if (hasRetractable) {
+      points.push({ type: 'ports', icon: '', text: 'Retractable' });
+    } else if (usbCount >= 3) {
+      points.push({ type: 'ports', icon: '', text: usbCount + ' USB Ports' });
+    } else if (hasTypeC) {
+      points.push({ type: 'ports', icon: '', text: 'USB-C' });
+    } else if (usbCount === 2) {
+      points.push({ type: 'ports', icon: '', text: 'Dual USB' });
+    }
+  }
+  
+  // 4. Screen / Special feature
+  if (p.screen) {
+    points.push({ type: 'screen', icon: '', text: p.screen + ' Screen' });
+  } else if (powerCombined.includes('colorful lights') || powerCombined.includes('led')) {
+    points.push({ type: 'screen', icon: '', text: 'LED Lights' });
+  }
+  
+  // 5. Year
+  if (p.year) {
+    points.push({ type: 'year', icon: '', text: p.year });
+  }
+  
+  return points.slice(0, 5);
+}
+
+// ===== COMPARE SYSTEM =====
+let compareList = [];
+
+function toggleCompare(model, el) {
+  const idx = compareList.indexOf(model);
+  if (idx >= 0) {
+    compareList.splice(idx, 1);
+    el.classList.remove('checked');
+  } else {
+    if (compareList.length >= 4) {
+      showToast('Max 4 products for comparison', 'warn');
+      return;
+    }
+    compareList.push(model);
+    el.classList.add('checked');
+  }
+  updateCompareBar();
+}
+
+function updateCompareBar() {
+  const bar = document.getElementById('compareBar');
+  const selected = document.getElementById('compareSelected');
+  const btn = document.getElementById('compareBtn');
+  
+  if (compareList.length === 0) {
+    bar.classList.remove('show');
+    return;
+  }
+  
+  bar.classList.add('show');
+  selected.innerHTML = compareList.map(m => {
+    const p = PRODUCTS.find(x => x.model === m);
+    return `<div class="compare-chip">
+      ${p ? '<img src="' + (p.image || '') + '" style="width:24px;height:24px;object-fit:contain;border-radius:4px;" onerror="this.style.display=\'none\'">' : ''}
+      <span>${m}</span>
+      <button class="compare-chip-close" onclick="event.stopPropagation();removeCompare('${m}')">&times;</button>
+    </div>`;
+  }).join('');
+  
+  btn.disabled = compareList.length < 2;
+  btn.textContent = 'Compare (' + compareList.length + ')';
+}
+
+function removeCompare(model) {
+  const idx = compareList.indexOf(model);
+  if (idx >= 0) compareList.splice(idx, 1);
+  // Update checkbox in card if visible
+  const card = document.querySelector('.product-card[data-model="' + model + '"]');
+  if (card) {
+    const check = card.querySelector('.compare-check');
+    if (check) check.classList.remove('checked');
+  }
+  updateCompareBar();
+}
+
+function clearCompare() {
+  compareList = [];
+  document.querySelectorAll('.compare-check.checked').forEach(el => el.classList.remove('checked'));
+  updateCompareBar();
+}
+
+function openCompareModal() {
+  if (compareList.length < 2) return;
+  const overlay = document.getElementById('compareModalOverlay');
+  const table = document.getElementById('compareTable');
+  
+  const products = compareList.map(m => PRODUCTS.find(p => p.model === m)).filter(Boolean);
+  if (products.length < 2) return;
+  
+  const fields = [
+    { key: 'model', label: 'Model' },
+    { key: 'category', label: 'Category' },
+    { key: 'bt', label: 'Bluetooth' },
+    { key: 'power', label: 'Power' },
+    { key: 'ports', label: 'Ports' },
+    { key: 'features', label: 'Features' },
+    { key: 'screen', label: 'Screen' },
+    { key: 'signal', label: 'Signal' },
+    { key: 'dim', label: 'Dimensions' },
+    { key: 'fm', label: 'FM Freq' },
+    { key: 'year', label: 'Year' },
+  ];
+  
+  let html = '<thead><tr><th>Spec</th>';
+  products.forEach(p => {
+    html += '<th class="compare-product-header">' +
+      '<img class="compare-product-img" src="' + (p.image || '') + '" onerror="this.style.display=\'none\'">' +
+      '<div>' + p.model + '</div></th>';
+  });
+  html += '</tr></thead><tbody>';
+  
+  fields.forEach(f => {
+    const values = products.map(p => p[f.key] || '-');
+    const allSame = values.every(v => v === values[0]);
+    html += '<tr><th>' + f.label + '</th>';
+    values.forEach(v => {
+      const cls = allSame ? 'same-val' : 'diff-highlight';
+      html += '<td class="' + cls + '">' + v + '</td>';
+    });
+    html += '</tr>';
+  });
+  
+  html += '</tbody>';
+  table.innerHTML = html;
+  overlay.classList.add('show');
+}
+
+function closeCompareModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('compareModalOverlay').classList.remove('show');
 }
 
 function extractPower(power) {
@@ -1171,6 +1722,28 @@ function closeLightbox() {
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showToast(message, type) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;z-index:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);animation:fadeUp 0.3s ease;';
+  if (type === 'warn') {
+    toast.style.background = 'rgba(255,149,0,0.9)';
+    toast.style.color = '#fff';
+  } else if (type === 'danger') {
+    toast.style.background = 'rgba(255,59,48,0.9)';
+    toast.style.color = '#fff';
+  } else {
+    toast.style.background = 'rgba(0,113,227,0.9)';
+    toast.style.color = '#fff';
+  }
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(20px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }
 
 // Keyboard
