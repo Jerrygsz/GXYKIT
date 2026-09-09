@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-<script src="data.js?v=2026-09-09-v6"></script>
+<script src="data.js?v=2026-09-09-v7"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -172,6 +172,81 @@ body {
 .nav-title {
   font-size: 1.1rem; font-weight: 600;
   color: var(--text-primary);
+}
+
+/* ===== Search Bar ===== */
+.search-bar {
+  padding: 8px 20px 4px;
+  position: sticky;
+  top: 0;
+  z-index: 91;
+  background: rgba(245,245,247,0.92);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  height: 42px;
+}
+.search-wrap:focus-within {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(0,113,227,0.08);
+}
+.search-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  height: 100%;
+  min-width: 0;
+}
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
+.search-clear {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+  transition: background 0.2s;
+}
+.search-clear:hover {
+  background: rgba(0,0,0,0.12);
+}
+.search-count {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 /* ===== Category Tabs ===== */
@@ -780,6 +855,20 @@ body {
   font-weight: 700;
   color: var(--text-primary);
 }
+.option-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: 2px solid rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.option-thumb:hover {
+  transform: scale(1.08);
+  border-color: var(--accent-blue);
+}
 .option-diffs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -890,7 +979,16 @@ body {
   .modal-model { font-size: 1.4rem; }
   .cat-hero-title { font-size: 1.5rem; }
 }
+@media (max-width: 768px) {
+  .search-bar { padding: 6px 16px 4px; }
+  .search-wrap { height: 38px; padding: 0 10px; }
+  .search-input { font-size: 0.9rem; }
+}
 @media (max-width: 480px) {
+  .search-bar { padding: 6px 12px 4px; }
+  .search-wrap { height: 36px; padding: 0 10px; }
+  .search-input { font-size: 0.85rem; }
+  .search-count { font-size: 0.7rem; }
   .product-grid { grid-template-columns: repeat(2, 1fr); padding: 8px 8px 100px; }
   .cat-tabs { padding: 80px 12px 12px; }
   .card-gallery { flex-direction: column; }
@@ -1075,6 +1173,19 @@ body {
     <div style="width:80px"></div>
   </div>
 
+  <!-- Search Bar -->
+  <div class="search-bar" id="searchBar">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search model, type, category..." oninput="handleSearch(this.value)">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+    </div>
+    <div class="search-count" id="searchCount"></div>
+  </div>
+
   <div class="cat-tabs" id="catTabs"></div>
   <div class="series-bar" id="seriesTabs" style="display:none"></div>
 
@@ -1177,6 +1288,7 @@ const SERIES_CONFIG = {
 
 let currentCategory = 'all';
 let currentSeries = 'all';
+let searchQuery = '';
 let productsRendered = false;
 let currentModalProduct = null;
 let currentLightboxIdx = 0;
@@ -1328,6 +1440,21 @@ function detectSeries(product, category) {
   return 'all';
 }
 
+function handleSearch(query) {
+  searchQuery = query;
+  const clearBtn = document.getElementById('searchClear');
+  if (clearBtn) clearBtn.style.display = query.trim() ? 'flex' : 'none';
+  renderProducts(currentCategory, currentSeries);
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = '';
+    handleSearch('');
+  }
+}
+
 function renderProducts(cat, series) {
   const grid = document.getElementById('productGrid');
   const hero = document.getElementById('catHero');
@@ -1343,6 +1470,21 @@ function renderProducts(cat, series) {
   // Series filter
   if (series && series !== 'all' && (cat === 'Car Charger' || cat === 'Car Bluetooth MP3')) {
     products = products.filter(p => detectSeries(p, cat) === series);
+  }
+
+  // Search filter
+  if (searchQuery && searchQuery.trim()) {
+    const q = searchQuery.trim().toLowerCase();
+    products = products.filter(p => {
+      return (p.model && p.model.toLowerCase().includes(q)) ||
+             (p.type_cn && p.type_cn.toLowerCase().includes(q)) ||
+             (p.type_en && p.type_en.toLowerCase().includes(q)) ||
+             (p.category && p.category.toLowerCase().includes(q)) ||
+             (p.bt && p.bt.toLowerCase().includes(q)) ||
+             (p.power && p.power.toLowerCase().includes(q)) ||
+             (p.ports && p.ports.toLowerCase().includes(q)) ||
+             (p.features && p.features.toLowerCase().includes(q));
+    });
   }
 
   // Sort by year descending, then by model ascending
@@ -1369,8 +1511,18 @@ function renderProducts(cat, series) {
 
   grid.innerHTML = '';
 
+  // Update search count
+  const searchCountEl = document.getElementById('searchCount');
+  if (searchCountEl) {
+    if (searchQuery && searchQuery.trim()) {
+      searchCountEl.textContent = products.length + ' results';
+    } else {
+      searchCountEl.textContent = '';
+    }
+  }
+
   if (products.length === 0) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128269;</div><div class="empty-state-text">No products in this category</div></div>';
+    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128269;</div><div class="empty-state-text">No products match your search</div></div>';
     return;
   }
 
@@ -1715,7 +1867,9 @@ function openModal(p) {
         }
       });
       paramsHTML += '<div class="option-item">' +
-        '<div class="option-header"><span class="option-num">#' + (i + 1) + '</span><span class="option-model">' + opt.model + '</span></div>' +
+        '<div class="option-header"><span class="option-num">#' + (i + 1) + '</span>' +
+        (opt.image ? '<img class="option-thumb" src="' + opt.image + '" onclick="openVariantLightbox(this.src)" onerror="this.style.display=\'none\'" alt="' + (opt.model || '') + '">' : '') +
+        '<span class="option-model">' + opt.model + '</span></div>' +
         (diffFields.length > 0 ? '<div class="option-diffs">' + diffFields.join('') + '</div>' : '<div class="option-diffs"><div class="option-diff"><span class="option-diff-label">Note</span><span class="option-diff-value">Same as base spec</span></div></div>' ) +
         '</div>';
     });
@@ -1802,6 +1956,14 @@ function nextLightboxImg(delta) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('show');
   document.getElementById('lightboxImg').src = '';
+}
+
+function openVariantLightbox(imgSrc) {
+  if (!imgSrc) return;
+  currentLightboxImages = [imgSrc];
+  currentLightboxIdx = 0;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('show');
 }
 
 function scrollToTop() {

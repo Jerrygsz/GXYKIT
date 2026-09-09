@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GXYKIT Product Admin</title>
-<script src="data.js?v=2026-09-09-v5"></script>
+<script src="data.js?v=2026-09-09-v7"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
 /* ===== Reset & Base ===== */
@@ -357,6 +357,140 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .chip.active { background: var(--text); color: #fff; border-color: var(--text); }
 .chip:hover:not(.active) { background: var(--bg); }
 
+/* ===== Variant Editor ===== */
+.variants-section { margin-top: 16px; border-top: 2px solid var(--bg); padding-top: 16px; }
+.variants-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.variants-header label { font-size: 0.85rem; font-weight: 600; color: var(--text-sec); text-transform: uppercase; }
+.variant-card { background: var(--bg); border-radius: 10px; margin-bottom: 10px; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); }
+.variant-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; cursor: pointer; background: var(--bg-card); transition: background 0.2s; }
+.variant-header:hover { background: rgba(0,113,227,0.04); }
+.variant-title { font-weight: 600; font-size: 0.9rem; }
+.variant-toggle { font-size: 0.8rem; color: var(--text-sec); }
+.variant-del { background: rgba(255,59,48,0.1); color: var(--danger); border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+.variant-del:hover { background: var(--danger); color: #fff; }
+.variant-body { padding: 12px 14px; display: none; }
+.variant-body.open { display: block; }
+.variant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.variant-grid .form-field { gap: 3px; }
+.variant-grid .form-field label { font-size: 0.7rem; }
+.variant-grid .form-field input, .variant-grid .form-field textarea { padding: 6px 8px; font-size: 0.8rem; }
+/* Variant Image */
+.variant-image-section {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.variant-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.variant-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.variant-thumb-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px dashed rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-ter);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.variant-image-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.variant-image-inputs input[type="text"] {
+  flex: 1;
+  font-size: 0.8rem;
+}
+.variant-file-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 0.75rem;
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.variant-file-btn:hover {
+  background: rgba(0,113,227,0.05);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+/* Image Lightbox */
+.lightbox-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.lightbox-bg.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.3);
+}
+@media (max-width: 768px) {
+  .variant-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ===== Batch Operation Bar ===== */
 .batch-bar {
   display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
@@ -540,6 +674,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   </div>
   <div class="modal-body">
     <div class="form-grid" id="formGrid"></div>
+    <div class="variants-section">
+      <div class="variants-header">
+        <label>Variants</label>
+        <button class="btn btn-primary btn-sm" onclick="addVariant()">+ Add Variant</button>
+      </div>
+      <div id="variantsContainer"></div>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
@@ -576,6 +717,7 @@ let products = [];
 let editingId = null;
 let cart = [];
 let _batchImages = [];
+let _batchVariants = [];
 
 function reattachImages() {
   products.forEach(function(p) {
@@ -1012,6 +1154,171 @@ function buildForm(data) {
   });
   // After all fields rendered, update image previews if batch images exist
   if (_batchImages && _batchImages.length > 0) updateImagePreviews();
+
+  // Build variants editor section
+  buildVariantsEditor(data.options || []);
+}
+
+/* ===== VARIANTS EDITOR ===== */
+function buildVariantsEditor(existing) {
+  const container = document.getElementById('variantsContainer');
+  if (!container) return;
+  _batchVariants = existing.slice();
+  renderVariantsList();
+}
+
+function renderVariantsList() {
+  const container = document.getElementById('variantsContainer');
+  if (!container) return;
+  let html = '';
+  _batchVariants.forEach(function(opt, idx) {
+    html += buildVariantCard(idx, opt);
+  });
+  container.innerHTML = html;
+}
+
+function buildVariantCard(idx, opt) {
+  const fields = [
+    { key: 'model', label: 'Model' },
+    { key: 'p_5000', label: 'MOQ 5K Price (RMB)' },
+    { key: 'bt', label: 'Bluetooth' },
+    { key: 'chip', label: 'Chip' },
+    { key: 'power', label: 'Power' },
+    { key: 'ports', label: 'Ports' },
+    { key: 'features', label: 'Features' },
+    { key: 'signal', label: 'Signal' },
+    { key: 'fm', label: 'FM' },
+    { key: 'screen', label: 'Screen' },
+    { key: 'dim', label: 'Dimensions' },
+    { key: 'proto', label: 'Protocols' },
+    { key: 'color', label: 'Color' },
+    { key: 'material', label: 'Material' },
+    { key: 'cert', label: 'Certifications' },
+    { key: 'safety', label: 'Safety' },
+    { key: 'battery', label: 'Battery' },
+    { key: 'cable', label: 'Cable' },
+    { key: 'input_v', label: 'Input Voltage' }
+  ];
+  
+  // Build image section
+  const variantImage = opt.image || '';
+  const hasImage = variantImage.trim() !== '';
+  let imageSection = '';
+  if (hasImage) {
+    imageSection = '<img src="' + escapeHtml(variantImage) + '" class="variant-thumb" onclick="openVariantLightbox(\'' + escapeHtml(variantImage) + '\')" title="Click to enlarge">';
+  } else {
+    imageSection = '<div class="variant-thumb-placeholder">No Image</div>';
+  }
+  
+  let inputsHTML = '';
+  fields.forEach(function(f) {
+    const val = opt[f.key] || '';
+    const isTextarea = (f.key === 'features' || f.key === 'p_5000');
+    const safeId = 'v_' + f.key + '_' + idx;
+    const safeKey = f.key;
+    const safeLabel = f.label;
+    const safeVal = escapeHtml(val);
+    let inputHTML = '';
+    if (isTextarea) {
+      inputHTML = '<textarea rows="2" id="' + safeId + '" data-vkey="' + safeKey + '" placeholder="' + safeLabel + '" class="variant-input">' + safeVal + '</textarea>';
+    } else {
+      inputHTML = '<input type="text" id="' + safeId + '" data-vkey="' + safeKey + '" value="' + safeVal + '" placeholder="' + safeLabel + '" class="variant-input" />';
+    }
+    inputsHTML += '<div class="form-field"><label>' + safeLabel + '</label>' + inputHTML + '</div>';
+  });
+  
+  // Image input row (separate from grid)
+  const imageInputHTML = 
+    '<div class="variant-image-section">' +
+      imageSection +
+      '<div class="variant-image-inputs">' +
+        '<input type="text" id="v_image_' + idx + '" data-vkey="image" value="' + escapeHtml(variantImage) + '" placeholder="Image path or URL" class="variant-input" />' +
+        '<label class="variant-file-btn" onclick="document.getElementById(\'variantUpload_' + idx + '\').click()">&#128247; Upload</label>' +
+        '<input type="file" id="variantUpload_' + idx + '" accept="image/*" style="display:none" onchange="handleVariantImageUpload(this, ' + idx + ')">' +
+      '</div>' +
+    '</div>';
+  
+  return '<div class="variant-card" data-vidx="' + idx + '">' +
+    '<div class="variant-header" onclick="toggleVariantBody(this)">' +
+      '<span class="variant-title">Variant #' + (idx + 1) + ' &mdash; ' + (opt.model || 'Untitled') + '</span>' +
+      '<span class="variant-toggle">&#9662;</span>' +
+      '<button class="variant-del" onclick="event.stopPropagation();removeVariant(' + idx + ')">Delete</button>' +
+    '</div>' +
+    '<div class="variant-body open">' +
+      imageInputHTML +
+      '<div class="variant-grid">' + inputsHTML + '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function toggleVariantBody(header) {
+  const body = header.nextElementSibling;
+  if (body) body.classList.toggle('open');
+}
+
+function addVariant() {
+  _batchVariants.push({ model: '' });
+  renderVariantsList();
+}
+
+function removeVariant(idx) {
+  if (!confirm('Delete variant #' + (idx + 1) + '?')) return;
+  _batchVariants.splice(idx, 1);
+  renderVariantsList();
+}
+
+function handleVariantImageUpload(input, idx) {
+  const file = input.files[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    showToast('Please select an image file', 'warn');
+    return;
+  }
+  // Compress and convert to base64
+  compressImage(file, 800, 0.85).then(function(base64) {
+    // Store in _batchVariants
+    if (_batchVariants[idx]) {
+      _batchVariants[idx].image = base64;
+    }
+    // Update the image input field
+    const imgInput = document.getElementById('v_image_' + idx);
+    if (imgInput) imgInput.value = base64;
+    // Re-render to show the thumbnail
+    renderVariantsList();
+    showToast('Variant image uploaded', 'success');
+  }).catch(function(err) {
+    showToast('Image upload failed: ' + err.message, 'danger');
+  });
+}
+
+function openVariantLightbox(imgSrc) {
+  if (!imgSrc) return;
+  // Remove existing lightbox if any
+  const existing = document.getElementById('variantLightbox');
+  if (existing) existing.remove();
+  
+  const lightbox = document.createElement('div');
+  lightbox.id = 'variantLightbox';
+  lightbox.className = 'lightbox-bg';
+  lightbox.innerHTML = '<img src="' + imgSrc + '" class="lightbox-img" onclick="event.stopPropagation()">' +
+    '<button class="lightbox-close" onclick="closeVariantLightbox()">&times;</button>';
+  lightbox.onclick = closeVariantLightbox;
+  document.body.appendChild(lightbox);
+  
+  // Trigger animation
+  requestAnimationFrame(function() {
+    lightbox.classList.add('show');
+  });
+}
+
+function closeVariantLightbox() {
+  const lightbox = document.getElementById('variantLightbox');
+  if (lightbox) {
+    lightbox.classList.remove('show');
+    setTimeout(function() {
+      lightbox.remove();
+    }, 300);
+  }
 }
 
 function handleDragOver(e, el) {
@@ -1129,6 +1436,7 @@ function removeBatchImage(idx) {
 }
 
 function saveProduct() {
+  if (!requireAuth('save product')) return;
   // Sync batch images to hidden inputs before saving
   const hiddenImg1 = document.getElementById('f_image');
   const hiddenImg2 = document.getElementById('f_image2');
@@ -1142,6 +1450,13 @@ function saveProduct() {
     const el = document.getElementById('f_' + f.key);
     data[f.key] = el ? el.value.trim() : '';
   });
+  // Collect variants
+  const opts = collectVariantData();
+  if (opts && opts.length > 0) {
+    data.options = opts;
+  } else {
+    delete data.options;
+  }
   if (!data.model) {
     showToast('Model is required', 'warn');
     return;
@@ -1154,14 +1469,40 @@ function saveProduct() {
     products.push(data);
     showToast('Product added', 'success');
   }
-  // Clear batch images array after save to prevent leakage to next edit
+  // Clear batch arrays after save to prevent leakage to next edit
   _batchImages = [];
+  _batchVariants = [];
   if (!saveData()) return;
   closeModal();
   renderTable();
   renderQuoteProducts();
   renderFilterChips();
   populateBatchCategories();
+}
+
+function collectVariantData() {
+  const container = document.getElementById('variantsContainer');
+  if (!container) return [];
+  const cards = container.querySelectorAll('.variant-card');
+  const opts = [];
+  cards.forEach(function(card) {
+    const inputs = card.querySelectorAll('input, select, textarea');
+    const opt = {};
+    inputs.forEach(function(inp) {
+      if (inp.id && inp.id.indexOf('v_') === 0) {
+        const key = inp.id.replace('v_', '').replace(/_\d+$/, '');
+        let val = '';
+        if (inp.tagName === 'TEXTAREA') {
+          val = inp.value.trim();
+        } else {
+          val = inp.value.trim();
+        }
+        if (val) opt[key] = val;
+      }
+    });
+    if (Object.keys(opt).length > 0) opts.push(opt);
+  });
+  return opts;
 }
 
 function deleteProduct(idx) {
@@ -1182,6 +1523,9 @@ function closeModal() {
   document.getElementById('modalBox').classList.remove('show');
   editingId = null;
   _batchImages = [];
+  _batchVariants = [];
+  // Reset any variant image upload inputs that may still be in DOM
+  document.querySelectorAll('input[id^="variantUpload_"]').forEach(function(el) { el.value = ''; });
 }
 
 // ===== REFRESH CATALOG =====
@@ -1620,6 +1964,15 @@ function showToast(msg, type) {
   toast.textContent = msg;
   toast.className = 'toast toast-' + type + ' show';
   setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 // ===== KEYBOARD =====
