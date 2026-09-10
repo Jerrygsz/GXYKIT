@@ -1360,21 +1360,15 @@ function handleVariantImageUpload(input, idx) {
     showToast('Please select an image file', 'warn');
     return;
   }
-  // Compress and convert to base64
-  compressImage(file, 800, 0.85).then(function(base64) {
-    // Store in _batchVariants
-    if (_batchVariants[idx]) {
-      _batchVariants[idx].image = base64;
-    }
-    // Update the image input field
-    const imgInput = document.getElementById('v_image_' + idx);
-    if (imgInput) imgInput.value = base64;
-    // Re-render to show the thumbnail
-    renderVariantsList();
-    showToast('Variant image uploaded', 'success');
-  }).catch(function(err) {
-    showToast('Image upload failed: ' + err.message, 'danger');
-  });
+  // Suggest path instead of converting to base64
+  const suggestedPath = 'images/' + file.name;
+  if (_batchVariants[idx]) {
+    _batchVariants[idx].image = suggestedPath;
+  }
+  const imgInput = document.getElementById('v_image_' + idx);
+  if (imgInput) imgInput.value = suggestedPath;
+  renderVariantsList();
+  showToast('Image path set: ' + suggestedPath + ' (copy file to images/ folder)', 'success');
 }
 
 function openVariantLightbox(imgSrc) {
@@ -1472,22 +1466,16 @@ function processBatchFiles(files) {
   }
   const toAdd = files.slice(0, remainingSlots);
   let processed = 0;
-  let compressCount = 0;
   toAdd.forEach(function(file) {
-    compressImage(file, 1200, 0.7).then(function(dataUrl) {
-      _batchImages.push(dataUrl);
-      processed++;
-      compressCount++;
-      if (processed === toAdd.length) {
-        updateImagePreviews();
-        syncBatchToHidden();
-        if (compressCount > 0) showToast(compressCount + ' image(s) compressed and added', 'success');
-      }
-    }).catch(function(err) {
-      processed++;
-      showToast('Image compression failed: ' + err.message, 'danger');
-      if (processed === toAdd.length) updateImagePreviews();
-    });
+    const suggestedPath = 'images/' + file.name;
+    _batchImages.push(suggestedPath);
+    processed++;
+    if (processed === toAdd.length) {
+      updateImagePreviews();
+      syncBatchToHidden();
+      showToast(processed + ' image path(s) set (copy files to images/ folder)', 'success');
+    }
+  });
   });
   if (files.length > remainingSlots) {
     showToast('Only ' + remainingSlots + ' of ' + files.length + ' images were added (max 3)', 'warn');
