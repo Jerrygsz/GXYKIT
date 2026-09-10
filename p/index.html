@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-10-v14"></script>
+  <script src="data.js?v=2026-09-11-v15"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1978,22 +1978,22 @@ function renderProducts(cat, series) {
   const hero = document.getElementById('catHero');
   const navTitle = document.getElementById('navTitle');
 
-  let products;
+  let filteredProducts;
   if (cat === 'all') {
-    products = PRODUCTS.slice();
+    filteredProducts = PRODUCTS.slice();
   } else {
-    products = PRODUCTS.filter(p => p.category === cat);
+    filteredProducts = PRODUCTS.filter(p => p.category === cat);
   }
 
   // Series filter
   if (series && series !== 'all' && (cat === 'Car Charger' || cat === 'Car Bluetooth MP3')) {
-    products = products.filter(p => detectSeries(p, cat) === series);
+    filteredProducts = filteredProducts.filter(p => detectSeries(p, cat) === series);
   }
 
   // Search filter
   if (searchQuery && searchQuery.trim()) {
     const q = searchQuery.trim().toLowerCase();
-    products = products.filter(p => {
+    filteredProducts = filteredProducts.filter(p => {
       return (p.model && p.model.toLowerCase().includes(q)) ||
              (p.type_cn && p.type_cn.toLowerCase().includes(q)) ||
              (p.type_en && p.type_en.toLowerCase().includes(q)) ||
@@ -2006,7 +2006,7 @@ function renderProducts(cat, series) {
   }
 
   // Sort by year descending, then by model ascending
-  products.sort((a, b) => {
+  filteredProducts.sort((a, b) => {
     const ya = parseInt(a.year) || 0;
     const yb = parseInt(b.year) || 0;
     if (yb !== ya) return yb - ya;
@@ -2020,11 +2020,11 @@ function renderProducts(cat, series) {
     document.getElementById('heroIcon').style.color = icon.text;
     document.getElementById('heroIcon').textContent = getIconSymbol(icon.emoji);
     document.getElementById('heroTitle').textContent = CATEGORIES.find(c => c.key === cat)?.label || cat;
-    document.getElementById('heroCount').textContent = products.length + ' products';
+    document.getElementById('heroCount').textContent = filteredProducts.length + ' products';
     navTitle.textContent = CATEGORIES.find(c => c.key === cat)?.label || cat;
   } else {
     hero.style.display = 'none';
-    navTitle.textContent = 'All Products (' + products.length + ')';
+    navTitle.textContent = 'All Products (' + filteredProducts.length + ')';
   }
 
   grid.innerHTML = '';
@@ -2033,19 +2033,19 @@ function renderProducts(cat, series) {
   const searchCountEl = document.getElementById('searchCount');
   if (searchCountEl) {
     if (searchQuery && searchQuery.trim()) {
-      searchCountEl.textContent = products.length + ' results';
+      searchCountEl.textContent = filteredProducts.length + ' results';
     } else {
       searchCountEl.textContent = '';
     }
   }
 
-  if (products.length === 0) {
+  if (filteredProducts.length === 0) {
     grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128269;</div><div class="empty-state-text">No products match your search</div></div>';
     return;
   }
 
   // Stagger animation
-  products.forEach((p, i) => {
+  filteredProducts.forEach((p, i) => {
     const card = createCard(p);
     card.style.animationDelay = (i * 0.04) + 's';
     grid.appendChild(card);
@@ -2126,6 +2126,19 @@ function createCard(p) {
       });
     });
   }
+
+  // Quote button (merged from monkey-patch)
+  const _isQuoted = isInQuote(p.model);
+  const quoteBtn = document.createElement('button');
+  quoteBtn.className = 'quote-btn' + (_isQuoted ? ' added' : '');
+  quoteBtn.textContent = _isQuoted ? '\u2713' : '+';
+  quoteBtn.onclick = function(e) {
+    e.stopPropagation();
+    if (isInQuote(p.model)) { removeFromQuote(p.model); this.classList.remove('added'); this.textContent = '+'; }
+    else { addToQuote(p.model); this.classList.add('added'); this.textContent = '\u2713'; }
+  };
+  card.appendChild(quoteBtn);
+
   return card;
 }
 
@@ -2415,6 +2428,13 @@ function openModal(p) {
 
   currentModalProduct = p;
 
+  // Update modal quote button state (merged from monkey-patch)
+  const modalQuoteBtn = document.getElementById('modalQuoteBtn');
+  if (modalQuoteBtn) {
+    if (isInQuote(p.model)) { modalQuoteBtn.classList.add('added'); modalQuoteBtn.textContent = '\u5df2\u52a0\u5165'; }
+    else { modalQuoteBtn.classList.remove('added'); modalQuoteBtn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
+  }
+
   overlay.classList.add('show');
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -2424,6 +2444,7 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('show');
   document.getElementById('modal').classList.remove('show');
   document.body.style.overflow = '';
+  currentModalProduct = null;
 }
 
 function switchModalImg(idx) {
@@ -2491,7 +2512,10 @@ function scrollToTop() {
 function showToast(message, type) {
   const toast = document.createElement('div');
   toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;z-index:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);animation:fadeUp 0.3s ease;';
-  if (type === 'warn') {
+  if (type === 'success') {
+    toast.style.background = 'rgba(52,199,89,0.9)';
+    toast.style.color = '#fff';
+  } else if (type === 'warn') {
     toast.style.background = 'rgba(255,149,0,0.9)';
     toast.style.color = '#fff';
   } else if (type === 'danger') {
@@ -2513,8 +2537,9 @@ function showToast(message, type) {
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal();
-    closeLightbox();
+    if (document.getElementById('quotePreviewOverlay').classList.contains('show')) { closeQuotePreview(); e.stopPropagation(); }
+    else if (document.getElementById('quotePanel').classList.contains('show')) { closeQuotePanel(); e.stopPropagation(); }
+    else { closeModal(); closeLightbox(); }
   }
   if (document.getElementById('lightbox').classList.contains('show')) {
     if (e.key === 'ArrowLeft') nextLightboxImg(-1);
@@ -2777,64 +2802,6 @@ function exportQuoteCSV() {
 // Init quote system
 loadQuoteFromStorage();
 updateQuoteBadge();
-
-// ===== MODIFIED EXISTING FUNCTIONS =====
-// Override createCard to add quote button
-const _originalCreateCard = createCard;
-createCard = function(p) {
-  const card = _originalCreateCard(p);
-  const isQuoted = isInQuote(p.model);
-  const quoteBtn = document.createElement('button');
-  quoteBtn.className = 'quote-btn' + (isQuoted ? ' added' : '');
-  quoteBtn.textContent = isQuoted ? '\u2713' : '+';
-  quoteBtn.onclick = function(e) {
-    e.stopPropagation();
-    if (isInQuote(p.model)) { removeFromQuote(p.model); this.classList.remove('added'); this.textContent = '+'; }
-    else { addToQuote(p.model); this.classList.add('added'); this.textContent = '\u2713'; }
-  };
-  card.appendChild(quoteBtn);
-  return card;
-};
-
-// Override openModal to update quote button state
-const _originalOpenModal = openModal;
-openModal = function(p) {
-  _originalOpenModal(p);
-  currentModalProduct = p;
-  const modalBtn = document.getElementById('modalQuoteBtn');
-  if (modalBtn) {
-    if (isInQuote(p.model)) { modalBtn.classList.add('added'); modalBtn.textContent = '\u5df2\u52a0\u5165'; }
-    else { modalBtn.classList.remove('added'); modalBtn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
-  }
-};
-
-// Override closeModal to reset currentModalProduct
-const _originalCloseModal = closeModal;
-closeModal = function() {
-  currentModalProduct = null;
-  _originalCloseModal();
-};
-
-// ===== Toast type fix =====
-const _originalShowToast = showToast;
-showToast = function(message, type) {
-  if (type === 'success') {
-    const toast = document.createElement('div');
-    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;z-index:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);animation:fadeUp 0.3s ease;background:rgba(52,199,89,0.9);color:#fff;';
-    toast.textContent = message; document.body.appendChild(toast);
-    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(20px)'; setTimeout(() => toast.remove(), 300); }, 2500);
-    return;
-  }
-  _originalShowToast(message, type);
-};
-
-// Keyboard support for quote panel and preview
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    if (document.getElementById('quotePreviewOverlay').classList.contains('show')) { closeQuotePreview(); e.stopPropagation(); }
-    else if (document.getElementById('quotePanel').classList.contains('show')) { closeQuotePanel(); e.stopPropagation(); }
-  }
-});
 
 // Init
 init();
