@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-<script src="data.js?v=2026-09-10-v12"></script>
+  <script src="data.js?v=2026-09-10-v13"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1170,6 +1170,472 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+/* ===== Quote System ===== */
+/* --- Quote Button on Card --- */
+.quote-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,113,227,0.3);
+  z-index: 5;
+  transition: all 0.2s var(--ease);
+}
+.quote-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,113,227,0.4);
+}
+.quote-btn.added {
+  background: var(--accent-green);
+  box-shadow: 0 2px 8px rgba(52,199,89,0.3);
+}
+.quote-btn.added:hover {
+  box-shadow: 0 4px 12px rgba(52,199,89,0.4);
+}
+
+/* --- Quote Badge in Nav --- */
+.quote-badge-wrap {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.2s;
+}
+.quote-badge-wrap:hover {
+  background: var(--bg-tertiary);
+}
+.quote-badge-wrap svg {
+  width: 20px; height: 20px;
+  color: var(--text-secondary);
+}
+.quote-badge-count {
+  position: absolute;
+  top: -4px; right: -4px;
+  min-width: 18px; height: 18px;
+  border-radius: 9px;
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 1px 4px rgba(255,59,48,0.3);
+}
+
+/* --- Quote Side Panel (Drawer) --- */
+.quote-panel-overlay {
+  position: fixed; inset: 0; z-index: 210;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.quote-panel-overlay.show { opacity: 1; pointer-events: auto; }
+.quote-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 211;
+  width: 420px; max-width: 100vw;
+  background: var(--bg-secondary);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.4s var(--spring);
+  display: flex; flex-direction: column;
+}
+.quote-panel.show { transform: translateX(0); }
+@media (max-width: 480px) {
+  .quote-panel { width: 100vw; }
+}
+
+.quote-panel-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--bg-tertiary);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.quote-panel-title {
+  font-size: 1.2rem; font-weight: 700;
+}
+.quote-panel-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-tertiary); border: none;
+  cursor: pointer; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.quote-panel-close:hover { background: var(--text-tertiary); transform: scale(1.1); }
+
+.quote-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 24px;
+}
+.quote-panel-body::-webkit-scrollbar { width: 4px; }
+.quote-panel-body::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 2px; }
+
+.quote-empty {
+  text-align: center; padding: 60px 20px;
+  color: var(--text-tertiary);
+}
+.quote-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.quote-empty-text { font-size: 0.95rem; }
+
+.quote-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.quote-item:hover {
+  background: rgba(0,113,227,0.04);
+}
+.quote-item-thumb {
+  width: 56px; height: 56px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.quote-item-info { flex: 1; min-width: 0; }
+.quote-item-model {
+  font-size: 0.95rem; font-weight: 700;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.quote-item-type {
+  font-size: 0.75rem; color: var(--text-secondary);
+  margin-bottom: 8px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.quote-item-controls {
+  display: flex; gap: 8px; align-items: center;
+}
+.quote-item-qty {
+  width: 64px; height: 32px;
+  border: 1.5px solid var(--bg-tertiary);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  font-size: 0.85rem; font-weight: 600;
+  text-align: center;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.quote-item-qty:focus {
+  border-color: var(--accent-blue);
+}
+.quote-item-tier {
+  height: 32px;
+  border: 1.5px solid var(--bg-tertiary);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--text-primary);
+  padding: 0 8px;
+  outline: none;
+  cursor: pointer;
+}
+.quote-item-tier:focus {
+  border-color: var(--accent-blue);
+}
+.quote-item-remove {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,59,48,0.1);
+  border: none;
+  color: var(--accent-red);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.quote-item-remove:hover {
+  background: var(--accent-red); color: #fff;
+}
+
+.quote-panel-subtotal {
+  padding: 12px 24px;
+  border-top: 1px solid var(--bg-tertiary);
+  font-size: 1rem; font-weight: 700;
+  text-align: right;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.quote-panel-subtotal span {
+  color: var(--accent-blue);
+  font-size: 1.15rem;
+}
+
+/* Customer Info */
+.quote-customer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--bg-tertiary);
+  flex-shrink: 0;
+}
+.quote-customer-title {
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.quote-field {
+  margin-bottom: 10px;
+}
+.quote-field label {
+  display: block;
+  font-size: 0.8rem; color: var(--text-secondary);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.quote-field input {
+  width: 100%;
+  height: 40px;
+  border: 1.5px solid var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  padding: 0 12px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font);
+}
+.quote-field input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(0,113,227,0.1);
+}
+
+/* Panel Footer Actions */
+.quote-panel-footer {
+  padding: 12px 24px 24px;
+  border-top: 1px solid var(--bg-tertiary);
+  display: flex; gap: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.quote-btn-generate {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  font-size: 0.95rem; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+.quote-btn-generate:hover {
+  background: var(--accent-blue-hover);
+  transform: translateY(-1px);
+}
+.quote-btn-clear {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: none;
+  font-size: 0.9rem; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+.quote-btn-clear:hover {
+  background: var(--text-tertiary); color: #fff;
+}
+
+/* --- Modal Footer Quote Button --- */
+.mf-btn-quote {
+  background: var(--accent-blue);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0,113,227,0.3);
+}
+.mf-btn-quote:hover { background: var(--accent-blue-hover); transform: translateY(-1px); }
+.mf-btn-quote.added { background: var(--accent-green); }
+
+/* --- Quote Preview Modal --- */
+.quote-preview-overlay {
+  position: fixed; inset: 0; z-index: 220;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+  display: flex; align-items: center; justify-content: center;
+}
+.quote-preview-overlay.show { opacity: 1; pointer-events: auto; }
+.quote-preview-modal {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  width: 94%; max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95); transition: transform 0.3s var(--spring);
+}
+.quote-preview-overlay.show .quote-preview-modal {
+  transform: scale(1);
+}
+.quote-preview-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--bg-tertiary);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+}
+.quote-preview-title { font-size: 1.2rem; font-weight: 700; }
+.quote-preview-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-tertiary); border: none;
+  cursor: pointer; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.quote-preview-close:hover { background: var(--text-tertiary); transform: scale(1.1); }
+
+.quote-preview-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 24px;
+}
+.quote-preview-company {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.quote-preview-company-name {
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--text-primary);
+}
+.quote-preview-company-sub {
+  font-size: 0.85rem; color: var(--text-secondary);
+  margin-top: 4px;
+}
+.quote-preview-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+}
+@media (max-width: 480px) {
+  .quote-preview-info { grid-template-columns: 1fr; }
+}
+.quote-preview-info-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.quote-preview-info-label {
+  font-size: 0.7rem; color: var(--text-tertiary);
+  font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.quote-preview-info-value {
+  font-size: 0.9rem; font-weight: 600; color: var(--text-primary);
+}
+
+.quote-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+.quote-preview-table th, .quote-preview-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.quote-preview-table th {
+  font-weight: 600; color: var(--text-secondary);
+  background: var(--bg-primary);
+  position: sticky; top: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+.quote-preview-table td {
+  color: var(--text-primary);
+  vertical-align: top;
+}
+.quote-preview-table tr:hover td {
+  background: var(--bg-primary);
+}
+.quote-preview-total {
+  text-align: right;
+  font-size: 1.1rem; font-weight: 700;
+  padding: 12px 0;
+  color: var(--text-primary);
+}
+.quote-preview-total span {
+  color: var(--accent-blue);
+  font-size: 1.25rem;
+}
+.quote-preview-note {
+  font-size: 0.8rem; color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 12px;
+  background: rgba(0,113,227,0.03);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-blue);
+}
+
+.quote-preview-actions {
+  padding: 12px 24px 20px;
+  border-top: 1px solid var(--bg-tertiary);
+  display: flex; gap: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.quote-btn-copy {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--bg-tertiary);
+  font-size: 0.9rem; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.quote-btn-copy:hover {
+  background: var(--bg-tertiary);
+}
+.quote-btn-export {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent-green);
+  color: #fff;
+  border: none;
+  font-size: 0.9rem; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.quote-btn-export:hover {
+  background: #2eb350;
+  transform: translateY(-1px);
+}
 </style>
 </head>
 <body>
@@ -1206,7 +1672,19 @@ body {
       <span>Catalog</span>
     </div>
     <div class="nav-title" id="navTitle">All Products</div>
-    <div style="width:80px"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="quote-badge-wrap" onclick="openQuotePanel()" title="Quotation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <span class="quote-badge-count" id="quoteBadgeCount" style="display:none">0</span>
+      </div>
+      <div style="width:40px"></div>
+    </div>
   </div>
 
   <!-- Search Bar -->
@@ -1268,6 +1746,7 @@ body {
   <div id="modalContent"></div>
   <div class="modal-footer">
     <button class="mf-btn mf-btn-close" onclick="closeModal()">关闭</button>
+    <button class="mf-btn mf-btn-quote" id="modalQuoteBtn" onclick="toggleQuoteFromModal()">加入报价单</button>
   </div>
 </div>
 
@@ -2043,8 +2522,382 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ===== QUOTE SYSTEM =====
+let quoteCart = [];
+let quoteCustomer = { name: '', company: '', email: '', date: '' };
+const QUOTE_STORAGE_KEY = 'gxykit_quote';
+const QUOTE_CUSTOMER_KEY = 'gxykit_quote_customer';
+
+function saveQuoteToStorage() {
+  try {
+    localStorage.setItem(QUOTE_STORAGE_KEY, JSON.stringify(quoteCart));
+    localStorage.setItem(QUOTE_CUSTOMER_KEY, JSON.stringify(quoteCustomer));
+  } catch(e) {}
+}
+
+function loadQuoteFromStorage() {
+  try {
+    const savedCart = localStorage.getItem(QUOTE_STORAGE_KEY);
+    const savedCustomer = localStorage.getItem(QUOTE_CUSTOMER_KEY);
+    if (savedCart) quoteCart = JSON.parse(savedCart);
+    if (savedCustomer) quoteCustomer = JSON.parse(savedCustomer);
+  } catch(e) {
+    quoteCart = [];
+    quoteCustomer = { name: '', company: '', email: '', date: '' };
+  }
+}
+
+function isInQuote(model) {
+  return quoteCart.some(item => item.model === model);
+}
+
+function addToQuote(model) {
+  if (isInQuote(model)) return;
+  quoteCart.push({ model: model, qty: 100, priceTier: '500' });
+  saveQuoteToStorage();
+  updateQuoteBadge();
+  const cardBtn = document.querySelector('.product-card[data-model="' + model + '"] .quote-btn');
+  if (cardBtn) { cardBtn.classList.add('added'); cardBtn.textContent = '\u2713'; }
+}
+
+function removeFromQuote(model) {
+  const idx = quoteCart.findIndex(item => item.model === model);
+  if (idx >= 0) {
+    quoteCart.splice(idx, 1);
+    saveQuoteToStorage();
+    updateQuoteBadge();
+    renderQuotePanel();
+    const cardBtn = document.querySelector('.product-card[data-model="' + model + '"] .quote-btn');
+    if (cardBtn) { cardBtn.classList.remove('added'); cardBtn.textContent = '+'; }
+    if (currentModalProduct && currentModalProduct.model === model) {
+      const modalBtn = document.getElementById('modalQuoteBtn');
+      if (modalBtn) { modalBtn.classList.remove('added'); modalBtn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
+    }
+  }
+}
+
+function toggleQuote(model, btnEl) {
+  if (isInQuote(model)) { removeFromQuote(model); }
+  else { addToQuote(model); }
+}
+
+function toggleQuoteFromModal() {
+  if (!currentModalProduct) return;
+  const model = currentModalProduct.model;
+  const btn = document.getElementById('modalQuoteBtn');
+  if (isInQuote(model)) {
+    removeFromQuote(model);
+    if (btn) { btn.classList.remove('added'); btn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
+  } else {
+    addToQuote(model);
+    if (btn) { btn.classList.add('added'); btn.textContent = '\u5df2\u52a0\u5165'; }
+  }
+}
+
+function updateQuoteBadge() {
+  const badge = document.getElementById('quoteBadgeCount');
+  if (!badge) return;
+  const count = quoteCart.length;
+  if (count > 0) { badge.textContent = count; badge.style.display = 'flex'; }
+  else { badge.style.display = 'none'; }
+}
+
+function openQuotePanel() {
+  renderQuotePanel();
+  populateCustomerFields();
+  document.getElementById('quotePanelOverlay').classList.add('show');
+  document.getElementById('quotePanel').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQuotePanel() {
+  document.getElementById('quotePanelOverlay').classList.remove('show');
+  document.getElementById('quotePanel').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function populateCustomerFields() {
+  document.getElementById('qcName').value = quoteCustomer.name || '';
+  document.getElementById('qcCompany').value = quoteCustomer.company || '';
+  document.getElementById('qcEmail').value = quoteCustomer.email || '';
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById('qcDate').value = quoteCustomer.date || today;
+}
+
+function updateQuoteCustomer() {
+  quoteCustomer.name = document.getElementById('qcName').value.trim();
+  quoteCustomer.company = document.getElementById('qcCompany').value.trim();
+  quoteCustomer.email = document.getElementById('qcEmail').value.trim();
+  quoteCustomer.date = document.getElementById('qcDate').value;
+  saveQuoteToStorage();
+}
+
+function renderQuotePanel() {
+  const body = document.getElementById('quotePanelBody');
+  const subtotalEl = document.getElementById('quotePanelSubtotal');
+  const totalAmountEl = document.getElementById('quoteTotalAmount');
+  if (quoteCart.length === 0) {
+    body.innerHTML = '<div class="quote-empty"><div class="quote-empty-icon">&#128196;</div><div class="quote-empty-text">No products selected. Tap "+" on cards to add.</div></div>';
+    subtotalEl.style.display = 'none'; return;
+  }
+  let total = 0; let html = '';
+  quoteCart.forEach(item => {
+    const p = PRODUCTS.find(x => x.model === item.model);
+    if (!p) return;
+    const priceField = 'p_' + item.priceTier;
+    const unitPrice = parseFloat(p[priceField]) || 0;
+    const subtotal = unitPrice * item.qty;
+    total += subtotal;
+    html += '<div class="quote-item">' +
+      '<img class="quote-item-thumb" src="' + (p.image || '') + '" alt="' + item.model + '" onerror="this.style.display=\'none\'">' +
+      '<div class="quote-item-info">' +
+        '<div class="quote-item-model">' + item.model + '</div>' +
+        '<div class="quote-item-type">' + (p.type_en || p.type_cn || p.category) + '</div>' +
+        '<div class="quote-item-controls">' +
+          '<input type="number" class="quote-item-qty" value="' + item.qty + '" min="1" onchange="updateQuoteItem(\'' + item.model + '\', this.value, \'' + item.priceTier + '\')">' +
+          '<select class="quote-item-tier" onchange="updateQuoteItem(\'' + item.model + '\', ' + item.qty + ', this.value)">' +
+            '<option value="sample"' + (item.priceTier === 'sample' ? ' selected' : '') + '>Sample</option>' +
+            '<option value="500"' + (item.priceTier === '500' ? ' selected' : '') + '>500pcs</option>' +
+            '<option value="2000"' + (item.priceTier === '2000' ? ' selected' : '') + '>2000pcs</option>' +
+            '<option value="5000"' + (item.priceTier === '5000' ? ' selected' : '') + '>5000pcs</option>' +
+          '</select>' +
+        '</div>' +
+      '</div>' +
+      '<button class="quote-item-remove" onclick="removeQuoteItem(\'' + item.model + '\')">&times;</button>' +
+    '</div>';
+  });
+  body.innerHTML = html;
+  subtotalEl.style.display = 'block';
+  totalAmountEl.textContent = 'RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function updateQuoteItem(model, qty, priceTier) {
+  const item = quoteCart.find(x => x.model === model);
+  if (!item) return;
+  item.qty = Math.max(1, parseInt(qty) || 1);
+  item.priceTier = priceTier;
+  saveQuoteToStorage();
+  renderQuotePanel();
+}
+
+function removeQuoteItem(model) { removeFromQuote(model); }
+
+function clearQuote() {
+  quoteCart = [];
+  saveQuoteToStorage();
+  updateQuoteBadge();
+  renderQuotePanel();
+  document.querySelectorAll('.quote-btn.added').forEach(btn => { btn.classList.remove('added'); btn.textContent = '+'; });
+  const modalBtn = document.getElementById('modalQuoteBtn');
+  if (modalBtn) { modalBtn.classList.remove('added'); modalBtn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
+}
+
+function openQuotePreview() {
+  if (quoteCart.length === 0) { showToast('Please add at least one product', 'warn'); return; }
+  updateQuoteCustomer();
+  document.getElementById('quotePreviewBody').innerHTML = generateQuoteHTML();
+  document.getElementById('quotePreviewOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQuotePreview() {
+  document.getElementById('quotePreviewOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function generateQuoteHTML() {
+  const date = quoteCustomer.date || new Date().toISOString().slice(0, 10);
+  let rows = ''; let total = 0;
+  quoteCart.forEach((item, idx) => {
+    const p = PRODUCTS.find(x => x.model === item.model);
+    if (!p) return;
+    const priceField = 'p_' + item.priceTier;
+    const unitPrice = parseFloat(p[priceField]) || 0;
+    const subtotal = unitPrice * item.qty;
+    total += subtotal;
+    const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
+    rows += '<tr><td>' + (idx + 1) + '</td><td>' + item.model + '</td><td>' + desc + '</td><td>' + item.qty + '</td><td>' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '</td><td>' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '</td></tr>';
+  });
+  return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen Guangxinyi Electronics Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
+    '<div class="quote-preview-info"><div class="quote-preview-info-item"><span class="quote-preview-info-label">Customer</span><span class="quote-preview-info-value">' + (quoteCustomer.name || '-') + '</span></div>' +
+    '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Company</span><span class="quote-preview-info-value">' + (quoteCustomer.company || '-') + '</span></div>' +
+    '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Email</span><span class="quote-preview-info-value">' + (quoteCustomer.email || '-') + '</span></div>' +
+    '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Date</span><span class="quote-preview-info-value">' + date + '</span></div></div>' +
+    '<table class="quote-preview-table"><thead><tr><th>#</th><th>Model</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<div class="quote-preview-total">Total: <span>RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div>' +
+    '<div class="quote-preview-note">Note: Prices are in RMB, EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.</div>';
+}
+
+function copyQuoteText() {
+  const date = quoteCustomer.date || new Date().toISOString().slice(0, 10);
+  let text = 'GXYKIT Quotation\nShenzhen Guangxinyi Electronics Co., Ltd.\n\n';
+  text += 'Customer: ' + (quoteCustomer.name || '-') + '\nCompany: ' + (quoteCustomer.company || '-') + '\nEmail: ' + (quoteCustomer.email || '-') + '\nDate: ' + date + '\n\n';
+  text += '#\tModel\tDescription\tQty\tUnit Price\tSubtotal\n';
+  let total = 0;
+  quoteCart.forEach((item, idx) => {
+    const p = PRODUCTS.find(x => x.model === item.model);
+    if (!p) return;
+    const priceField = 'p_' + item.priceTier;
+    const unitPrice = parseFloat(p[priceField]) || 0;
+    const subtotal = unitPrice * item.qty;
+    total += subtotal;
+    const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
+    text += (idx + 1) + '\t' + item.model + '\t' + desc + '\t' + item.qty + '\t' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '\t' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '\n';
+  });
+  text += '\nTotal: RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '\n';
+  text += '\nNote: Prices are in RMB, EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.';
+  navigator.clipboard.writeText(text).then(() => showToast('Quotation copied to clipboard', 'success')).catch(() => {
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta); showToast('Quotation copied to clipboard', 'success');
+  });
+}
+
+function exportQuoteCSV() {
+  let csv = 'Model,Description,Qty,Price Tier,Unit Price,Total\n';
+  let total = 0;
+  quoteCart.forEach(item => {
+    const p = PRODUCTS.find(x => x.model === item.model);
+    if (!p) return;
+    const priceField = 'p_' + item.priceTier;
+    const unitPrice = parseFloat(p[priceField]) || 0;
+    const subtotal = unitPrice * item.qty;
+    total += subtotal;
+    const desc = (p.type_en || p.type_cn || p.category || '').replace(/,/g, ';');
+    csv += '"' + item.model + '","' + desc + '",' + item.qty + ',"' + item.priceTier + '",' + (unitPrice || '') + ',' + (subtotal || '') + '\n';
+  });
+  csv += '"","","","","Total:",' + total.toFixed(2) + '\n';
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'GXYKIT_Quotation_' + new Date().toISOString().slice(0,10) + '.csv';
+  link.click();
+  showToast('CSV exported', 'success');
+}
+
+// Init quote system
+loadQuoteFromStorage();
+updateQuoteBadge();
+
+// ===== MODIFIED EXISTING FUNCTIONS =====
+// Override createCard to add quote button
+const _originalCreateCard = createCard;
+createCard = function(p) {
+  const card = _originalCreateCard(p);
+  const isQuoted = isInQuote(p.model);
+  const quoteBtn = document.createElement('button');
+  quoteBtn.className = 'quote-btn' + (isQuoted ? ' added' : '');
+  quoteBtn.textContent = isQuoted ? '\u2713' : '+';
+  quoteBtn.onclick = function(e) {
+    e.stopPropagation();
+    if (isInQuote(p.model)) { removeFromQuote(p.model); this.classList.remove('added'); this.textContent = '+'; }
+    else { addToQuote(p.model); this.classList.add('added'); this.textContent = '\u2713'; }
+  };
+  card.appendChild(quoteBtn);
+  return card;
+};
+
+// Override openModal to update quote button state
+const _originalOpenModal = openModal;
+openModal = function(p) {
+  _originalOpenModal(p);
+  currentModalProduct = p;
+  const modalBtn = document.getElementById('modalQuoteBtn');
+  if (modalBtn) {
+    if (isInQuote(p.model)) { modalBtn.classList.add('added'); modalBtn.textContent = '\u5df2\u52a0\u5165'; }
+    else { modalBtn.classList.remove('added'); modalBtn.textContent = '\u52a0\u5165\u62a5\u4ef7\u5355'; }
+  }
+};
+
+// Override closeModal to reset currentModalProduct
+const _originalCloseModal = closeModal;
+closeModal = function() {
+  currentModalProduct = null;
+  _originalCloseModal();
+};
+
+// ===== Toast type fix =====
+const _originalShowToast = showToast;
+showToast = function(message, type) {
+  if (type === 'success') {
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;z-index:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);animation:fadeUp 0.3s ease;background:rgba(52,199,89,0.9);color:#fff;';
+    toast.textContent = message; document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(20px)'; setTimeout(() => toast.remove(), 300); }, 2500);
+    return;
+  }
+  _originalShowToast(message, type);
+};
+
+// Keyboard support for quote panel and preview
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('quotePreviewOverlay').classList.contains('show')) { closeQuotePreview(); e.stopPropagation(); }
+    else if (document.getElementById('quotePanel').classList.contains('show')) { closeQuotePanel(); e.stopPropagation(); }
+  }
+});
+
 // Init
 init();
 </script>
+<!-- Quote Side Panel (Drawer) -->
+<div class="quote-panel-overlay" id="quotePanelOverlay" onclick="closeQuotePanel()"></div>
+<div class="quote-panel" id="quotePanel">
+  <div class="quote-panel-header">
+    <div class="quote-panel-title">Quotation List</div>
+    <button class="quote-panel-close" onclick="closeQuotePanel()">&times;</button>
+  </div>
+  <div class="quote-panel-body" id="quotePanelBody">
+    <div class="quote-empty">
+      <div class="quote-empty-icon">&#128196;</div>
+      <div class="quote-empty-text">No products selected. Tap "+" on cards to add.</div>
+    </div>
+  </div>
+  <div class="quote-panel-subtotal" id="quotePanelSubtotal" style="display:none">Total: <span id="quoteTotalAmount">$0.00</span></div>
+  <div class="quote-customer" id="quoteCustomerSection">
+    <div class="quote-customer-title">Customer Info</div>
+    <div class="quote-field">
+      <label for="qcName">Name</label>
+      <input type="text" id="qcName" placeholder="Your name" onchange="updateQuoteCustomer()" onblur="updateQuoteCustomer()">
+    </div>
+    <div class="quote-field">
+      <label for="qcCompany">Company</label>
+      <input type="text" id="qcCompany" placeholder="Company name" onchange="updateQuoteCustomer()" onblur="updateQuoteCustomer()">
+    </div>
+    <div class="quote-field">
+      <label for="qcEmail">Email</label>
+      <input type="email" id="qcEmail" placeholder="email@example.com" onchange="updateQuoteCustomer()" onblur="updateQuoteCustomer()">
+    </div>
+    <div class="quote-field">
+      <label for="qcDate">Date</label>
+      <input type="date" id="qcDate" onchange="updateQuoteCustomer()" onblur="updateQuoteCustomer()">
+    </div>
+  </div>
+  <div class="quote-panel-footer">
+    <button class="quote-btn-clear" onclick="clearQuote()">Clear</button>
+    <button class="quote-btn-generate" onclick="openQuotePreview()">Generate Quotation</button>
+  </div>
+</div>
+
+<!-- Quote Preview Modal -->
+<div class="quote-preview-overlay" id="quotePreviewOverlay" onclick="closeQuotePreview()">
+  <div class="quote-preview-modal" onclick="event.stopPropagation()">
+    <div class="quote-preview-header">
+      <div class="quote-preview-title">Quotation</div>
+      <button class="quote-preview-close" onclick="closeQuotePreview()">&times;</button>
+    </div>
+    <div class="quote-preview-body" id="quotePreviewBody"></div>
+    <div class="quote-preview-actions">
+      <button class="quote-btn-copy" onclick="copyQuoteText()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy as Text
+      </button>
+      <button class="quote-btn-export" onclick="exportQuoteCSV()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export Excel
+      </button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
