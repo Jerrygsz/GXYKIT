@@ -915,21 +915,26 @@ function init() {
 }
 
 function doLogin() {
-  const user = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const errorEl = document.getElementById('loginError');
-  if (user === AUTH_USER && pass === AUTH_PASS) {
-    isLoggedIn = true;
-    sessionStorage.setItem(AUTH_KEY, JSON.stringify({ user: user, time: Date.now() }));
-    document.getElementById('loginOverlay').classList.add('hidden');
-    document.getElementById('loginPass').value = '';
-    errorEl.textContent = '';
-    initApp();
-    showToast('Welcome back, Jerry!', 'success');
-  } else {
-    errorEl.textContent = 'Invalid username or password';
-    document.getElementById('loginPass').value = '';
-    document.getElementById('loginPass').focus();
+  try {
+    const user = document.getElementById('loginUser').value.trim();
+    const pass = document.getElementById('loginPass').value;
+    const errorEl = document.getElementById('loginError');
+    if (user === AUTH_USER && pass === AUTH_PASS) {
+      isLoggedIn = true;
+      sessionStorage.setItem(AUTH_KEY, JSON.stringify({ user: user, time: Date.now() }));
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('loginPass').value = '';
+      errorEl.textContent = '';
+      initApp();
+      showToast('Welcome back, Jerry!', 'success');
+    } else {
+      errorEl.textContent = 'Invalid username or password';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('loginPass').focus();
+    }
+  } catch(e) {
+    console.error('Login error:', e);
+    document.getElementById('loginError').textContent = 'System error: ' + e.message + '. Try Ctrl+F5 to clear cache.';
   }
 }
 
