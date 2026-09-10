@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-10-v9a';
+const DATA_VERSION = '2026-09-10-v11';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -283,36 +283,17 @@ const PRODUCTS = [
     "p_5000": "33.0",
     "nw": "193.0 g",
     "gw": "250.0 g",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "options": [
+      {
+        "model": "GC01-A1C",
+        "features": "LED Display, QC3.0, Independent Switch, Stereo, Universal for Cars",
+        "proto": "QC3.0",
+        "desc": "Product Name: GC01 3-Socket Cigarette Lighter Splitter with 5-Port USB Car Charger (3A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-C + 3 USB-A + 3 Cigarette Sockets\nUSB-A1 Output: 5V/2.4A\nUSB-A2 Output: 5V/2.4A\nUSB-A3 Output: 5V/2.4A\nUSB-C1 Output: 5V/2.4A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension Output: 120W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nCable Length: 1.0m \nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display"
+      }
+    ]
   },
-  {
-    "model": "GC01-A1C",
-    "category": "Car Charger",
-    "type_cn": "一分三车充",
-    "type_en": "Smart USB Car Charger",
-    "image": "images/GC01.jpg",
-    "power": "Total 120W",
-    "ports": "3x USB-A, 2x USB-C",
-    "features": "LED Display, QC3.0, Independent Switch, Stereo, Universal for Cars",
-    "dim": "122 x 74 x 38 mm",
-    "weight": "193.0 g",
-    "cable": "1.0m",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "color": "Black",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 3-in-1 Power Hub:​ Combines 3 cigarette lighter sockets and 5 USB ports (3A+2C) in one device\n⚡ 120W Max Power & 36W PD:​ Supports high-power car appliances and fast charges devices via PD (5V/3A, 9V/3A, 12V/3A)\n🛡 Safe & Smart Design:​ Built with fireproof PC+ABS, multi-protection, and a car battery voltage LED display",
-    "desc": "Product Name: GC01 3-Socket Cigarette Lighter Splitter with 5-Port USB Car Charger (3A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-C + 3 USB-A + 3 Cigarette Sockets\nUSB-A1 Output: 5V/2.4A\nUSB-A2 Output: 5V/2.4A\nUSB-A3 Output: 5V/2.4A\nUSB-C1 Output: 5V/2.4A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension Output: 120W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nCable Length: 1.0m \nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "193.0 g",
-    "gw": "250.0 g",
-    "acc": "User Manual, Power Cable",
-    "proto": "QC3.0"
-  },
+
   {
     "model": "GC03-Standard",
     "category": "Car Charger",
@@ -558,18 +539,17 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "acc": "User Manual x1"
-  },
-  {
-    "model": "GC24-Boost",
-    "category": "Car Charger",
-    "type_cn": "伸缩线车充",
-    "image": "images/GC24.jpg",
-    "power": "PD 65W | Total 65W+18W",
-    "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "Voltage Monitor, Smart Protection, Universal for Cars",
-    "dim": "71 x 151 x 38 mm",
-    "cable": "78CM"
+    "acc": "User Manual x1",
+    "options": [
+      {
+        "model": "GC24-Boost",
+        "power": "PD 65W | Total 65W+18W",
+        "ports": "USB-A + USB-C | PD | Retractable Cable",
+        "features": "Voltage Monitor, Smart Protection, Universal for Cars",
+        "dim": "71 x 151 x 38 mm",
+        "cable": "78CM"
+      }
+    ]
   },
   {
     "model": "GC25",
@@ -604,33 +584,14 @@ const PRODUCTS = [
     "p_5000": "35.0",
     "nw": "125.0 g",
     "gw": "165.0 g",
-    "acc": "User Manual x1"
-  },
-  {
-    "model": "ZNB02-LED",
-    "category": "Car Charger",
-    "type_cn": "一拖二车充",
-    "type_en": "Smart USB Car Charger",
-    "image": "images/ZNB02-C.jpg",
-    "power": "Total 120W",
-    "ports": "2x USB-A",
-    "features": "LED Display, Voltage Monitor, Independent Switch, Universal for Cars, Dual USB",
-    "dim": "130 x 85 x 50 mm",
-    "weight": "125.0 g",
-    "input_v": "DC 12V",
-    "material": "Fireproof PC + ABS",
-    "color": "Black",
-    "cert": "CE, FCC, RoHS",
-    "safety": "OCP, OVP, OTP, Short Circuit Protection",
-    "selling": "🔌 2-in-1 Power Hub:​ Combines 2 cigarette lighter sockets and 2 USB-A ports, expanding your car’s power supply.\n⚡ 120W High Power:​ Delivers up to 120W total output, with 80W dedicated to the sockets for high-power car accessories.\n🛡️ Safe & Smart:​ Built with fireproof PC+ABS, comprehensive safety protections, and a car battery voltage LED display.",
-    "desc": "Product Name: ZNB02  2-Socket Cigarette Lighter Splitter with 2-Port USB Car Charger(2A)\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-A + 2 Cigarette Sockets\nUSB-A1 Output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-A2 Output: 5V/3.1A\n\n2 Sockets Extension Output: 80W Max\n\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "125.0 g",
-    "gw": "165.0 g",
-    "acc": "User Manual, Power Cable"
+    "acc": "User Manual x1",
+    "options": [
+      {
+        "model": "ZNB02-LED",
+        "features": "LED Display, Voltage Monitor, Independent Switch, Universal for Cars, Dual USB",
+        "desc": "Product Name: ZNB02  2-Socket Cigarette Lighter Splitter with 2-Port USB Car Charger(2A)\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 120W\nOutput Port(s): 2 USB-A + 2 Cigarette Sockets\nUSB-A1 Output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-A2 Output: 5V/3.1A\n\n2 Sockets Extension Output: 80W Max\n\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Car Battery Voltage LED Display"
+      }
+    ]
   },
   {
     "model": "ZNB03S",
@@ -964,29 +925,15 @@ const PRODUCTS = [
     "p_5000": "16.0",
     "nw": "29.8 g",
     "gw": "54.0 g",
-    "acc": "User Manual"
-  },
-  {
-    "model": "GZ03-PD",
-    "category": "Car Bluetooth MP3",
-    "type_cn": "车载蓝牙MP3",
-    "type_en": "Car MP3 Player",
-    "image": "images/GZ03.jpg",
-    "bt": "BT 5.4",
-    "power": "PD 5V/3.0A, 9V/3.0A, 12V/2.5A •  USB-A Output Port: 5V/2.4A •   | USB-A 5V/2.4A",
-    "ports": "PD",
-    "features": "Heavy Bass, Lossless Sound, HD Mic, Fast Charge, Voice Navigation, U Disk Play, Stereo, Universal for Cars, FM Transmit",
-    "signal": "10 m",
-    "dim": "70.5 x 46 x 98 mm",
-    "weight": "29.8 g",
-    "color": "Black",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
-    "nw": "29.8 g",
-    "gw": "54.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "options": [
+      {
+        "model": "GZ03-PD",
+        "bt": "BT 5.4",
+        "power": "PD 5V/3.0A, 9V/3.0A, 12V/2.5A •  USB-A Output Port: 5V/2.4A •   | USB-A 5V/2.4A",
+        "ports": "PD"
+      }
+    ]
   },
   {
     "model": "GZ07",
