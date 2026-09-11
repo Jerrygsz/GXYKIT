@@ -1133,6 +1133,18 @@ function getFiltered() {
   return list;
 }
 
+// ===== IMAGE FALLBACK: share base-model image for variants =====
+function getFallbackImage(model) {
+  if (!model || model.indexOf('-') === -1) return '';
+  const base = model.split('-')[0];
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].model === base && products[i].image) {
+      return products[i].image;
+    }
+  }
+  return '';
+}
+
 function renderTable() {
   const list = getFiltered();
   const start = (currentPage - 1) * pageSize;
@@ -1142,8 +1154,13 @@ function renderTable() {
   pageItems.forEach((p, idx) => {
     const realIdx = products.indexOf(p);
     const tr = document.createElement('tr');
-    const thumbHtml = p.image ?
-      '<img src="' + p.image + '" class="table-thumb" onclick="openVariantLightbox(\'' + p.image + '\')" alt="">' :
+    // Image fallback: if p.image is empty, try base model image
+    let imgSrc = p.image || '';
+    if (!imgSrc) {
+      imgSrc = getFallbackImage(p.model);
+    }
+    const thumbHtml = imgSrc ?
+      '<img src="' + imgSrc + '" class="table-thumb" onclick="openVariantLightbox(\'' + imgSrc + '\')" alt="">' :
       '<div class="table-thumb-placeholder">--</div>';
     tr.innerHTML = '<td><input type="checkbox" class="row-check" data-idx="' + realIdx + '" onchange="updateBatchInfo()"></td>' +
       '<td>' + thumbHtml + '</td>' +
@@ -1293,8 +1310,11 @@ function buildVariantCard(idx, opt) {
     { key: 'input_v', label: 'Input Voltage' }
   ];
   
-  // Build image section
-  const variantImage = opt.image || '';
+  // Build image section with fallback
+  let variantImage = opt.image || '';
+  if (!variantImage) {
+    variantImage = getFallbackImage(opt.model || '');
+  }
   const hasImage = variantImage.trim() !== '';
   let imageSection = '';
   if (hasImage) {
@@ -1320,12 +1340,12 @@ function buildVariantCard(idx, opt) {
     inputsHTML += '<div class="form-field"><label>' + safeLabel + '</label>' + inputHTML + '</div>';
   });
   
-  // Image input row (separate from grid)
+  // Image input row (separate from grid) - keep original value empty for shared images
   const imageInputHTML = 
     '<div class="variant-image-section">' +
       imageSection +
       '<div class="variant-image-inputs">' +
-        '<input type="text" id="v_image_' + idx + '" data-vkey="image" value="' + escapeHtml(variantImage) + '" placeholder="Image path or URL" class="variant-input" />' +
+        '<input type="text" id="v_image_' + idx + '" data-vkey="image" value="' + escapeHtml(opt.image || '') + '" placeholder="' + (variantImage ? 'Fallback: ' + escapeHtml(variantImage) : 'Image path or URL') + '" class="variant-input" />' +
         '<label class="variant-file-btn" onclick="document.getElementById(\'variantUpload_' + idx + '\').click()">&#128247; Upload</label>' +
         '<input type="file" id="variantUpload_' + idx + '" accept="image/*" style="display:none" onchange="handleVariantImageUpload(this, ' + idx + ')">' +
       '</div>' +
