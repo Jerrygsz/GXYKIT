@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-11-v16';
+const DATA_VERSION = '2026-09-11-v17';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -333,7 +333,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "3x USB-A, 2x USB-C",
     "features": "LED Display, Independent Switch, Stereo, Universal for Cars",
-    "dim": "Product Dimensions:\n74*122*38mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n135*125*45mm\nCarton Dimensions:\n34*29.3*49.5cm\nQty/Carton: 50pcs/carton\nN.W.: 12.50kg\nG.W.: 13.50kg",
+    "dim": "74 x 122 x 38mm",
     "weight": "193.0 g",
     "cable": "1.0m",
     "input_v": "DC 12V",
@@ -349,7 +349,11 @@ const PRODUCTS = [
     "p_5000": "33.0",
     "nw": "193.0 g",
     "gw": "250.0 g",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "74 x 122 x 38mm",
+    "box_dim": "135 x 125 x 45mm",
+    "carton_dim": "34 x 29.3 x 49.5cm",
+    "qty_carton": "50pcs/carton"
   },
   {
     "model": "GC01-A1C",
@@ -360,7 +364,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "3x USB-A, 2x USB-C",
     "features": "LED Display, QC3.0, Independent Switch, Stereo, Universal for Cars",
-    "dim": "Product Dimensions:\n74*122*38mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n135*125*45mm\nCarton Dimensions:\n34*29.3*49.5cm\nQty/Carton: 50pcs/carton\nN.W.: 12.50kg\nG.W.: 13.50kg",
+    "dim": "74 x 122 x 38mm",
     "weight": "193.0 g",
     "cable": "1.0m",
     "input_v": "DC 12V",
@@ -377,7 +381,11 @@ const PRODUCTS = [
     "nw": "193.0 g",
     "gw": "250.0 g",
     "acc": "User Manual x1",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_dim": "74 x 122 x 38mm",
+    "box_dim": "135 x 125 x 45mm",
+    "carton_dim": "34 x 29.3 x 49.5cm",
+    "qty_carton": "50pcs/carton"
   },
   {
     "model": "GC03",
@@ -458,7 +466,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "3x USB-A, 3x USB-C",
     "features": "Colorful Lights, Fast Charge, QC3.0, Universal for Cars",
-    "dim": "Product Dimensions:\n41*41*71mm\n46*20*65mm\nN.W.: 81.4g\nG.W.: 113.2g\nColor Box Dimensions:\n100*37*126mm\nCarton Dimensions:\n41.5*38.5*40cm\nQty/Carton: 120pcs/carton\nN.W.: 13.50kg\nG.W.: 14.50kg",
+    "dim": "41 x 41 x 71mm\n46 x 20 x 65mm",
     "weight": "81.4 g",
     "cable": "1.5m",
     "input_v": "DC 12V",
@@ -474,7 +482,11 @@ const PRODUCTS = [
     "nw": "81.4 g",
     "gw": "113.2 g",
     "acc": "User Manual x1",
-    "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0"
+    "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0",
+    "product_dim": "41 x 41 x 71mm\n46 x 20 x 65mm",
+    "box_dim": "100 x 37 x 126mm",
+    "carton_dim": "41.5 x 38.5 x 40cm",
+    "qty_carton": "120pcs/carton"
   },
   {
     "model": "GC05-C",
@@ -485,7 +497,7 @@ const PRODUCTS = [
     "power": "Total 61W",
     "ports": "1x USB-A, 2x USB-C",
     "features": "Colorful Lights, Fast Charge, QC3.0, Voltage Monitor, Universal for Cars",
-    "dim": "Color Box Dimensions: 70.5* 46* 98mm\nN.W.: 28.8g\nCarton Dimensions: 50* 21.5* 38cm\nQty/Carton: 100pcs/carton",
+    "dim": "",
     "weight": "81.4 g",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -500,7 +512,10 @@ const PRODUCTS = [
     "nw": "81.4 g",
     "gw": "113.2 g",
     "acc": "User Manual x1",
-    "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0"
+    "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0",
+    "box_dim": "70.5 x 46 x 98mm",
+    "carton_dim": "50 x 21.5 x 38cm",
+    "qty_carton": "100pcs/carton"
   },
   {
     "model": "GC13-45W",
@@ -522,7 +537,7 @@ const PRODUCTS = [
     "power": "Total 65W",
     "ports": "1x USB-A, 3x USB-C, Retractable Cable",
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
-    "dim": "Product Dimensions: 41.3*53*156.4mm\nColor Box Dimensions:\n73*45*182mm\nN.W.: 114g\nG.W.: 152g\nCarton Dimensions:\n47.5*38.2*31.5cm\nQty/Carton: 80pcs/carton\nN.W.: 12.20kg\nG.W.: 13.20kg",
+    "dim": "41.3 x 53 x 156.4mm",
     "weight": "114 g",
     "cable": "78cm",
     "input_v": "DC 12V",
@@ -537,7 +552,11 @@ const PRODUCTS = [
     "p_5000": "35.0",
     "nw": "114 g",
     "gw": "152 g",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "41.3 x 53 x 156.4mm",
+    "box_dim": "73 x 45 x 182mm",
+    "carton_dim": "47.5 x 38.2 x 31.5cm",
+    "qty_carton": "80pcs/carton"
   },
   {
     "model": "GC16",
@@ -548,7 +567,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "1x USB-A, 2x USB-C",
     "features": "Voltage Monitor, Smart Protection, Universal for Cars, Spring Wire",
-    "dim": "Product Dimensions: 97.5*59*36mm\nN.W.: 84g\nG.W.: 105.8g\nColor Box Dimensions:\n85*40*116.5mm",
+    "dim": "97.5 x 59 x 36mm",
     "cable": "1.5 m",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -560,7 +579,11 @@ const PRODUCTS = [
     "p_500": "28.0",
     "p_2000": "27.0",
     "p_5000": "26.0",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "97.5 x 59 x 36mm",
+    "box_dim": "85 x 40 x 116.5mm",
+    "nw": "84g",
+    "gw": "105.8g"
   },
   {
     "model": "GC18",
@@ -571,7 +594,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "1x USB-A, 2x USB-C, Retractable Cable",
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
-    "dim": "Product Dimensions:\n67*48*159MM\nColor Box Dimensions: 90*59*185MM\nN.W.: 130.2g\nG.W.: 251.8g\nCarton Dimensions: 41.5*36.4*44.0cm\nQty/Carton: 80pcs/carton",
+    "dim": "67 x 48 x 159mm",
     "cable": "80CM",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -583,7 +606,13 @@ const PRODUCTS = [
     "p_500": "40.0",
     "p_2000": "39.0",
     "p_5000": "38.0",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "67 x 48 x 159mm",
+    "box_dim": "90 x 59 x 185mm",
+    "carton_dim": "41.5 x 36.4 x 44.0cm",
+    "qty_carton": "80pcs/carton",
+    "nw": "130.2g",
+    "gw": "251.8g"
   },
   {
     "model": "GC21",
@@ -650,7 +679,7 @@ const PRODUCTS = [
     "power": "Total 65W",
     "ports": "1x USB-A, 2x USB-C, Retractable Cable",
     "features": "Voltage Monitor, Smart Protection, Universal for Cars",
-    "dim": "Product Dimensions:\n52*34*128.8mm\nColor Box Dimensions: 71*151*38MM\nN.W.: 75.6g\nG.W.: 109.6g",
+    "dim": "52 x 34 x 128.8mm",
     "cable": "78cm",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -662,7 +691,11 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "52 x 34 x 128.8mm",
+    "box_dim": "71 x 151 x 38mm",
+    "nw": "75.6g",
+    "gw": "109.6g"
   },
   {
     "model": "GC24-Boost",
@@ -706,7 +739,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "2x USB-A",
     "features": "Voltage Monitor, Independent Switch, Universal for Cars, Dual USB",
-    "dim": "Product Dimensions:\n40*50*120mm\nN.W.: 125.0g\nG.W.: 165.0g\nColor Box Dimensions:\n48*86*130mm\nCarton Dimensions:\n47*35*38cm\nQty/Carton: 100pcs/carton\nN.W.: 16.50kg\nG.W.: 17.50kg",
+    "dim": "40 x 50 x 120mm",
     "weight": "125.0 g",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -720,7 +753,11 @@ const PRODUCTS = [
     "p_5000": "35.0",
     "nw": "125.0 g",
     "gw": "165.0 g",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "40 x 50 x 120mm",
+    "box_dim": "48 x 86 x 130mm",
+    "carton_dim": "47 x 35 x 38cm",
+    "qty_carton": "100pcs/carton"
   },
   {
     "model": "ZNB02-LED",
@@ -731,7 +768,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "2x USB-A",
     "features": "LED Display, Voltage Monitor, Independent Switch, Universal for Cars, Dual USB",
-    "dim": "Product Dimensions:\n40*50*120mm\nN.W.: 125.0g\nG.W.: 165.0g\nColor Box Dimensions:\n48*86*130mm\nCarton Dimensions:\n47*35*38cm\nQty/Carton: 100pcs/carton\nN.W.: 16.50kg\nG.W.: 17.50kg",
+    "dim": "40 x 50 x 120mm",
     "weight": "125.0 g",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -745,7 +782,11 @@ const PRODUCTS = [
     "p_5000": "35.0",
     "nw": "125.0 g",
     "gw": "165.0 g",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "40 x 50 x 120mm",
+    "box_dim": "48 x 86 x 130mm",
+    "carton_dim": "47 x 35 x 38cm",
+    "qty_carton": "100pcs/carton"
   },
   {
     "model": "ZNB03S",
@@ -756,7 +797,7 @@ const PRODUCTS = [
     "power": "Total 120W",
     "ports": "2x USB-A",
     "features": "Voltage Monitor, Independent Switch, Universal for Cars, Dual USB",
-    "dim": "Product Dimensions:\n96*32*69mm\nN.W.: 131.0g\nG.W.: 175.0g\nColor Box Dimensions:\n153*40*114mm\nCarton Dimensions:\n46.5*34*31cm\nQty/Carton: 50pcs/carton\nN.W.: 8.575kg\nG.W.: 9.50kg",
+    "dim": "96 x 32 x 69mm",
     "weight": "131.0 g",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -771,7 +812,11 @@ const PRODUCTS = [
     "p_5000": "14.0",
     "nw": "131.0 g",
     "gw": "175.0 g",
-    "acc": "1. User Manual x1\n2. Fuse x1\n3. 3M Sticker x1"
+    "acc": "1. User Manual x1\n2. Fuse x1\n3. 3M Sticker x1",
+    "product_dim": "96 x 32 x 69mm",
+    "box_dim": "153 x 40 x 114mm",
+    "carton_dim": "46.5 x 34 x 31cm",
+    "qty_carton": "50pcs/carton"
   },
   {
     "model": "GR01",
@@ -1236,7 +1281,7 @@ const PRODUCTS = [
     "power": "Total 65W",
     "ports": "1x USB-A, 3x USB-C, Retractable Cable",
     "features": "Colorful Lights, Smart Protection, Universal for Cars, Flame-retardant",
-    "dim": "Product Dimensions: 68.8*50.5*98mm\nColor Box Dimensions:\n75* 54* 115mm\nN.W.: 72.2g\nG.W.: 104g\nCarton Dimensions:\n57*25*39.5cm\nQty/Carton: 100pcs/carton\nN.W.: 10kg\nG.W.: 10.81kg",
+    "dim": "68.8 x 50.5 x 98mm",
     "cable": "78cm",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -1248,7 +1293,13 @@ const PRODUCTS = [
     "p_500": "39.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "product_dim": "68.8 x 50.5 x 98mm",
+    "box_dim": "75 x 54 x 115mm",
+    "carton_dim": "57 x 25 x 39.5cm",
+    "qty_carton": "100pcs/carton",
+    "nw": "72.2g",
+    "gw": "104g"
   },
   {
     "model": "AP06",
@@ -1301,7 +1352,7 @@ const PRODUCTS = [
     "image": "images/GC07.jpg",
     "power": "Total 61W",
     "ports": "2x USB-A",
-    "dim": "Product Dimensions:\n28*67.6mm\nN.W.: 19.0g",
+    "dim": "28 x 67.6mm",
     "weight": "19.0 g",
     "input_v": "DC 12V",
     "material": "Fireproof PC + ABS",
@@ -1313,7 +1364,8 @@ const PRODUCTS = [
     "p_2000": null,
     "p_5000": null,
     "nw": "19.0 g",
-    "acc": "OEM Only,MOQ: 2000pcs"
+    "acc": "OEM Only,MOQ: 2000pcs",
+    "product_dim": "28 x 67.6mm"
   },
   {
     "model": "GR05",
@@ -1480,8 +1532,14 @@ const PRODUCTS = [
     "p_500": "62.0",
     "p_2000": "61.0",
     "p_5000": "60.0",
-    "dim": "Product Dimensions:\n85*75*60mm\nN.W.: 133.8g\nG.W.: 215.9g\nColor Box Dimensions:\n108*165*85mm\nCarton Dimensions:\n44.5*34*56cm\nQty/Carton: 50pcs/carton\nN.W.: 10.80kg\nG.W.: 12.00kg",
-    "acc": "User Manual x1"
+    "dim": "85 x 75 x 60mm",
+    "acc": "User Manual x1",
+    "product_dim": "85 x 75 x 60mm",
+    "box_dim": "108 x 165 x 85mm",
+    "carton_dim": "44.5 x 34 x 56cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "133.8g",
+    "gw": "215.9g"
   },
   {
     "model": "G63-Remote",
@@ -1499,9 +1557,15 @@ const PRODUCTS = [
     "p_500": "62.0",
     "p_2000": "61.0",
     "p_5000": "60.0",
-    "dim": "Product Dimensions:\n85*75*60mm\nN.W.: 133.8g\nG.W.: 215.9g\nColor Box Dimensions:\n108*165*85mm\nCarton Dimensions:\n44.5*34*56cm\nQty/Carton: 50pcs/carton\nN.W.: 10.80kg\nG.W.: 12.00kg",
+    "dim": "85 x 75 x 60mm",
     "acc": "User Manual x1",
-    "features": "Lossless Sound, Fast Charge, Voice Navigation, Hands-free Call, TF Card Slot, U Disk Play"
+    "features": "Lossless Sound, Fast Charge, Voice Navigation, Hands-free Call, TF Card Slot, U Disk Play",
+    "product_dim": "85 x 75 x 60mm",
+    "box_dim": "108 x 165 x 85mm",
+    "carton_dim": "44.5 x 34 x 56cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "133.8g",
+    "gw": "215.9g"
   },
   {
     "model": "GC06",
@@ -1522,8 +1586,12 @@ const PRODUCTS = [
     "p_500": "42.0",
     "p_2000": "41.0",
     "p_5000": "40.0",
-    "dim": "Product Dimensions:\n130*68*40mm\n46*20*65mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n129*40*68mm",
-    "acc": "User Manual x1"
+    "dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
+    "acc": "User Manual x1",
+    "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
+    "box_dim": "129 x 40 x 68mm",
+    "nw": "193.0g",
+    "gw": "250.0g"
   },
   {
     "model": "GC06-35W",
@@ -1544,10 +1612,14 @@ const PRODUCTS = [
     "p_500": "42.0",
     "p_2000": "41.0",
     "p_5000": "40.0",
-    "dim": "Product Dimensions:\n130*68*40mm\n46*20*65mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n129*40*68mm",
+    "dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
     "acc": "User Manual x1",
     "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
+    "box_dim": "129 x 40 x 68mm",
+    "nw": "193.0g",
+    "gw": "250.0g"
   },
   {
     "model": "GC06-PD65W",
@@ -1568,10 +1640,14 @@ const PRODUCTS = [
     "p_500": "42.0",
     "p_2000": "41.0",
     "p_5000": "40.0",
-    "dim": "Product Dimensions:\n130*68*40mm\n46*20*65mm\nN.W.: 193.0g\nG.W.: 250.0g\nColor Box Dimensions:\n129*40*68mm",
+    "dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
     "acc": "User Manual x1",
     "features": "LED Display, QC3.0, Smart Protection, Independent Switch, Universal for Cars",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
+    "box_dim": "129 x 40 x 68mm",
+    "nw": "193.0g",
+    "gw": "250.0g"
   },
   {
     "model": "GR21",
@@ -1614,12 +1690,18 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "Product Dimensions: 130.6*91.2*38mm\nColor Box Dimensions:\n134* 47* 155mm\nN.W.: 216.2g\nG.W.: 257g\nCarton Dimensions:\n51.5*30.5*38cm\nQty/Carton: 50pcs/carton\nN.W.: 13.2kg\nG.W.: 14kg",
+    "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
     "p_sample": "65.0",
     "p_500": "58.0",
     "p_2000": "57.0",
-    "p_5000": "55.0"
+    "p_5000": "55.0",
+    "product_dim": "130.6 x 91.2 x 38mm",
+    "box_dim": "134 x 47 x 155mm",
+    "carton_dim": "51.5 x 30.5 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "216.2g",
+    "gw": "257g"
   },
   {
     "model": "GC11S",
@@ -1628,7 +1710,7 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "Product Dimensions: 130.6*91.2*38mm\nColor Box Dimensions:\n134* 47* 155mm\nN.W.: 216.2g\nG.W.: 257g\nCarton Dimensions:\n51.5*30.5*38cm\nQty/Carton: 50pcs/carton\nN.W.: 13.2kg\nG.W.: 14kg",
+    "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
     "p_sample": "65.0",
     "p_500": "58.0",
@@ -1639,7 +1721,13 @@ const PRODUCTS = [
     "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
     "cable": "1.0m",
     "material": "Fireproof PC + ABS",
-    "input_v": "DC 12V"
+    "input_v": "DC 12V",
+    "product_dim": "130.6 x 91.2 x 38mm",
+    "box_dim": "134 x 47 x 155mm",
+    "carton_dim": "51.5 x 30.5 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "216.2g",
+    "gw": "257g"
   },
   {
     "model": "GC11-Std",
@@ -1648,7 +1736,7 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "Product Dimensions: 130.6*91.2*38mm\nColor Box Dimensions:\n134* 47* 155mm\nN.W.: 216.2g\nG.W.: 257g\nCarton Dimensions:\n51.5*30.5*38cm\nQty/Carton: 50pcs/carton\nN.W.: 13.2kg\nG.W.: 14kg",
+    "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
     "p_sample": "65.0",
     "p_500": "58.0",
@@ -1659,7 +1747,13 @@ const PRODUCTS = [
     "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
     "cable": "1.0m",
     "material": "Fireproof PC + ABS",
-    "input_v": "DC 12V"
+    "input_v": "DC 12V",
+    "product_dim": "130.6 x 91.2 x 38mm",
+    "box_dim": "134 x 47 x 155mm",
+    "carton_dim": "51.5 x 30.5 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "216.2g",
+    "gw": "257g"
   },
   {
     "model": "GC11-Pro",
@@ -1668,7 +1762,7 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "Product Dimensions: 130.6*91.2*38mm\nColor Box Dimensions:\n134* 47* 155mm\nN.W.: 216.2g\nG.W.: 257g\nCarton Dimensions:\n51.5*30.5*38cm\nQty/Carton: 50pcs/carton\nN.W.: 13.2kg\nG.W.: 14kg",
+    "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
     "p_sample": "65.0",
     "p_500": "58.0",
@@ -1678,7 +1772,13 @@ const PRODUCTS = [
     "ports": "2x USB-A, 3x USB-C",
     "cable": "1.0m",
     "material": "Fireproof PC + ABS",
-    "input_v": "DC 12V"
+    "input_v": "DC 12V",
+    "product_dim": "130.6 x 91.2 x 38mm",
+    "box_dim": "134 x 47 x 155mm",
+    "carton_dim": "51.5 x 30.5 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "216.2g",
+    "gw": "257g"
   },
   {
     "model": "GC11-Pro-V2",
@@ -1687,7 +1787,7 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "Product Dimensions: 130.6*91.2*38mm\nColor Box Dimensions:\n134* 47* 155mm\nN.W.: 216.2g\nG.W.: 257g\nCarton Dimensions:\n51.5*30.5*38cm\nQty/Carton: 50pcs/carton\nN.W.: 13.2kg\nG.W.: 14kg",
+    "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
     "p_sample": "65.0",
     "p_500": "58.0",
@@ -1695,7 +1795,13 @@ const PRODUCTS = [
     "p_5000": "55.0",
     "power": "PD 65W | Total 120W",
     "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars"
+    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
+    "product_dim": "130.6 x 91.2 x 38mm",
+    "box_dim": "134 x 47 x 155mm",
+    "carton_dim": "51.5 x 30.5 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "216.2g",
+    "gw": "257g"
   },
   {
     "model": "ZNB01",
@@ -1704,12 +1810,18 @@ const PRODUCTS = [
     "type_en": "Car Charger",
     "image": "images/ZNB01.jpg",
     "desc": "Dual USB Multi-Function Car Charger\nVoltage Display Range: 6-30V\nInput Voltage: 12V-24V\nTotal Power: 80W\nOutput Ports:\nUSB 1 Output: 5V/1A\nUSB 2 Output: 5V/2.1A\nPower Cable Length: 50cm\n2Cigarette LighterInterface",
-    "dim": "Product Dimensions:\n82*82*62mm\nN.W.: 155.0g\nG.W.: 190.0g\nColor Box Dimensions:\n85*85*82mm\nCarton Dimensions:\n38*38*38cm\nQty/Carton: 50pcs/carton\nN.W.: 9.50kg\nG.W.: 10.50kg",
+    "dim": "82 x 82 x 62mm",
     "acc": "1. User Manual x1\n2. Power Cable x1",
     "p_sample": "36.0",
     "p_500": "35.0",
     "p_2000": "34.0",
-    "p_5000": "32.0"
+    "p_5000": "32.0",
+    "product_dim": "82 x 82 x 62mm",
+    "box_dim": "85 x 85 x 82mm",
+    "carton_dim": "38 x 38 x 38cm",
+    "qty_carton": "50pcs/carton",
+    "nw": "155.0g",
+    "gw": "190.0g"
   },
   {
     "category": "Car Charger",
