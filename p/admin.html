@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GXYKIT Product Admin</title>
-<script src="data.js?v=2026-09-11-v17"></script>
+<script src="data.js?v=2026-09-11-v18"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
 /* ===== Reset & Base ===== */
@@ -846,45 +846,47 @@ function clearAllImageStorage() {
 }
 
 // Fields config for form/table
-const FIELDS = [
-  { key: 'model', label: 'Model', type: 'text', required: true },
-  { key: 'category', label: 'Category', type: 'select', options: ['Car Charger','Car Bluetooth MP3','Bluetooth Receiver','FM Transmitter','Wireless Charger','CarPlay','Other'] },
-  { key: 'type_en', label: 'Product Type (EN)', type: 'text' },
-  { key: 'type_cn', label: 'Product Type (CN)', type: 'text' },
-  { key: 'bt', label: 'Bluetooth', type: 'text' },
-  { key: 'chip', label: 'Chip', type: 'text' },
-  { key: 'power', label: 'Power/Charging', type: 'text' },
-  { key: 'ports', label: 'Ports', type: 'text' },
-  { key: 'features', label: 'Features', type: 'textarea' },
-  { key: 'signal', label: 'Signal Distance', type: 'text' },
-  { key: 'dim', label: 'Dimensions', type: 'text' },
-  { key: 'nw', label: 'N.W. (g)', type: 'text' },
-  { key: 'gw', label: 'G.W. (g)', type: 'text' },
-  { key: 'fm', label: 'FM Frequency', type: 'text' },
-  { key: 'input_v', label: 'Input Voltage', type: 'text' },
-  { key: 'material', label: 'Material', type: 'text' },
-  { key: 'color', label: 'Color', type: 'text' },
-  { key: 'cert', label: 'Certifications', type: 'text' },
-  { key: 'safety', label: 'Safety Protections', type: 'text' },
-  { key: 'audio', label: 'Audio Codecs', type: 'text' },
-  { key: 'rxtx', label: 'RX/TX', type: 'text' },
-  { key: 'proto', label: 'Protocols', type: 'text' },
-  { key: 'selling', label: 'Selling Points', type: 'textarea' },
-  { key: 'desc', label: 'Product Description', type: 'textarea' },
-  { key: 'p_sample', label: 'Sample Price (RMB)', type: 'text' },
-  { key: 'p_500', label: '500pcs Price (RMB)', type: 'text' },
-  { key: 'p_2000', label: '2000pcs Price (RMB)', type: 'text' },
-  { key: 'p_5000', label: '5000pcs Price (RMB)', type: 'text' },
-  { key: 'year', label: 'Year', type: 'text', placeholder: '2024' },
+  const FIELDS = [
+    { key: 'model', label: 'Model', type: 'text', required: true },
+    { key: 'category', label: 'Category', type: 'select', options: ['Car Charger','Car Bluetooth MP3','Bluetooth Receiver','FM Transmitter','Wireless Charger','CarPlay','Other'] },
+    { key: 'type_en', label: 'Product Type (EN)', type: 'text' },
+    { key: 'type_cn', label: 'Product Type (CN)', type: 'text' },
+    { key: 'bt', label: 'Bluetooth', type: 'text' },
+    { key: 'chip', label: 'Chip', type: 'text' },
+    { key: 'power', label: 'Power/Charging', type: 'text' },
+    { key: 'ports', label: 'Ports', type: 'text' },
+    { key: 'features', label: 'Features', type: 'textarea' },
+    { key: 'signal', label: 'Signal Distance', type: 'text' },
+    // Dimensions
+    { key: 'dim', label: 'Product Dimensions', type: 'text', placeholder: '74 x 122 x 38mm' },
+    { key: 'box_dim', label: 'Box Dimensions (mm)', type: 'text', placeholder: '135 x 125 x 45mm' },
+    { key: 'carton_dim', label: 'Carton Dimensions (mm)', type: 'text', placeholder: '500 x 400 x 300mm' },
+    { key: 'qty_carton', label: 'Qty/Carton', type: 'text', placeholder: '50pcs/carton' },
+    // Weights
+    { key: 'product_nw', label: 'Product N.W. (g)', type: 'text', placeholder: '193.0' },
+    { key: 'box_gw', label: 'Box G.W. (g)', type: 'text', placeholder: '250.0' },
+    { key: 'carton_gw', label: 'Carton G.W. (kg)', type: 'text', placeholder: '12.5' },
+    { key: 'fm', label: 'FM Frequency', type: 'text' },
+    { key: 'input_v', label: 'Input Voltage', type: 'text' },
+    { key: 'material', label: 'Material', type: 'text' },
+    { key: 'color', label: 'Color', type: 'text' },
+    { key: 'cert', label: 'Certifications', type: 'text' },
+    { key: 'safety', label: 'Safety Protections', type: 'text' },
+    { key: 'audio', label: 'Audio Codecs', type: 'text' },
+    { key: 'rxtx', label: 'RX/TX', type: 'text' },
+    { key: 'proto', label: 'Protocols', type: 'text' },
+    { key: 'selling', label: 'Selling Points', type: 'textarea' },
+    { key: 'desc', label: 'Product Description', type: 'textarea' },
+    { key: 'p_sample', label: 'Sample Price (RMB)', type: 'text' },
+    { key: 'p_500', label: '500pcs Price (RMB)', type: 'text' },
+    { key: 'p_2000', label: '2000pcs Price (RMB)', type: 'text' },
+    { key: 'p_5000', label: '5000pcs Price (RMB)', type: 'text' },
+    { key: 'year', label: 'Year', type: 'text', placeholder: '2024' },
     { key: 'image', label: 'Images (max 3)', type: 'images', placeholder: 'Upload up to 3 images' },
-  { key: 'image2', label: 'Image 2', type: 'hidden' },
-  { key: 'image3', label: 'Image 3', type: 'hidden' },
-  { key: 'acc', label: 'Accessories', type: 'text' },
-  { key: 'box_dim', label: 'Box Dimensions (mm)', type: 'text', placeholder: '120 x 80 x 45' },
-  { key: 'box_weight', label: 'Box Weight (g)', type: 'text', placeholder: '85' },
-  { key: 'carton_dim', label: 'Carton Dimensions (mm)', type: 'text', placeholder: '500 x 400 x 300' },
-  { key: 'carton_weight', label: 'Carton Weight (kg)', type: 'text', placeholder: '12.5' },
-];
+    { key: 'image2', label: 'Image 2', type: 'hidden' },
+    { key: 'image3', label: 'Image 3', type: 'hidden' },
+    { key: 'acc', label: 'Accessories', type: 'text' },
+  ];
 
 // ===== AUTH =====
 const AUTH_USER = 'Jerry';
@@ -1151,7 +1153,7 @@ function renderTable() {
       '<td>' + (p.bt || '') + '</td>' +
       '<td>' + (p.power || '') + '</td>' +
       '<td>' + (p.ports || '') + '</td>' +
-      '<td class="td-dim">' + (p.dim || '') + '</td>' +
+      '<td class="td-dim">' + (p.dim || p.product_dim || '') + '</td>' +
       '<td class="td-price">' + (p.p_sample || '-') + '</td>' +
       '<td class="td-price">' + (p.p_500 || '-') + '</td>' +
       '<td class="td-price">' + (p.p_2000 || '-') + '</td>' +

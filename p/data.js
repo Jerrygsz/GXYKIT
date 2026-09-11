@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-11-v17';
+const DATA_VERSION = '2026-09-11-v18';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -15,7 +15,12 @@ const PRODUCTS = [
     "fm": "87.5-108.0 MHz",
     "selling": "🌈Bluetooth 5.3​ - 10m stable connection\n🔥 Dual USB ports​ - 5V/1A (music playback) + 5V/2.1A (fast charge)\n✅ Multi-playback​ - Supports TF card/USB/Bluetooth/FM",
     "desc": "Product Name: G13 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 2\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
-    "proto": "A2DP"
+    "proto": "A2DP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G15",
@@ -32,7 +37,12 @@ const PRODUCTS = [
     "fm": "87.5-108.0 MHz",
     "selling": "🌈 Bluetooth 5.3​ - 10m stable connection\n🔥 Dual USB ports​ - 5V/1A (music playback) + 5V/2.1A (fast charge)\n✅ Multi-playback​ - Supports TF card/USB/Bluetooth/FM",
     "desc": "Product Name: G15 Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 2\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
-    "proto": "A2DP"
+    "proto": "A2DP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G24",
@@ -54,10 +64,15 @@ const PRODUCTS = [
     "p_500": "66.0",
     "p_2000": "65.0",
     "p_5000": "64.0",
-    "nw": "97.5 g",
-    "gw": "200.0 g",
     "acc": "User Manual, 3.5mm Audio Cable",
-    "proto": "A2DP, QC3.0"
+    "proto": "A2DP, QC3.0",
+    "product_nw": "97.5 g",
+    "box_gw": "200.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G32",
@@ -73,7 +88,12 @@ const PRODUCTS = [
     "p_sample": "23.0",
     "p_500": "22.0",
     "p_2000": "21.0",
-    "p_5000": "20.0"
+    "p_5000": "20.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G32-PD",
@@ -90,7 +110,12 @@ const PRODUCTS = [
     "p_500": "22.0",
     "p_2000": "21.0",
     "p_5000": "20.0",
-    "ports": "PD"
+    "ports": "PD",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G32-QC",
@@ -107,7 +132,12 @@ const PRODUCTS = [
     "p_500": "22.0",
     "p_2000": "21.0",
     "p_5000": "20.0",
-    "ports": "QC3.0"
+    "ports": "QC3.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G32-Uni",
@@ -125,7 +155,12 @@ const PRODUCTS = [
     "p_2000": "21.0",
     "p_5000": "20.0",
     "ports": "2x USB-A, TF Card Slot",
-    "fm": "87.5-108.0 MHz"
+    "fm": "87.5-108.0 MHz",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G45",
@@ -149,10 +184,15 @@ const PRODUCTS = [
     "p_500": "57.0",
     "p_2000": "56.0",
     "p_5000": "55.0",
-    "nw": "94.8 g",
-    "gw": "140.0 g",
     "acc": "User Manual, 3.5mm Audio Cable",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_nw": "94.8 g",
+    "box_gw": "140.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G45-C",
@@ -176,10 +216,15 @@ const PRODUCTS = [
     "p_500": "57.0",
     "p_2000": "56.0",
     "p_5000": "55.0",
-    "nw": "94.8 g",
-    "gw": "140.0 g",
     "acc": "User Manual, 3.5mm Audio Cable",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_nw": "94.8 g",
+    "box_gw": "140.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G47",
@@ -191,7 +236,12 @@ const PRODUCTS = [
     "ports": "Dual USB-A",
     "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, TF Card Slot, U Disk Play, Power-off Memory",
     "dim": "70.5 x 46 x 98 mm",
-    "color": "Black"
+    "color": "Black",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G47-Knob",
@@ -203,7 +253,12 @@ const PRODUCTS = [
     "ports": "Dual USB-A",
     "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, U Disk Play, Power-off Memory",
     "dim": "70.5 x 46 x 98 mm",
-    "color": "Black"
+    "color": "Black",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G47-Uni",
@@ -216,7 +271,12 @@ const PRODUCTS = [
     "features": "Colorful Lights, 7 Color Modes, Lossless Sound, HD Mic, Fast Charge, TF Card Slot, U Disk Play, Power-off Memory",
     "dim": "70.5 x 46 x 98 mm",
     "color": "Black",
-    "fm": "87.5-108.0 MHz"
+    "fm": "87.5-108.0 MHz",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G52",
@@ -233,7 +293,12 @@ const PRODUCTS = [
     "color": "White",
     "selling": "🎧 Built-in Bluetooth Earphone​ - Private calls while driving (no extra headset needed)\n⚡ Fast Charging​ - QC3.0 18W (USB-A)\nBonus: Bluetooth 5.3 (10m) + FM playback",
     "desc": "Product Name: G52 Car FM Transmitter with Built-in Bluetooth earphone\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nBuilt-in Bluetooth earphone: easy private calls while driving\nOutput ports: 2\nUSB-A output: QC3.0 18W\nUSB-C output: 5V/3.0A\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G57",
@@ -250,7 +315,12 @@ const PRODUCTS = [
     "color": "White",
     "selling": "🎧 Built-in Bluetooth Earphone​ - Private calls while driving (no extra headset needed)\n⚡ Fast Charging​ - QC3.0 18W (USB-A)\nBonus: Bluetooth 5.3 (10m) + FM playback",
     "desc": "Product Name: G57 Car FM Transmitter with Built-in Bluetooth earphone\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nBuilt-in Bluetooth earphone: easy private calls while driving\nOutput ports: 2\nUSB-A output: QC3.0 18W\nUSB-C output: 5V/3.0A\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G61",
@@ -272,10 +342,15 @@ const PRODUCTS = [
     "p_500": "32.0",
     "p_2000": "31.0",
     "p_5000": "30.0",
-    "nw": "30.0 g",
-    "gw": "54.2 g",
     "acc": "User Manual",
-    "proto": "QC3.0"
+    "proto": "QC3.0",
+    "product_nw": "30.0 g",
+    "box_gw": "54.2 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G67",
@@ -295,9 +370,14 @@ const PRODUCTS = [
     "desc": "Product Name: G67-A1C Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-C1 output: PD 20W\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
     "p_2000": null,
     "p_5000": null,
-    "nw": "32.0 g",
-    "gw": "55.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "product_nw": "32.0 g",
+    "box_gw": "55.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G68",
@@ -320,9 +400,14 @@ const PRODUCTS = [
     "p_500": "21.0",
     "p_2000": "20.0",
     "p_5000": "19.0",
-    "nw": "40.2 g",
-    "gw": "72.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "product_nw": "40.2 g",
+    "box_gw": "72.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC01",
@@ -347,13 +432,14 @@ const PRODUCTS = [
     "p_500": "35.0",
     "p_2000": "34.0",
     "p_5000": "33.0",
-    "nw": "193.0 g",
-    "gw": "250.0 g",
     "acc": "User Manual x1",
     "product_dim": "74 x 122 x 38mm",
     "box_dim": "135 x 125 x 45mm",
     "carton_dim": "34 x 29.3 x 49.5cm",
-    "qty_carton": "50pcs/carton"
+    "qty_carton": "50pcs/carton",
+    "product_nw": "193.0 g",
+    "box_gw": "250.0 g",
+    "carton_gw": ""
   },
   {
     "model": "GC01-A1C",
@@ -378,14 +464,15 @@ const PRODUCTS = [
     "p_500": "35.0",
     "p_2000": "34.0",
     "p_5000": "33.0",
-    "nw": "193.0 g",
-    "gw": "250.0 g",
     "acc": "User Manual x1",
     "proto": "QC3.0",
     "product_dim": "74 x 122 x 38mm",
     "box_dim": "135 x 125 x 45mm",
     "carton_dim": "34 x 29.3 x 49.5cm",
-    "qty_carton": "50pcs/carton"
+    "qty_carton": "50pcs/carton",
+    "product_nw": "193.0 g",
+    "box_gw": "250.0 g",
+    "carton_gw": ""
   },
   {
     "model": "GC03",
@@ -402,7 +489,12 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "⚡ PD 36W USB-C Port​ - Fast charge compatible devices\n🔌1A2C Multi-Output​ - Charge three devices at once\n🛡Safe & Stylish​ - Fireproof build with ambient lighting",
-    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting"
+    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC03C",
@@ -419,7 +511,12 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "⚡ PD 36W USB-C Port​ - Fast charge compatible devices\n🔌1A2C Multi-Output​ - Charge three devices at once\n🛡Safe & Stylish​ - Fireproof build with ambient lighting",
-    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting"
+    "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC03S",
@@ -437,7 +534,12 @@ const PRODUCTS = [
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "⚡ PD 36W USB-C Port​ - Fast charge compatible devices\n🔌1A2C Multi-Output​ - Charge three devices at once\n🛡Safe & Stylish​ - Fireproof build with ambient lighting",
     "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting",
-    "cable": "1.3 m"
+    "cable": "1.3 m",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC03S-BlueLED",
@@ -455,7 +557,12 @@ const PRODUCTS = [
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "⚡ PD 36W USB-C Port​ - Fast charge compatible devices\n🔌1A2C Multi-Output​ - Charge three devices at once\n🛡Safe & Stylish​ - Fireproof build with ambient lighting",
     "desc": "Product Name: GC03 Car Charger PD36W(1A2C) \nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 51.5W\nOutput Port(s): 1 USB-A + 2 USB-C\nUSB-A1 Output: 5V/3.1A\nUSB-C1 Output: 5V/3.1A\nUSB-C2 Output: 5V/3A, 9V/3A, 12V/3A (36W Max)\nSocket Extension: 51.5W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Built-in ambient lighting",
-    "cable": "1.3 m"
+    "cable": "1.3 m",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC05",
@@ -479,14 +586,15 @@ const PRODUCTS = [
     "p_500": "38.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "81.4 g",
-    "gw": "113.2 g",
     "acc": "User Manual x1",
     "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0",
     "product_dim": "41 x 41 x 71mm\n46 x 20 x 65mm",
     "box_dim": "100 x 37 x 126mm",
     "carton_dim": "41.5 x 38.5 x 40cm",
-    "qty_carton": "120pcs/carton"
+    "qty_carton": "120pcs/carton",
+    "product_nw": "81.4 g",
+    "box_gw": "113.2 g",
+    "carton_gw": ""
   },
   {
     "model": "GC05-C",
@@ -509,13 +617,15 @@ const PRODUCTS = [
     "p_500": "23.0",
     "p_2000": "21.0",
     "p_5000": "20.0",
-    "nw": "81.4 g",
-    "gw": "113.2 g",
     "acc": "User Manual x1",
     "proto": "SCP/FCP/AFC, QC2.0, QC3.0, PD3.0",
     "box_dim": "70.5 x 46 x 98mm",
     "carton_dim": "50 x 21.5 x 38cm",
-    "qty_carton": "100pcs/carton"
+    "qty_carton": "100pcs/carton",
+    "product_nw": "",
+    "box_gw": "",
+    "carton_gw": "",
+    "product_dim": ""
   },
   {
     "model": "GC13-45W",
@@ -526,7 +636,12 @@ const PRODUCTS = [
     "ports": "Dual USB-A | USB-A + USB-C | 2x USB-A | 2x USB-C | PD | Retractable Cable",
     "features": "Voltage Monitor, Smart Protection, Universal for Cars",
     "dim": "108 x 37 x 139 mm",
-    "cable": "78CM"
+    "cable": "78CM",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC15",
@@ -550,13 +665,14 @@ const PRODUCTS = [
     "p_500": "39.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "114 g",
-    "gw": "152 g",
     "acc": "User Manual x1",
     "product_dim": "41.3 x 53 x 156.4mm",
     "box_dim": "73 x 45 x 182mm",
     "carton_dim": "47.5 x 38.2 x 31.5cm",
-    "qty_carton": "80pcs/carton"
+    "qty_carton": "80pcs/carton",
+    "product_nw": "114 g",
+    "box_gw": "152 g",
+    "carton_gw": ""
   },
   {
     "model": "GC16",
@@ -582,8 +698,11 @@ const PRODUCTS = [
     "acc": "User Manual x1",
     "product_dim": "97.5 x 59 x 36mm",
     "box_dim": "85 x 40 x 116.5mm",
-    "nw": "84g",
-    "gw": "105.8g"
+    "product_nw": "84g",
+    "box_gw": "105.8g",
+    "carton_gw": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC18",
@@ -611,8 +730,9 @@ const PRODUCTS = [
     "box_dim": "90 x 59 x 185mm",
     "carton_dim": "41.5 x 36.4 x 44.0cm",
     "qty_carton": "80pcs/carton",
-    "nw": "130.2g",
-    "gw": "251.8g"
+    "product_nw": "130.2g",
+    "box_gw": "251.8g",
+    "carton_gw": ""
   },
   {
     "model": "GC21",
@@ -630,7 +750,12 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "🦉 Cute Emoji Faces & Real-Time Voltage Display​ - Exclusive Cute Emojis, Switch Anytime You Like.\n⚡  Power 83W​ - a PD 65W Retractable Cable + 1A1C 18W for fast charging laptops and multiple devices.\n🛡Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display"
+    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC21-FM",
@@ -650,7 +775,12 @@ const PRODUCTS = [
     "selling": "🦉 Cute Emoji Faces & Real-Time Voltage Display​ - Exclusive Cute Emojis, Switch Anytime You Like.\n⚡  Power 83W​ - a PD 65W Retractable Cable + 1A1C 18W for fast charging laptops and multiple devices.\n🛡Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
     "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display",
     "bt": "BT 5.4",
-    "fm": "87.5 - 108.0 MHz"
+    "fm": "87.5 - 108.0 MHz",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC21-PD45W",
@@ -668,7 +798,12 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "safety": "OCP, OVP, OTP, Short Circuit Protection",
     "selling": "🦉 Cute Emoji Faces & Real-Time Voltage Display​ - Exclusive Cute Emojis, Switch Anytime You Like.\n⚡  Power 83W​ - a PD 65W Retractable Cable + 1A1C 18W for fast charging laptops and multiple devices.\n🛡Safe & Smart​ - Built-in car battery voltage display and comprehensive safety protections.",
-    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display"
+    "desc": "Product Name: GC21 Emoji Car Charger with a PD65W Retractable Cable\nPower Input Voltage: DC 12V-24V\nTotal Output Power: Max 83W\nOutput Port(s): 1 USB-A + 1 USB-C + 1 PD65W Retractable Cable\nUSB-A Output: 5V/3.6A\nUSB-C Output: 5V/3.6A\nPD65W Retractable Cable Output: 5V/3A, 9V/3A, 12V/3A, 15V/3A, 20V/3.25A (Max 65W)\n\nA + C Total Output: 5V/3.6A 18W Shared\n\nSocket Extension Output: 83W Max\nFast Charge Protocols: PD 3.0, PPS, AFC, FCP, SCP\nDesign Material: Fireproof PC + ABS\nSafety Protections: OCP, OVP, OTP, Short Circuit Protection\nCertifications: CE, FCC, RoHS\nOthers Features: Cute Emoji faces & Car Battery Voltage LED Display",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC24",
@@ -694,8 +829,11 @@ const PRODUCTS = [
     "acc": "User Manual x1",
     "product_dim": "52 x 34 x 128.8mm",
     "box_dim": "71 x 151 x 38mm",
-    "nw": "75.6g",
-    "gw": "109.6g"
+    "product_nw": "75.6g",
+    "box_gw": "109.6g",
+    "carton_gw": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC24-Boost",
@@ -718,7 +856,12 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "acc": "User Manual x1"
+    "acc": "User Manual x1",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC25",
@@ -728,7 +871,12 @@ const PRODUCTS = [
     "power": "PD 65W | Total 65W+18W",
     "ports": "USB-A + USB-C | PD | Retractable Cable",
     "features": "Colorful Lights, Smart Protection, Universal for Cars",
-    "cable": "78CM"
+    "cable": "78CM",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "ZNB02",
@@ -751,13 +899,14 @@ const PRODUCTS = [
     "p_500": "38.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "125.0 g",
-    "gw": "165.0 g",
     "acc": "User Manual x1",
     "product_dim": "40 x 50 x 120mm",
     "box_dim": "48 x 86 x 130mm",
     "carton_dim": "47 x 35 x 38cm",
-    "qty_carton": "100pcs/carton"
+    "qty_carton": "100pcs/carton",
+    "product_nw": "125.0 g",
+    "box_gw": "165.0 g",
+    "carton_gw": ""
   },
   {
     "model": "ZNB02-LED",
@@ -780,13 +929,14 @@ const PRODUCTS = [
     "p_500": "38.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "125.0 g",
-    "gw": "165.0 g",
     "acc": "User Manual x1",
     "product_dim": "40 x 50 x 120mm",
     "box_dim": "48 x 86 x 130mm",
     "carton_dim": "47 x 35 x 38cm",
-    "qty_carton": "100pcs/carton"
+    "qty_carton": "100pcs/carton",
+    "product_nw": "125.0 g",
+    "box_gw": "165.0 g",
+    "carton_gw": ""
   },
   {
     "model": "ZNB03S",
@@ -810,13 +960,14 @@ const PRODUCTS = [
     "p_500": "16.0",
     "p_2000": "15.0",
     "p_5000": "14.0",
-    "nw": "131.0 g",
-    "gw": "175.0 g",
     "acc": "1. User Manual x1\n2. Fuse x1\n3. 3M Sticker x1",
     "product_dim": "96 x 32 x 69mm",
     "box_dim": "153 x 40 x 114mm",
     "carton_dim": "46.5 x 34 x 31cm",
-    "qty_carton": "50pcs/carton"
+    "qty_carton": "50pcs/carton",
+    "product_nw": "131.0 g",
+    "box_gw": "175.0 g",
+    "carton_gw": ""
   },
   {
     "model": "GR01",
@@ -841,10 +992,15 @@ const PRODUCTS = [
     "p_500": "26.0",
     "p_2000": "25.0",
     "p_5000": "24.0",
-    "nw": "42.4 g",
-    "gw": "86.4 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "product_nw": "42.4 g",
+    "box_gw": "86.4 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR03",
@@ -869,10 +1025,15 @@ const PRODUCTS = [
     "p_500": "21.0",
     "p_2000": "20.0",
     "p_5000": "19.0",
-    "nw": "16.5 g",
-    "gw": "35.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "product_nw": "16.5 g",
+    "box_gw": "35.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR07",
@@ -898,10 +1059,15 @@ const PRODUCTS = [
     "p_500": "21.0",
     "p_2000": "20.0",
     "p_5000": "19.0",
-    "nw": "28.0 g",
-    "gw": "52.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "product_nw": "28.0 g",
+    "box_gw": "52.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR08",
@@ -918,11 +1084,16 @@ const PRODUCTS = [
     "cable": "1.5m",
     "p_2000": "10.0",
     "p_5000": "8.0",
-    "nw": "25.0 g",
     "acc": "User Manual, 3.5mm Audio Cable",
     "proto": "SBC, A2DP, HFP, HSP",
     "p_sample": "12.0",
-    "p_500": "11.0"
+    "p_500": "11.0",
+    "product_nw": "25.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR11",
@@ -944,10 +1115,15 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "30.7 g",
-    "gw": "64.5 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, A2DP, HFP, HSP, AVRCP"
+    "proto": "SBC, A2DP, HFP, HSP, AVRCP",
+    "product_nw": "30.7 g",
+    "box_gw": "64.5 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR11-QC",
@@ -969,10 +1145,15 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "30.7 g",
-    "gw": "64.5 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, aptX HD, aptX LL/Adaptive"
+    "proto": "SBC, aptX HD, aptX LL/Adaptive",
+    "product_nw": "30.7 g",
+    "box_gw": "64.5 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR11-Wired-JL",
@@ -994,10 +1175,15 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "30.7 g",
-    "gw": "64.5 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, A2DP, HFP, HSP, AVRCP"
+    "proto": "SBC, A2DP, HFP, HSP, AVRCP",
+    "product_nw": "30.7 g",
+    "box_gw": "64.5 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR11-Wired-QC",
@@ -1019,10 +1205,15 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "30.7 g",
-    "gw": "64.5 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "SBC, aptX HD, aptX LL/Adaptive"
+    "proto": "SBC, aptX HD, aptX LL/Adaptive",
+    "product_nw": "30.7 g",
+    "box_gw": "64.5 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR13",
@@ -1048,10 +1239,15 @@ const PRODUCTS = [
     "p_500": "23.0",
     "p_2000": "22.0",
     "p_5000": "21.0",
-    "nw": "28.0 g",
-    "gw": "52.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "product_nw": "28.0 g",
+    "box_gw": "52.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR15",
@@ -1076,7 +1272,12 @@ const PRODUCTS = [
     "p_sample": "90.0",
     "p_500": "90.0",
     "p_2000": "85.0",
-    "p_5000": "80.0"
+    "p_5000": "80.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR16",
@@ -1100,7 +1301,12 @@ const PRODUCTS = [
     "p_sample": "38.0",
     "p_500": "37.0",
     "p_2000": "36.0",
-    "p_5000": "35.0"
+    "p_5000": "35.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR18",
@@ -1118,7 +1324,12 @@ const PRODUCTS = [
     "audio": "SBC, AAC",
     "rxtx": "RX/TX",
     "desc": "GR18 2-in-1 Bluetooth Transmitter & Receiver\nBluetooth Version: 5.4\nBluetooth Profiles: A2DP, AVRCP, HFP/HSP\nAudio Codecs: SBC, AAC\n\nInterfaces: 3.5mm Aux Jack (for audio in/out), USB-C (for charging)\nWorking Modes: TX (Transmitter) / RX (Receiver) dual mode, both supporting 1-to-2 simultaneous Bluetooth connections\nWireless Range: 10m (open space, line-of-sight)\nSupported Audio Formats: MP3, WMA\n\nBattery Capacity: Built-in 300mAh rechargeable lithium battery\nBattery Life\nRX Mode Standby Time: up to 15hrs\nTX Mode Standby Time: up to 11hrs\nCharging Time: Approx. 2 hours\nWorking Voltage: DC 5V\nUSB-C Input: 5V / 1A (Max)\n\nCertifications: CE, FCC, RoHS\nOther Features:",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR31",
@@ -1130,7 +1341,12 @@ const PRODUCTS = [
     "signal": "10M",
     "dim": "70 x 21 x 128 mm",
     "cable": "1.7m",
-    "proto": "SBC, A2DP, HFP, HSP, AVRCP"
+    "proto": "SBC, A2DP, HFP, HSP, AVRCP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ01",
@@ -1152,9 +1368,14 @@ const PRODUCTS = [
     "p_500": "25.0",
     "p_2000": "24.0",
     "p_5000": "23.0",
-    "nw": "29.8 g",
-    "gw": "54.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "product_nw": "29.8 g",
+    "box_gw": "54.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ03",
@@ -1177,9 +1398,14 @@ const PRODUCTS = [
     "p_500": "18.0",
     "p_2000": "17.0",
     "p_5000": "16.0",
-    "nw": "29.8 g",
-    "gw": "54.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "product_nw": "29.8 g",
+    "box_gw": "54.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ03-PD",
@@ -1202,10 +1428,15 @@ const PRODUCTS = [
     "p_500": "18.0",
     "p_2000": "17.0",
     "p_5000": "16.0",
-    "nw": "29.8 g",
-    "gw": "54.0 g",
     "acc": "User Manual",
-    "power": "PD 5V/3.0A, 9V/3.0A, 12V/2.5A •  USB-A Output Port: 5V/2.4A •   | USB-A 5V/2.4A"
+    "power": "PD 5V/3.0A, 9V/3.0A, 12V/2.5A •  USB-A Output Port: 5V/2.4A •   | USB-A 5V/2.4A",
+    "product_nw": "29.8 g",
+    "box_gw": "54.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ07",
@@ -1225,7 +1456,12 @@ const PRODUCTS = [
     "p_sample": "18.0",
     "p_500": "17.0",
     "p_2000": "16.0",
-    "p_5000": "15.0"
+    "p_5000": "15.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ08-DualPD35W",
@@ -1248,9 +1484,14 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "36.0 g",
-    "gw": "65.0 g",
-    "acc": "User Manual"
+    "acc": "User Manual",
+    "product_nw": "36.0 g",
+    "box_gw": "65.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ11",
@@ -1270,7 +1511,12 @@ const PRODUCTS = [
     "p_sample": "45.0",
     "p_500": "44.0",
     "p_2000": "43.0",
-    "p_5000": "42.0"
+    "p_5000": "42.0",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GZ11-C",
@@ -1298,8 +1544,9 @@ const PRODUCTS = [
     "box_dim": "75 x 54 x 115mm",
     "carton_dim": "57 x 25 x 39.5cm",
     "qty_carton": "100pcs/carton",
-    "nw": "72.2g",
-    "gw": "104g"
+    "product_nw": "72.2g",
+    "box_gw": "104g",
+    "carton_gw": ""
   },
   {
     "model": "AP06",
@@ -1322,9 +1569,14 @@ const PRODUCTS = [
     "p_500": "52.0",
     "p_2000": "51.0",
     "p_5000": "50.0",
-    "nw": "90.0 g",
-    "gw": "130.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable"
+    "acc": "User Manual, 3.5mm Audio Cable",
+    "product_nw": "90.0 g",
+    "box_gw": "130.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "M7",
@@ -1342,7 +1594,12 @@ const PRODUCTS = [
     "color": "Black",
     "selling": "📺 LCD Screen Display​ - Clear visual interface for easy control\n🔌 Triple USB Charging Ports​ - Charge 3 devices simultaneously\n🎵 Versatile Playback Options​ - USB/TF/AUX/Bluetooth/FM all-in-one\nBonus: Bluetooth 5.3 stable connection (10m range)",
     "desc": "Product Name: M7 Car FM Transmitter with LCD Screen\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nUSB-A3 output: 5V/2.1A\nTF card Slot: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
-    "proto": "A2DP"
+    "proto": "A2DP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC07",
@@ -1363,9 +1620,13 @@ const PRODUCTS = [
     "p_500": null,
     "p_2000": null,
     "p_5000": null,
-    "nw": "19.0 g",
     "acc": "OEM Only,MOQ: 2000pcs",
-    "product_dim": "28 x 67.6mm"
+    "product_dim": "28 x 67.6mm",
+    "product_nw": "19.0 g",
+    "carton_gw": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05",
@@ -1384,9 +1645,14 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
-    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable"
+    "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05-LED",
@@ -1405,11 +1671,16 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
     "ports": "3.5mm AUX",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05-LED-JL",
@@ -1428,11 +1699,16 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
     "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Long Battery Life"
+    "features": "TF Card Slot, Stereo, Smart Chip, Long Battery Life",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05-LED-QL",
@@ -1451,12 +1727,17 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
     "ports": "Type-C",
     "features": "TF Card Slot, Stereo, Smart Chip, Multi-point, Long Battery Life",
-    "chip": "Actions (炬力)"
+    "chip": "Actions (炬力)",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05-Wired-JL",
@@ -1475,11 +1756,16 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
     "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life"
+    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR05-Wired-JL2",
@@ -1498,11 +1784,16 @@ const PRODUCTS = [
     "p_500": "37.0",
     "p_2000": "36.0",
     "p_5000": "35.0",
-    "nw": "21.5 g",
-    "gw": "60.0 g",
     "acc": "User Manual, 3.5mm Audio Cable, USB Charging Cable",
     "ports": "Type-C",
-    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life"
+    "features": "TF Card Slot, Stereo, Smart Chip, Bendable Plug, Long Battery Life",
+    "product_nw": "21.5 g",
+    "box_gw": "60.0 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G21",
@@ -1514,7 +1805,12 @@ const PRODUCTS = [
     "ports": "3x USB-A, 3.5mm AUX, TF Card Slot",
     "signal": "10-15 m",
     "selling": "📻 DAB+FM Dual Band​ (174-240MHz + 87.5-108MHz) - Enhanced radio coverage\n🔥 LED Screen Display​ - Clear visual interface\n🚀 QC3.0 18W Fast Charging​ - Ultra-fast power delivery",
-    "desc": "Product Name: G21 Car FM Transmitter with LED Screen & \nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nUSB-A3 output: QC3.0 18W\nTF card Slot: 1\n3.5mm Aux Input Port: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFrequency Range: DAB Band III (174-240MHz); FM 87.5-108MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters"
+    "desc": "Product Name: G21 Car FM Transmitter with LED Screen & \nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/2.1A\nUSB-A3 output: QC3.0 18W\nTF card Slot: 1\n3.5mm Aux Input Port: 1\n3.5mm Aux Output Port: 1\nMusic Format: MP3/WMA\nFrequency Range: DAB Band III (174-240MHz); FM 87.5-108MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "G63",
@@ -1538,8 +1834,9 @@ const PRODUCTS = [
     "box_dim": "108 x 165 x 85mm",
     "carton_dim": "44.5 x 34 x 56cm",
     "qty_carton": "50pcs/carton",
-    "nw": "133.8g",
-    "gw": "215.9g"
+    "product_nw": "133.8g",
+    "box_gw": "215.9g",
+    "carton_gw": ""
   },
   {
     "model": "G63-Remote",
@@ -1564,8 +1861,9 @@ const PRODUCTS = [
     "box_dim": "108 x 165 x 85mm",
     "carton_dim": "44.5 x 34 x 56cm",
     "qty_carton": "50pcs/carton",
-    "nw": "133.8g",
-    "gw": "215.9g"
+    "product_nw": "133.8g",
+    "box_gw": "215.9g",
+    "carton_gw": ""
   },
   {
     "model": "GC06",
@@ -1590,8 +1888,11 @@ const PRODUCTS = [
     "acc": "User Manual x1",
     "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
     "box_dim": "129 x 40 x 68mm",
-    "nw": "193.0g",
-    "gw": "250.0g"
+    "product_nw": "193.0g",
+    "box_gw": "250.0g",
+    "carton_gw": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC06-35W",
@@ -1618,8 +1919,11 @@ const PRODUCTS = [
     "proto": "QC3.0",
     "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
     "box_dim": "129 x 40 x 68mm",
-    "nw": "193.0g",
-    "gw": "250.0g"
+    "product_nw": "193.0g",
+    "box_gw": "250.0g",
+    "carton_gw": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC06-PD65W",
@@ -1646,8 +1950,11 @@ const PRODUCTS = [
     "proto": "QC3.0",
     "product_dim": "130 x 68 x 40mm\n46 x 20 x 65mm",
     "box_dim": "129 x 40 x 68mm",
-    "nw": "193.0g",
-    "gw": "250.0g"
+    "product_nw": "193.0g",
+    "box_gw": "250.0g",
+    "carton_gw": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR21",
@@ -1664,7 +1971,12 @@ const PRODUCTS = [
     "audio": "SBC, AAC",
     "rxtx": "RX/TX",
     "desc": "GR21 2-in-1 Bluetooth Transmitter & Receiver with 3.5mm AUX Cable\nBluetooth Version: 5.4 \nBluetooth Profiles: A2DP, AVRCP, HFP/HSP\nAudio Codecs: SBC, AAC\n\nInterfaces: 3.5 mm Audio Plug with 4 cm cable, USB-C (for charging)\nWorking Modes: TX (Transmitter) / RX (Receiver) dual mode, both supporting 1-to-2 simultaneous Bluetooth connections\nWireless Range: 10m (open space, line-of-sight)\nSupported Audio Formats: MP3, WMA\n\nBattery Capacity: Built-in 300mAh rechargeable lithium battery\nBattery Life\nRX Mode Standby Time: up to 15hrs\nTX Mode Standby Time: up to11hrs\nCharging Time: Approx. 2 hours\nWorking Voltage: DC 5V\nUSB-C Input: 5V / 1A (Max)\n\nCertifications: CE, FCC, RoHS\nOther Features:",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GR24",
@@ -1681,7 +1993,12 @@ const PRODUCTS = [
     "audio": "SBC, AAC",
     "rxtx": "RX/TX",
     "desc": "GR24 2-in-1 Bluetooth Transmitter & Receiver with 3.5mm AUX\nBluetooth Version: 5.4 \nBluetooth Profiles: A2DP, AVRCP, HFP/HSP\nAudio Codecs: SBC, AAC\n\nInterfaces: 3.5 mm Audio Plug with 4 cm cable, USB-C (for charging)\nWorking Modes: TX (Translmitter) / RX (Receiver) dual mode, both supporting 1-to-2 simultaneous Bluetooth connections\nWireless Range: 10m (open space, line-of-sight)\nSupported Audio Formats: MP3, WMA\n\nBattery Capacity: Built-in 300mAh rechargeable lithium battery\nBattery Life\nRX Mode Standby Time: up to 15hrs\nTX Mode Standby Time: up to11hrs\nCharging Time: Approx. 2 hours\nWorking Voltage: DC 5V\nUSB-C Input: 5V / 1A (Max)\n\nCertifications: CE, FCC, RoHS\nOther Features:",
-    "proto": "A2DP, AVRCP, HFP/HSP"
+    "proto": "A2DP, AVRCP, HFP/HSP",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "model": "GC11",
@@ -1700,8 +2017,9 @@ const PRODUCTS = [
     "box_dim": "134 x 47 x 155mm",
     "carton_dim": "51.5 x 30.5 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "216.2g",
-    "gw": "257g"
+    "product_nw": "216.2g",
+    "box_gw": "257g",
+    "carton_gw": ""
   },
   {
     "model": "GC11S",
@@ -1726,8 +2044,9 @@ const PRODUCTS = [
     "box_dim": "134 x 47 x 155mm",
     "carton_dim": "51.5 x 30.5 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "216.2g",
-    "gw": "257g"
+    "product_nw": "216.2g",
+    "box_gw": "257g",
+    "carton_gw": ""
   },
   {
     "model": "GC11-Std",
@@ -1752,8 +2071,9 @@ const PRODUCTS = [
     "box_dim": "134 x 47 x 155mm",
     "carton_dim": "51.5 x 30.5 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "216.2g",
-    "gw": "257g"
+    "product_nw": "216.2g",
+    "box_gw": "257g",
+    "carton_gw": ""
   },
   {
     "model": "GC11-Pro",
@@ -1777,8 +2097,9 @@ const PRODUCTS = [
     "box_dim": "134 x 47 x 155mm",
     "carton_dim": "51.5 x 30.5 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "216.2g",
-    "gw": "257g"
+    "product_nw": "216.2g",
+    "box_gw": "257g",
+    "carton_gw": ""
   },
   {
     "model": "GC11-Pro-V2",
@@ -1800,8 +2121,9 @@ const PRODUCTS = [
     "box_dim": "134 x 47 x 155mm",
     "carton_dim": "51.5 x 30.5 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "216.2g",
-    "gw": "257g"
+    "product_nw": "216.2g",
+    "box_gw": "257g",
+    "carton_gw": ""
   },
   {
     "model": "ZNB01",
@@ -1820,8 +2142,9 @@ const PRODUCTS = [
     "box_dim": "85 x 85 x 82mm",
     "carton_dim": "38 x 38 x 38cm",
     "qty_carton": "50pcs/carton",
-    "nw": "155.0g",
-    "gw": "190.0g"
+    "product_nw": "155.0g",
+    "box_gw": "190.0g",
+    "carton_gw": ""
   },
   {
     "category": "Car Charger",
@@ -1835,8 +2158,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1844,7 +2165,14 @@ const PRODUCTS = [
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
     "model": "GC08 PD+L",
     "power": "Total 65W+25W",
-    "ports": "PD 65W + Lightning 12W | Retractable Cable"
+    "ports": "PD 65W + Lightning 12W | Retractable Cable",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "category": "Car Charger",
@@ -1858,8 +2186,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1867,7 +2193,14 @@ const PRODUCTS = [
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
     "model": "GC08 PD+C",
     "power": "Total 65W+25W",
-    "ports": "PD 65W + USB-C 18W | Retractable Cable"
+    "ports": "PD 65W + USB-C 18W | Retractable Cable",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "category": "Car Charger",
@@ -1881,8 +2214,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1890,7 +2221,14 @@ const PRODUCTS = [
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
     "model": "GC08 2PD",
     "power": "Total 65W+65W",
-    "ports": "Dual PD 65W | Retractable Cable"
+    "ports": "Dual PD 65W | Retractable Cable",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1904,8 +2242,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1916,7 +2252,14 @@ const PRODUCTS = [
     "ports": "PD 65W + Lightning 12W | Retractable Cable",
     "bt": "BT 5.4",
     "fm": "87.5-108MHz",
-    "selling": "⚡ PD 65W Fast Charge + Lightning Cable\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch"
+    "selling": "⚡ PD 65W Fast Charge + Lightning Cable\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1930,8 +2273,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1942,7 +2283,14 @@ const PRODUCTS = [
     "ports": "PD 65W + USB-C 18W | Retractable Cable",
     "bt": "BT 5.4",
     "fm": "87.5-108MHz",
-    "selling": "⚡ PD 65W Fast Charge + USB-C Cable\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch"
+    "selling": "⚡ PD 65W Fast Charge + USB-C Cable\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1956,8 +2304,6 @@ const PRODUCTS = [
     "p_500": "45.0",
     "p_2000": "43.0",
     "p_5000": "42.0",
-    "nw": "143.8 g",
-    "gw": "178 g",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1968,6 +2314,13 @@ const PRODUCTS = [
     "ports": "Dual PD 65W | Retractable Cable",
     "bt": "BT 5.4",
     "fm": "87.5-108MHz",
-    "selling": "⚡ Dual PD 65W Fast Charge\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch"
+    "selling": "⚡ Dual PD 65W Fast Charge\n🎵 Bluetooth 5.4 FM Transmitter\n🌈 7-Color LED Light with One-Touch Switch",
+    "product_nw": "143.8 g",
+    "box_gw": "178 g",
+    "carton_gw": "",
+    "product_dim": "",
+    "box_dim": "",
+    "carton_dim": "",
+    "qty_carton": ""
   }
 ];
