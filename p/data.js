@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-12-v21';
+const DATA_VERSION = '2026-09-12-v22';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -758,11 +758,11 @@ const PRODUCTS = [
     "qty_carton": ""
   },
   {
-    "model": "GC21-Z",
+"model": "GC21-Z",
     "category": "Car Charger",
     "type_cn": "车充表情款",
     "type_en": "Car Charger",
-    "image": "images/GC21.jpg",
+    "image": "images/GC21-Z.png",
     "power": "Total 83W",
     "ports": "Retractable Cable",
     "features": "Hands-free Call, Universal for Cars, FM Transmit",
