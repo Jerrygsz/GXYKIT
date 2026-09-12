@@ -1631,7 +1631,7 @@ body {
   <div class="cover-content">
     <div class="cover-logo">G</div>
     <h1 class="cover-title">GXYKIT Product Catalog</h1>
-    <p class="cover-subtitle">Shenzhen Guangxinyi Electronics Co., Ltd.</p>
+    <p class="cover-subtitle">Shenzhen GXY Electronic Co., Ltd.</p>
     <div class="cover-stats">
       <div class="cover-stat">
         <div class="cover-stat-num" id="stat-products">0</div>
@@ -2729,7 +2729,7 @@ function generateQuoteHTML() {
     const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
     rows += '<tr><td>' + (idx + 1) + '</td><td>' + item.model + '</td><td>' + desc + '</td><td>' + item.qty + '</td><td>' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '</td><td>' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '</td></tr>';
   });
-  return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen Guangxinyi Electronics Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
+  return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen GXY Electronic Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
     '<div class="quote-preview-info"><div class="quote-preview-info-item"><span class="quote-preview-info-label">Customer</span><span class="quote-preview-info-value">' + (quoteCustomer.name || '-') + '</span></div>' +
     '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Company</span><span class="quote-preview-info-value">' + (quoteCustomer.company || '-') + '</span></div>' +
     '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Email</span><span class="quote-preview-info-value">' + (quoteCustomer.email || '-') + '</span></div>' +
@@ -2741,7 +2741,7 @@ function generateQuoteHTML() {
 
 function copyQuoteText() {
   const date = quoteCustomer.date || new Date().toISOString().slice(0, 10);
-  let text = 'GXYKIT Quotation\nShenzhen Guangxinyi Electronics Co., Ltd.\n\n';
+  let text = 'GXYKIT Quotation\nShenzhen GXY Electronic Co., Ltd.\n\n';
   text += 'Customer: ' + (quoteCustomer.name || '-') + '\nCompany: ' + (quoteCustomer.company || '-') + '\nEmail: ' + (quoteCustomer.email || '-') + '\nDate: ' + date + '\n\n';
   text += '#\tModel\tDescription\tQty\tUnit Price\tSubtotal\n';
   let total = 0;
