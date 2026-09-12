@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-12-v32"></script>
+  <script src="data.js?v=2026-09-13-v34"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -2847,7 +2847,7 @@ function generateQuoteHTML() {
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
-    const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
+    const desc = (p.desc || '').replace(/\n/g, '<br>');
     rows += '<tr><td>' + (idx + 1) + '</td><td>' + item.model + '</td><td>' + desc + '</td><td>' + item.qty + '</td><td>' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '</td><td>' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '</td></tr>';
   });
   return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen GXY Electronic Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
@@ -2872,7 +2872,7 @@ function copyQuoteText() {
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
-    const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
+    const desc = (p.desc || '').replace(/\n/g, ' ');
     text += (idx + 1) + '\t' + item.model + '\t' + desc + '\t' + item.qty + '\t' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '\t' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '\n';
   });
   text += '\nTotal: RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '\n';
@@ -2892,7 +2892,7 @@ function exportQuoteCSV() {
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
-    const desc = (p.type_en || p.type_cn || p.category || '').replace(/,/g, ';');
+    const desc = (p.desc || '').replace(/\n/g, ' ').replace(/,/g, ';');
     csv += '"' + item.model + '","' + desc + '",' + item.qty + ',"' + item.priceTier + '",' + (unitPrice || '') + ',' + (subtotal || '') + '\n';
   });
   csv += '"","","","","Total:",' + total.toFixed(2) + '\n';
