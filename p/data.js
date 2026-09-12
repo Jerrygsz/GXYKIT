@@ -1,4 +1,4 @@
-﻿const DATA_VERSION = '2026-09-12-v32';
+const DATA_VERSION = '2026-09-12-v33';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -20,7 +20,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G15",
@@ -42,7 +43,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G24",
@@ -72,7 +74,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G32",
@@ -93,7 +96,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G32-PD",
@@ -115,7 +119,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G32-QC",
@@ -137,7 +142,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G32-Uni",
@@ -160,7 +166,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G45",
@@ -192,7 +199,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G45-C",
@@ -224,7 +232,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G47",
@@ -245,7 +254,8 @@ const PRODUCTS = [
     "p_sample": "22.0",
     "p_500": "21.0",
     "p_2000": "20.0",
-    "p_5000": "19.0"
+    "p_5000": "19.0",
+    "year": ""
   },
   {
     "model": "G47-Knob",
@@ -266,7 +276,8 @@ const PRODUCTS = [
     "p_sample": "22.0",
     "p_500": "21.0",
     "p_2000": "20.0",
-    "p_5000": "19.0"
+    "p_5000": "19.0",
+    "year": ""
   },
   {
     "model": "G47-Uni",
@@ -288,7 +299,8 @@ const PRODUCTS = [
     "p_sample": "22.0",
     "p_500": "21.0",
     "p_2000": "20.0",
-    "p_5000": "19.0"
+    "p_5000": "19.0",
+    "year": ""
   },
   {
     "model": "G52",
@@ -310,7 +322,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G57",
@@ -332,7 +345,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G61",
@@ -362,7 +376,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G67",
@@ -391,7 +406,8 @@ const PRODUCTS = [
     "p_sample": "21.0",
     "p_500": "20.0",
     "p_2000": "19.0",
-    "p_5000": "18.0"
+    "p_5000": "18.0",
+    "year": ""
   },
   {
     "model": "G68",
@@ -421,7 +437,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC01",
@@ -453,7 +470,8 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "193.0 g",
     "box_gw": "250.0 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC01-A1C",
@@ -486,7 +504,8 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "193.0 g",
     "box_gw": "250.0 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC03",
@@ -508,7 +527,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC03C",
@@ -530,7 +550,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC03S",
@@ -553,7 +574,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC03S-BlueLED",
@@ -576,7 +598,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC05",
@@ -608,7 +631,8 @@ const PRODUCTS = [
     "qty_carton": "120pcs/carton",
     "product_nw": "81.4 g",
     "box_gw": "113.2 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC05-C",
@@ -639,7 +663,8 @@ const PRODUCTS = [
     "product_nw": "",
     "box_gw": "",
     "carton_gw": "",
-    "product_dim": ""
+    "product_dim": "",
+    "year": ""
   },
   {
     "model": "GC13-45W",
@@ -655,7 +680,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC15",
@@ -686,7 +712,8 @@ const PRODUCTS = [
     "qty_carton": "80pcs/carton",
     "product_nw": "114 g",
     "box_gw": "152 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC16",
@@ -716,7 +743,8 @@ const PRODUCTS = [
     "box_gw": "105.8g",
     "carton_gw": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC18",
@@ -746,7 +774,8 @@ const PRODUCTS = [
     "qty_carton": "80pcs/carton",
     "product_nw": "130.2g",
     "box_gw": "251.8g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC21",
@@ -773,10 +802,11 @@ const PRODUCTS = [
     "p_sample": "50.0",
     "p_500": "45.0",
     "p_2000": "42.0",
-    "p_5000": "41.0"
+    "p_5000": "41.0",
+    "year": ""
   },
   {
-"model": "GC21-Z",
+    "model": "GC21-Z",
     "category": "Car Charger",
     "type_cn": "车充表情款",
     "type_en": "Car Charger",
@@ -802,7 +832,8 @@ const PRODUCTS = [
     "p_sample": "60.0",
     "p_500": "53.0",
     "p_2000": "52.0",
-    "p_5000": "52.0"
+    "p_5000": "52.0",
+    "year": ""
   },
   {
     "model": "GC24",
@@ -832,7 +863,8 @@ const PRODUCTS = [
     "box_gw": "109.6g",
     "carton_gw": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC24-Boost",
@@ -860,7 +892,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC25",
@@ -875,7 +908,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "ZNB02",
@@ -905,7 +939,8 @@ const PRODUCTS = [
     "qty_carton": "100pcs/carton",
     "product_nw": "125.0 g",
     "box_gw": "165.0 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "ZNB02-LED",
@@ -935,7 +970,8 @@ const PRODUCTS = [
     "qty_carton": "100pcs/carton",
     "product_nw": "125.0 g",
     "box_gw": "165.0 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "ZNB03S",
@@ -966,7 +1002,8 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "131.0 g",
     "box_gw": "175.0 g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GR01",
@@ -999,7 +1036,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR03",
@@ -1032,7 +1070,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR07",
@@ -1066,7 +1105,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR08",
@@ -1092,7 +1132,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR11",
@@ -1122,7 +1163,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR13",
@@ -1156,7 +1198,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR15",
@@ -1186,7 +1229,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR16",
@@ -1215,7 +1259,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR18",
@@ -1238,7 +1283,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR31",
@@ -1255,7 +1301,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ01",
@@ -1284,7 +1331,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ03",
@@ -1314,7 +1362,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ03-PD",
@@ -1345,7 +1394,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ07",
@@ -1370,7 +1420,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ08-DualPD35W",
@@ -1400,7 +1451,8 @@ const PRODUCTS = [
     "p_sample": "25.0",
     "p_500": "24.0",
     "p_2000": "23.0",
-    "p_5000": "22.0"
+    "p_5000": "22.0",
+    "year": ""
   },
   {
     "model": "GZ11",
@@ -1425,7 +1477,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GZ11-C",
@@ -1455,7 +1508,8 @@ const PRODUCTS = [
     "qty_carton": "100pcs/carton",
     "product_nw": "72.2g",
     "box_gw": "104g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "AP06",
@@ -1485,7 +1539,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "M7",
@@ -1508,7 +1563,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC07",
@@ -1535,7 +1591,8 @@ const PRODUCTS = [
     "p_sample": "20.0",
     "p_500": "19.0",
     "p_2000": "18.0",
-    "p_5000": "17.5"
+    "p_5000": "17.5",
+    "year": ""
   },
   {
     "model": "GR05",
@@ -1561,7 +1618,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GR05-Wired-JL",
@@ -1589,7 +1647,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G21",
@@ -1606,7 +1665,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "G63",
@@ -1632,7 +1692,8 @@ const PRODUCTS = [
     "p_sample": "43.0",
     "p_500": "42.0",
     "p_2000": "41.0",
-    "p_5000": "40.0"
+    "p_5000": "40.0",
+    "year": ""
   },
   {
     "model": "G63-Remote",
@@ -1659,7 +1720,8 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "133.8g",
     "box_gw": "215.9g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "model": "GC06",
@@ -1688,7 +1750,8 @@ const PRODUCTS = [
     "box_gw": "250.0g",
     "carton_gw": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC06-35W",
@@ -1719,7 +1782,8 @@ const PRODUCTS = [
     "box_gw": "250.0g",
     "carton_gw": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "model": "GC06-PD65W",
@@ -1750,10 +1814,11 @@ const PRODUCTS = [
     "box_gw": "250.0g",
     "carton_gw": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
-"model": "GC11",
+    "model": "GC11",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1771,10 +1836,11 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "216.2g",
     "box_gw": "257g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
-"model": "GC11S",
+    "model": "GC11S",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1798,10 +1864,11 @@ const PRODUCTS = [
     "p_sample": "70.0",
     "p_500": "70.0",
     "p_2000": "68.0",
-    "p_5000": "65.0"
+    "p_5000": "65.0",
+    "year": ""
   },
-{
-"model": "GC11-Pro",
+  {
+    "model": "GC11-Pro",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
@@ -1824,9 +1891,10 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "216.2g",
     "box_gw": "257g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
-{
+  {
     "model": "ZNB01",
     "category": "Car Charger",
     "type_cn": "车载充电器",
@@ -1845,7 +1913,8 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "155.0g",
     "box_gw": "190.0g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "year": ""
   },
   {
     "category": "Car Charger",
@@ -1873,7 +1942,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "category": "Car Charger",
@@ -1901,7 +1971,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "category": "Car Charger",
@@ -1929,7 +2000,8 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "year": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1960,7 +2032,8 @@ const PRODUCTS = [
     "p_sample": "55.0",
     "p_500": "54.0",
     "p_2000": "53.0",
-    "p_5000": "52.0"
+    "p_5000": "52.0",
+    "year": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1991,7 +2064,8 @@ const PRODUCTS = [
     "p_sample": "55.0",
     "p_500": "54.0",
     "p_2000": "53.0",
-    "p_5000": "52.0"
+    "p_5000": "52.0",
+    "year": ""
   },
   {
     "category": "Car Bluetooth MP3",
@@ -2022,6 +2096,7 @@ const PRODUCTS = [
     "p_sample": "55.0",
     "p_500": "54.0",
     "p_2000": "53.0",
-    "p_5000": "52.0"
+    "p_5000": "52.0",
+    "year": ""
   }
-];
+  ];
