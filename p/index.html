@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-12-v28"></script>
+  <script src="data.js?v=2026-09-12-v29"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1337,6 +1337,25 @@ body {
 .quote-item-tier:focus {
   border-color: var(--accent-blue);
 }
+.quote-item-price {
+  height: 32px;
+  width: 80px;
+  border: 1.5px solid var(--bg-tertiary);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--text-primary);
+  padding: 0 8px;
+  outline: none;
+  text-align: center;
+}
+.quote-item-price:focus {
+  border-color: var(--accent-blue);
+}
+.quote-item-price::placeholder {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
 .quote-item-remove {
   width: 28px; height: 28px;
   border-radius: 50%;
@@ -2564,11 +2583,21 @@ function isInQuote(model) {
 
 function addToQuote(model) {
   if (isInQuote(model)) return;
-  quoteCart.push({ model: model, qty: 100, priceTier: '500' });
+  quoteCart.push({ model: model, qty: 100, priceTier: '500', customPrice: null });
   saveQuoteToStorage();
   updateQuoteBadge();
   const cardBtn = document.querySelector('.product-card[data-model="' + model + '"] .quote-btn');
   if (cardBtn) { cardBtn.classList.add('added'); cardBtn.textContent = '\u2713'; }
+}
+
+function getQuoteUnitPrice(item) {
+  if (item.customPrice !== null && item.customPrice !== undefined && String(item.customPrice).trim() !== '') {
+    const cp = parseFloat(item.customPrice);
+    if (!isNaN(cp) && cp >= 0) return cp;
+  }
+  const p = PRODUCTS.find(x => x.model === item.model);
+  if (!p) return 0;
+  return parseFloat(p['p_' + item.priceTier]) || 0;
 }
 
 function removeFromQuote(model) {
@@ -2655,23 +2684,24 @@ function renderQuotePanel() {
   quoteCart.forEach(item => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
-    const priceField = 'p_' + item.priceTier;
-    const unitPrice = parseFloat(p[priceField]) || 0;
+    const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
+    const displayPrice = (item.customPrice !== null && item.customPrice !== undefined && String(item.customPrice).trim() !== '') ? String(item.customPrice).trim() : '';
     html += '<div class="quote-item">' +
       '<img class="quote-item-thumb" src="' + (p.image || '') + '" alt="' + item.model + '" onerror="this.style.display=\'none\'">' +
       '<div class="quote-item-info">' +
         '<div class="quote-item-model">' + item.model + '</div>' +
         '<div class="quote-item-type">' + (p.type_en || p.type_cn || p.category) + '</div>' +
         '<div class="quote-item-controls">' +
-          '<input type="number" class="quote-item-qty" value="' + item.qty + '" min="1" onchange="updateQuoteItem(\'' + item.model + '\', this.value, \'' + item.priceTier + '\')">' +
-          '<select class="quote-item-tier" onchange="updateQuoteItem(\'' + item.model + '\', ' + item.qty + ', this.value)">' +
+          '<input type="number" class="quote-item-qty" value="' + item.qty + '" min="1" onchange="updateQuoteItem(\'' + item.model + '\', this.value, \'' + item.priceTier + '\', document.querySelector(\'.quote-item-price[data-model=\\\'' + item.model + '\\\']\').value)">' +
+          '<select class="quote-item-tier" onchange="updateQuoteItem(\'' + item.model + '\', ' + item.qty + ', this.value, document.querySelector(\'.quote-item-price[data-model=\\\'' + item.model + '\\\']\').value)">' +
             '<option value="sample"' + (item.priceTier === 'sample' ? ' selected' : '') + '>Sample</option>' +
             '<option value="500"' + (item.priceTier === '500' ? ' selected' : '') + '>500pcs</option>' +
             '<option value="2000"' + (item.priceTier === '2000' ? ' selected' : '') + '>2000pcs</option>' +
             '<option value="5000"' + (item.priceTier === '5000' ? ' selected' : '') + '>5000pcs</option>' +
           '</select>' +
+          '<input type="number" class="quote-item-price" data-model="' + item.model + '" value="' + displayPrice + '" placeholder="' + (unitPrice > 0 ? unitPrice.toFixed(2) : '-') + '" step="0.01" onchange="updateQuoteItem(\'' + item.model + '\', ' + item.qty + ', \'' + item.priceTier + '\', this.value)">' +
         '</div>' +
       '</div>' +
       '<button class="quote-item-remove" onclick="removeQuoteItem(\'' + item.model + '\')">&times;</button>' +
@@ -2682,11 +2712,15 @@ function renderQuotePanel() {
   totalAmountEl.textContent = 'RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 
-function updateQuoteItem(model, qty, priceTier) {
+function updateQuoteItem(model, qty, priceTier, customPrice) {
   const item = quoteCart.find(x => x.model === model);
   if (!item) return;
   item.qty = Math.max(1, parseInt(qty) || 1);
   item.priceTier = priceTier;
+  if (customPrice !== undefined) {
+    const trimmed = String(customPrice).trim();
+    item.customPrice = trimmed === '' ? null : trimmed;
+  }
   saveQuoteToStorage();
   renderQuotePanel();
 }
@@ -2722,8 +2756,7 @@ function generateQuoteHTML() {
   quoteCart.forEach((item, idx) => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
-    const priceField = 'p_' + item.priceTier;
-    const unitPrice = parseFloat(p[priceField]) || 0;
+    const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
     const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
@@ -2748,8 +2781,7 @@ function copyQuoteText() {
   quoteCart.forEach((item, idx) => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
-    const priceField = 'p_' + item.priceTier;
-    const unitPrice = parseFloat(p[priceField]) || 0;
+    const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
     const desc = (p.type_en || p.type_cn || p.category || '') + (p.ports ? ' | ' + p.ports : '') + (p.power ? ' | ' + p.power : '');
@@ -2769,8 +2801,7 @@ function exportQuoteCSV() {
   quoteCart.forEach(item => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
-    const priceField = 'p_' + item.priceTier;
-    const unitPrice = parseFloat(p[priceField]) || 0;
+    const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
     const desc = (p.type_en || p.type_cn || p.category || '').replace(/,/g, ';');
