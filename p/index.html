@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-12-v29"></script>
+  <script src="data.js?v=2026-09-12-v30"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -2583,7 +2583,10 @@ function isInQuote(model) {
 
 function addToQuote(model) {
   if (isInQuote(model)) return;
-  quoteCart.push({ model: model, qty: 100, priceTier: '500', customPrice: null });
+  const p = PRODUCTS.find(x => x.model === model);
+  const defaultTier = '500';
+  const defaultPrice = p ? (parseFloat(p['p_' + defaultTier]) || null) : null;
+  quoteCart.push({ model: model, qty: 100, priceTier: defaultTier, customPrice: defaultPrice !== null ? String(defaultPrice) : null });
   saveQuoteToStorage();
   updateQuoteBadge();
   const cardBtn = document.querySelector('.product-card[data-model="' + model + '"] .quote-btn');
@@ -2661,7 +2664,7 @@ function populateCustomerFields() {
   document.getElementById('qcCompany').value = quoteCustomer.company || '';
   document.getElementById('qcEmail').value = quoteCustomer.email || '';
   const today = new Date().toISOString().slice(0, 10);
-  document.getElementById('qcDate').value = quoteCustomer.date || today;
+  document.getElementById('qcDate').value = today;
 }
 
 function updateQuoteCustomer() {
