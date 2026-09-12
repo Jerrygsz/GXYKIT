@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-12-v25';
+﻿const DATA_VERSION = '2026-09-12-v26';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -241,7 +241,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "22.0",
+    "p_500": "21.0",
+    "p_2000": "20.0",
+    "p_5000": "19.0"
   },
   {
     "model": "G47-Knob",
@@ -258,7 +262,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "22.0",
+    "p_500": "21.0",
+    "p_2000": "20.0",
+    "p_5000": "19.0"
   },
   {
     "model": "G47-Uni",
@@ -276,7 +284,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "22.0",
+    "p_500": "21.0",
+    "p_2000": "20.0",
+    "p_5000": "19.0"
   },
   {
     "model": "G52",
@@ -368,8 +380,6 @@ const PRODUCTS = [
     "color": "Black",
     "selling": "⚡ Fast Charging​ - PD20W (USB-C) + QC3.0 18W (USB-A)\n💡 Smart Ambient Lighting\n📊 Shows FM + Battery Voltage simultaneously\nBonus: Bluetooth 5.3 (10m) + TF/USB/FM playback",
     "desc": "Product Name: G67-A1C Car FM Transmitter\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-A2 output: 5V/3A, 9V/2A, 12V/1.5A (QC3.0 18W)\nUSB-C1 output: PD 20W\nTF card Slot: 1\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting",
-    "p_2000": null,
-    "p_5000": null,
     "acc": "User Manual",
     "product_nw": "32.0 g",
     "box_gw": "55.0 g",
@@ -377,7 +387,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "21.0",
+    "p_500": "20.0",
+    "p_2000": "19.0",
+    "p_5000": "18.0"
   },
   {
     "model": "G68",
@@ -755,7 +769,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "50.0",
+    "p_500": "45.0",
+    "p_2000": "42.0",
+    "p_5000": "41.0"
   },
   {
 "model": "GC21-Z",
@@ -780,7 +798,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "60.0",
+    "p_500": "53.0",
+    "p_2000": "52.0",
+    "p_5000": "52.0"
   },
   {
     "model": "GC24",
@@ -1367,10 +1389,6 @@ const PRODUCTS = [
     "input_v": "12V/24V DC",
     "selling": "🌟 Dual USB-C 3A Fast Charging​ - Power 2 devices at full speed simultaneously\n🎵 One-Click Bass Boost​ - Instantly enhance audio depth\n💡 Smart Ambient Lighting​ - Functional mood lighting + voltage display\nBonus: Bluetooth 5.3 + FM/USB/TF multi-playback",
     "desc": "Product Name: GZ08 Car FM Transmitter with One-click Bass Boost\nBluetooth Version: V5.3\nWorking Voltage: 12V-24V\nLimit Voltage: 9-26V\nLED Display: FM/Car battery Voltage display\nTransmission Distance: 10-15m\nOutput ports: 3\nUSB-A1 output: 5V/1A(Supports u-disk media playback)\nUSB-C1 output: 5V/3.0A\nUSB-C2 output: 5V/3.0A\nMusic Format: MP3/WMA\nFM frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0 meters\nBluetooth Effective Distance: 10 meters\nFM Effective Distance: 2-3 meters\nOthers Features: Built-in ambient lighting\nOne-click bass boost",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
     "acc": "User Manual",
     "product_nw": "36.0 g",
     "box_gw": "65.0 g",
@@ -1378,7 +1396,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "25.0",
+    "p_500": "24.0",
+    "p_2000": "23.0",
+    "p_5000": "22.0"
   },
   {
     "model": "GZ11",
@@ -1503,17 +1525,17 @@ const PRODUCTS = [
     "cert": "CE, FCC, RoHS",
     "selling": "🔌 Dual-Port 2.4A Output​ - Charge two devices simultaneously at 2.4A each.\n🔋 Wide 12V-24V Input​ - Compatible with both cars and trucks.\n🛡️ Safe & Certified​ - Built with fireproof PC+ABS and CE/FCC/RoHS certifications.",
     "desc": "Input: 12V-24V\nOutput Ports: 2\nUSB 1 Output: 5V/2.4A\nUSB 2 Output: 5V/2.4A\nMaterial: ABS\nColor: Black + Gray\nCertification: CE FCC RoHS Design Patent",
-    "p_sample": null,
-    "p_500": null,
-    "p_2000": null,
-    "p_5000": null,
     "acc": "OEM Only,MOQ: 2000pcs",
     "product_dim": "28 x 67.6mm",
     "product_nw": "19.0 g",
     "carton_gw": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "20.0",
+    "p_500": "19.0",
+    "p_2000": "18.0",
+    "p_5000": "17.5"
   },
   {
     "model": "GR05",
@@ -1598,10 +1620,6 @@ const PRODUCTS = [
     "fm": "87.5-108.0 MHz",
     "selling": "🔌 Dual Cigarette Sockets​ - Power 2 devices simultaneously\n🎛 Wireless Steering Wheel Remote​ - Control music without touching device\n🔋 3A USB-C Fast Charging​ - Ultra-fast power delivery\nBonus: Bluetooth 5.3 + Battery voltage monitoring",
     "desc": "Bluetooth Version: V5.3\nWorking Voltage: 12V-24V\nVoltage Limit: 9-26V\nTransmission Distance: 10-15m\nOutput Ports: 2\nUSB Output: 5V/1A(Read USB Drive for Music Playback)\nType-C Output: PD 25W\n2-Port Power: 80W\nTF Card Slot: 1\nFM Frequency: 87.5-108.0MHz\nMicrophone Effective Distance: 0-1.0m\nBluetooth Effective Range: 10m\nFM Effective Range: 2-3m\n2Cigarette Lighter Sockets\nCertification: CE FCC RoHS Design Patent",
-    "p_sample": "63.0",
-    "p_500": "62.0",
-    "p_2000": "61.0",
-    "p_5000": "60.0",
     "dim": "85 x 75 x 60mm",
     "acc": "User Manual x1",
     "product_dim": "85 x 75 x 60mm",
@@ -1610,7 +1628,11 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "133.8g",
     "box_gw": "215.9g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "p_sample": "43.0",
+    "p_500": "42.0",
+    "p_2000": "41.0",
+    "p_5000": "40.0"
   },
   {
     "model": "G63-Remote",
@@ -1760,10 +1782,6 @@ const PRODUCTS = [
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
     "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
-    "p_sample": "65.0",
-    "p_500": "58.0",
-    "p_2000": "57.0",
-    "p_5000": "55.0",
     "power": "Total 120W",
     "ports": "3x USB-A, 3x USB-C",
     "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
@@ -1776,7 +1794,11 @@ const PRODUCTS = [
     "qty_carton": "50pcs/carton",
     "product_nw": "216.2g",
     "box_gw": "257g",
-    "carton_gw": ""
+    "carton_gw": "",
+    "p_sample": "70.0",
+    "p_500": "70.0",
+    "p_2000": "68.0",
+    "p_5000": "65.0"
   },
 {
 "model": "GC11-Pro",
@@ -1917,10 +1939,6 @@ const PRODUCTS = [
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
-    "p_sample": "50.0",
-    "p_500": "45.0",
-    "p_2000": "43.0",
-    "p_5000": "42.0",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1938,7 +1956,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "55.0",
+    "p_500": "54.0",
+    "p_2000": "53.0",
+    "p_5000": "52.0"
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1948,10 +1970,6 @@ const PRODUCTS = [
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
-    "p_sample": "50.0",
-    "p_500": "45.0",
-    "p_2000": "43.0",
-    "p_5000": "42.0",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -1969,7 +1987,11 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "55.0",
+    "p_500": "54.0",
+    "p_2000": "53.0",
+    "p_5000": "52.0"
   },
   {
     "category": "Car Bluetooth MP3",
@@ -1979,10 +2001,6 @@ const PRODUCTS = [
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
-    "p_sample": "50.0",
-    "p_500": "45.0",
-    "p_2000": "43.0",
-    "p_5000": "42.0",
     "acc": "User Manual x1",
     "material": "Aluminum Alloy + PC + ABS",
     "input_v": "DC 12V-24V",
@@ -2000,6 +2018,10 @@ const PRODUCTS = [
     "product_dim": "",
     "box_dim": "",
     "carton_dim": "",
-    "qty_carton": ""
+    "qty_carton": "",
+    "p_sample": "55.0",
+    "p_500": "54.0",
+    "p_2000": "53.0",
+    "p_5000": "52.0"
   }
 ];
