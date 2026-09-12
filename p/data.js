@@ -1,4 +1,4 @@
-﻿const DATA_VERSION = '2026-09-12-v26';
+﻿const DATA_VERSION = '2026-09-12-v27';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -1851,7 +1851,6 @@ const PRODUCTS = [
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
@@ -1864,6 +1863,7 @@ const PRODUCTS = [
     "input_v": "DC 12V-24V",
     "desc": "Output Ports: 4\nTotal Output: Max 90W\nInput: DC 12V-24V Max 5.0A\nPD Retractable Cable Output: 5V/3A,9V/3A,12V/3A,15V/3A,20V/3.25A(Max 65W)\niOS Retractable Charging Cable Output: 5V/2.4A\nUSB + Type-C Simultaneous Output: 5V/3.2A\nSolo Use Max Output: 5V/3A\nRetractable Cable Length: Total Length 80cm\n(Effective Length 78cm ± 1cm)\nCar Charger Material: Aluminum Alloy + PC + ABS\n7-Color LED Light: One-Touch Switch",
     "features": "Colorful Lights, Smart Protection, 360° Rotation, Universal for Cars",
+    "image": "images/GC08-PD+L.jpg",
     "model": "GC08 PD+L",
     "power": "Total 65W+25W",
     "ports": "PD 65W + Lightning 12W | Retractable Cable",
@@ -1879,7 +1879,7 @@ const PRODUCTS = [
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
+    "image": "images/GC08-PD+C.jpg",
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
@@ -1907,7 +1907,7 @@ const PRODUCTS = [
     "category": "Car Charger",
     "type_cn": "伸缩线车充",
     "type_en": "Retractable Cable Car Charger",
-    "image": "images/GC08.jpg",
+    "image": "images/GC08-2PD.jpg",
     "dim": "61 x 33.5 x 153 mm",
     "weight": "143.8 g",
     "cable": "80CM",
