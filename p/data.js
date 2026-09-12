@@ -1,4 +1,4 @@
-const DATA_VERSION = '2026-09-11-v19';
+const DATA_VERSION = '2026-09-12-v20';
 const PRODUCTS = [
   {
     "model": "G13",
@@ -2001,11 +2001,11 @@ const PRODUCTS = [
     "qty_carton": ""
   },
   {
-    "model": "GC11",
+"model": "GC11",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
-    "image": "",
+    "image": "images/GC11.jpg",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
     "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
@@ -2022,11 +2022,11 @@ const PRODUCTS = [
     "carton_gw": ""
   },
   {
-    "model": "GC11S",
+"model": "GC11S",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
-    "image": "",
+    "image": "images/GC11S.jpg",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
     "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
@@ -2048,39 +2048,12 @@ const PRODUCTS = [
     "box_gw": "257g",
     "carton_gw": ""
   },
-  {
-    "model": "GC11-Std",
+{
+"model": "GC11-Pro",
     "category": "Car Charger",
     "type_cn": "车载充电器",
     "type_en": "Car Charger",
-    "image": "",
-    "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "130.6 x 91.2 x 38mm",
-    "acc": "User Manual x1",
-    "p_sample": "65.0",
-    "p_500": "58.0",
-    "p_2000": "57.0",
-    "p_5000": "55.0",
-    "power": "Total 120W",
-    "ports": "2x USB-A, 2x USB-C",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
-    "cable": "1.0m",
-    "material": "Fireproof PC + ABS",
-    "input_v": "DC 12V",
-    "product_dim": "130.6 x 91.2 x 38mm",
-    "box_dim": "134 x 47 x 155mm",
-    "carton_dim": "51.5 x 30.5 x 38cm",
-    "qty_carton": "50pcs/carton",
-    "product_nw": "216.2g",
-    "box_gw": "257g",
-    "carton_gw": ""
-  },
-  {
-    "model": "GC11-Pro",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "",
+    "image": "images/GC11-Pro.jpg",
     "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
     "dim": "130.6 x 91.2 x 38mm",
     "acc": "User Manual x1",
@@ -2101,31 +2074,7 @@ const PRODUCTS = [
     "box_gw": "257g",
     "carton_gw": ""
   },
-  {
-    "model": "GC11-Pro-V2",
-    "category": "Car Charger",
-    "type_cn": "车载充电器",
-    "type_en": "Car Charger",
-    "image": "",
-    "desc": "Input Voltage: DC 12V-24V\nTotal Output Power: 120W (Max)\nUSB-C1\nPD Retractable Charging Cable Output: 5V 3.0A,9V 3.0A,12V 3.0A,15V 3.0A,20V 3.25A\n(24V vehicles support 15V/20V 65W Max, e.g. trucks, buses)\nUSB-C2+USB-A1+USB-A2 Output: 5V 3.6A (18W)\nTotal Output: Max 65W+18W\nPD Retractable Cable Total Length: 80cm (Effective Length 78cm±1cm)\nTotal Power Cable Length: 100cm",
-    "dim": "130.6 x 91.2 x 38mm",
-    "acc": "User Manual x1",
-    "p_sample": "65.0",
-    "p_500": "58.0",
-    "p_2000": "57.0",
-    "p_5000": "55.0",
-    "power": "PD 65W | Total 120W",
-    "ports": "USB-A + USB-C | PD | Retractable Cable",
-    "features": "LED Display, Smart Protection, Independent Switch, Universal for Cars",
-    "product_dim": "130.6 x 91.2 x 38mm",
-    "box_dim": "134 x 47 x 155mm",
-    "carton_dim": "51.5 x 30.5 x 38cm",
-    "qty_carton": "50pcs/carton",
-    "product_nw": "216.2g",
-    "box_gw": "257g",
-    "carton_gw": ""
-  },
-  {
+{
     "model": "ZNB01",
     "category": "Car Charger",
     "type_cn": "车载充电器",
