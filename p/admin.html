@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GXYKIT Product Admin</title>
-<script src="data.js?v=2026-09-12-v22"></script>
+<script src="data.js?v=2026-09-12-v23"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
 /* ===== Reset & Base ===== */
@@ -982,21 +982,13 @@ function loadData() {
     if (stored) {
       products = JSON.parse(stored);
       reattachImages();
-      // Version mismatch: data.js was updated, localStorage is stale
+      // Version mismatch: data.js was updated, localStorage is stale — force reload
       if (DATA_VERSION_JS !== 'unknown' && storedVersion !== DATA_VERSION_JS) {
-        const doReload = confirm(
-          'Data has been updated (v' + DATA_VERSION_JS + ').\n' +
-          'Your local data is from an older version (v' + (storedVersion || 'unknown') + ').\n\n' +
-          'Click OK to load the latest data from data.js.\n' +
-          'Click Cancel to keep your local changes (may have outdated categories).'
-        );
-        if (doReload) {
-          localStorage.removeItem(STORAGE_KEY);
-          localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
-          products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-          showToast('Loaded latest data from data.js (v' + DATA_VERSION_JS + ')', 'success');
-          return;
-        }
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION_JS);
+        products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+        showToast('Data updated to ' + DATA_VERSION_JS + '. Loaded latest from data.js.', 'success');
+        return;
       }
       return;
     }
