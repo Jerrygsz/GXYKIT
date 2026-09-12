@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-13-v35"></script>
+  <script src="data.js?v=2026-09-13-v36"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -2873,8 +2873,8 @@ function generateQuoteHTML() {
     const rawDesc = (p.desc || '').trim();
     const descFull = rawDesc.replace(/\n/g, '<br>');
     let descCell;
-    if (rawDesc.length > 100) {
-      const brief = safeCutDesc(rawDesc, 100).replace(/\n/g, '<br>');
+    if (rawDesc.length > 20) {
+      const brief = safeCutDesc(rawDesc, 20).replace(/\n/g, '<br>');
       descCell = '<span class="qd-short">' + brief + '...</span><span class="qd-full" style="display:none">' + descFull + '</span> <button type="button" class="qd-toggle" onclick="toggleQuoteDesc(this)">More</button>';
     } else {
       descCell = descFull;
