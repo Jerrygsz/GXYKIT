@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-12-v31"></script>
+  <script src="data.js?v=2026-09-12-v32"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1030,11 +1030,14 @@ body {
 }
 @media (max-width: 480px) {
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 6px 8px 100px; }
-  .search-bar { padding: 6px 12px 4px; top: 48px; }
-  .search-wrap { height: 38px; padding: 0 10px; }
+  .nav-bar { padding: 6px 16px; height: 48px; }
+  .nav-title { font-size: 1rem; }
+  .nav-back { font-size: 0.9rem; padding: 4px 8px; }
+  .search-bar { padding: 3px 12px 1px; top: 56px; }
+  .search-wrap { height: 36px; padding: 0 10px; }
   .search-input { font-size: 0.85rem; }
   .search-count { font-size: 0.7rem; }
-  .cat-tabs { padding: 100px 12px 12px; }
+  .cat-tabs { position: relative; top: auto; padding: 10px 12px 6px; }
   .card-gallery { flex-direction: column; }
   .card-thumb-strip {
     flex-direction: row;
