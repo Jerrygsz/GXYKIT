@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-13-v34"></script>
+  <script src="data.js?v=2026-09-13-v35"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1610,6 +1610,29 @@ body {
 .quote-preview-table tr:hover td {
   background: var(--bg-primary);
 }
+.quote-preview-table td .qd-short,
+.quote-preview-table td .qd-full {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.qd-toggle {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: transparent;
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 10px;
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: background 0.2s, border-color 0.2s;
+}
+.qd-toggle:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-blue);
+}
 .quote-preview-total {
   text-align: right;
   font-size: 1.1rem; font-weight: 700;
@@ -2847,8 +2870,16 @@ function generateQuoteHTML() {
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
     total += subtotal;
-    const desc = (p.desc || '').replace(/\n/g, '<br>');
-    rows += '<tr><td>' + (idx + 1) + '</td><td>' + item.model + '</td><td>' + desc + '</td><td>' + item.qty + '</td><td>' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '</td><td>' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '</td></tr>';
+    const rawDesc = (p.desc || '').trim();
+    const descFull = rawDesc.replace(/\n/g, '<br>');
+    let descCell;
+    if (rawDesc.length > 100) {
+      const brief = safeCutDesc(rawDesc, 100).replace(/\n/g, '<br>');
+      descCell = '<span class="qd-short">' + brief + '...</span><span class="qd-full" style="display:none">' + descFull + '</span> <button type="button" class="qd-toggle" onclick="toggleQuoteDesc(this)">More</button>';
+    } else {
+      descCell = descFull;
+    }
+    rows += '<tr><td>' + (idx + 1) + '</td><td>' + item.model + '</td><td>' + descCell + '</td><td>' + item.qty + '</td><td>' + (unitPrice > 0 ? 'RMB ' + unitPrice.toFixed(2) : '-') + '</td><td>' + (subtotal > 0 ? 'RMB ' + subtotal.toFixed(2) : '-') + '</td></tr>';
   });
   return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen GXY Electronic Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
     '<div class="quote-preview-info"><div class="quote-preview-info-item"><span class="quote-preview-info-label">Customer</span><span class="quote-preview-info-value">' + (quoteCustomer.name || '-') + '</span></div>' +
@@ -2858,6 +2889,25 @@ function generateQuoteHTML() {
     '<table class="quote-preview-table"><thead><tr><th>#</th><th>Model</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr></thead><tbody>' + rows + '</tbody></table>' +
     '<div class="quote-preview-total">Total: <span>RMB ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div>' +
     '<div class="quote-preview-note">Note: Prices are in RMB, EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.</div>';
+}
+
+function safeCutDesc(s, n) {
+  // 截断时避免把 <br> 或 HTML 实体切半
+  let t = s.slice(0, n);
+  const lastBreak = t.lastIndexOf('\n');
+  if (lastBreak > n - 12) t = t.slice(0, lastBreak);
+  return t.replace(/&[^;]{0,8}$/, '').replace(/<[^>]*$/, '');
+}
+
+function toggleQuoteDesc(btn) {
+  const td = btn.closest('td');
+  const short = td.querySelector('.qd-short');
+  const full = td.querySelector('.qd-full');
+  if (!full) return;
+  const hidden = full.style.display === 'none';
+  full.style.display = hidden ? '' : 'none';
+  if (short) short.style.display = hidden ? 'none' : '';
+  btn.textContent = hidden ? 'Less' : 'More';
 }
 
 function copyQuoteText() {
