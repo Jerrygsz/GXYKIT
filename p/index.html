@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GXYKIT Product Catalog</title>
-  <script src="data.js?v=2026-09-13-v37"></script>
+  <script src="data.js?v=2026-09-13-v38"></script>
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -1280,6 +1280,26 @@ body {
 .quote-panel-title {
   font-size: 1.2rem; font-weight: 700;
 }
+.quote-panel-header-right {
+  display: flex; align-items: center; gap: 10px;
+}
+.quote-currency-toggle {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 0.85rem; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 56px;
+}
+.quote-currency-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.quote-rate-note {
+  font-size: 0.72rem; font-weight: 400;
+  color: var(--text-tertiary);
+  margin-left: 8px;
+}
 .quote-panel-close {
   width: 36px; height: 36px; border-radius: 50%;
   background: var(--bg-tertiary); border: none;
@@ -1405,15 +1425,13 @@ body {
 .quote-item-currency-row {
   display: flex; align-items: center; gap: 10px; margin-top: 8px;
 }
-.quote-currency-toggle {
+.quote-currency-badge {
   flex-shrink: 0;
-  height: 28px; padding: 0 10px;
-  border-radius: 6px; border: 1.5px solid var(--accent-blue);
+  padding: 2px 8px;
+  border-radius: 5px;
   background: var(--accent-blue); color: #fff;
-  font-size: 0.72rem; font-weight: 700; cursor: pointer;
-  transition: all 0.2s;
+  font-size: 0.68rem; font-weight: 700;
 }
-.quote-currency-toggle:hover { opacity: 0.85; }
 .quote-price-inputs {
   display: flex; gap: 10px; flex: 1;
 }
@@ -1452,13 +1470,15 @@ body {
   .quote-item-model { font-size: 0.82rem; }
   .quote-item-type { font-size: 0.68rem; margin-bottom: 2px; }
   .quote-item-currency-row { gap: 6px; margin-top: 6px; }
-  .quote-currency-toggle { height: 24px; padding: 0 8px; font-size: 0.65rem; border-radius: 5px; }
   .quote-price-inputs { gap: 6px; }
+  .quote-price-inputs.single { flex: 1; }
+  .quote-price-inputs.single .quote-item-price { width: 100%; }
   .quote-price-label { font-size: 0.6rem; }
   .quote-item-line-total { font-size: 0.7rem; margin-top: 2px; }
   .quote-item-meta { gap: 6px; }
   .quote-item-qty-inline { width: 44px; height: 22px; font-size: 0.7rem; }
 }
+.quote-panel-subtotal {
   padding: 12px 24px;
   border-top: 1px solid var(--bg-tertiary);
   font-size: 1rem; font-weight: 700;
@@ -2718,18 +2738,19 @@ let quoteCustomer = { name: '', company: '', email: '', date: '' };
 const QUOTE_STORAGE_KEY = 'gxykit_quote';
 const QUOTE_CUSTOMER_KEY = 'gxykit_quote_customer';
 const RATE_STORAGE_KEY = 'gxykit_rate';
-let GLOBAL_RATE = 7.0;
+let GLOBAL_RATE = 6.707;
 let RATE_SOURCE = 'default';
+let GLOBAL_CURRENCY = 'RMB';
 
 function migrateQuoteData() {
   quoteCart.forEach(function(item) {
-    if (!item.currency) item.currency = 'RMB';
+    item.currency = GLOBAL_CURRENCY;
     if (item.customPrice !== undefined && item.customPrice !== null && !item.priceRMB) {
       item.priceRMB = String(item.customPrice);
     }
     if (!item.priceUSD && item.priceRMB && GLOBAL_RATE > 0) {
       const rmb = parseFloat(item.priceRMB);
-      if (!isNaN(rmb) && rmb > 0) item.priceUSD = (rmb / GLOBAL_RATE).toFixed(2);
+      if (!isNaN(rmb) && rmb > 0) item.priceUSD = (rmb / GLOBAL_RATE).toFixed(3);
     }
     if (item.manualRate === undefined) item.manualRate = null;
   });
@@ -2782,6 +2803,8 @@ function loadQuoteFromStorage() {
       const rateData = JSON.parse(savedRate);
       if (rateData && rateData.rate > 0) { GLOBAL_RATE = rateData.rate; RATE_SOURCE = rateData.source || 'default'; }
     }
+    const savedCurrency = localStorage.getItem('gxykit_quote_currency');
+    if (savedCurrency === 'RMB' || savedCurrency === 'USD') GLOBAL_CURRENCY = savedCurrency;
     if (savedCart) quoteCart = JSON.parse(savedCart);
     if (savedCustomer) quoteCustomer = JSON.parse(savedCustomer);
     migrateQuoteData();
@@ -2801,10 +2824,10 @@ function addToQuote(model) {
   const defaultTier = '500';
   const defaultPrice = p ? (parseFloat(p['p_' + defaultTier]) || null) : null;
   const initPrice = defaultPrice !== null ? String(defaultPrice) : null;
-  let item = { model: model, qty: 100, priceTier: defaultTier, currency: 'RMB', priceRMB: initPrice, priceUSD: null, manualRate: null, customPrice: initPrice };
+  let item = { model: model, qty: 100, priceTier: defaultTier, currency: GLOBAL_CURRENCY, priceRMB: initPrice, priceUSD: null, manualRate: null, customPrice: initPrice };
   if (initPrice && GLOBAL_RATE > 0) {
     const rmb = parseFloat(initPrice);
-    if (!isNaN(rmb) && rmb > 0) item.priceUSD = (rmb / GLOBAL_RATE).toFixed(2);
+    if (!isNaN(rmb) && rmb > 0) item.priceUSD = (rmb / GLOBAL_RATE).toFixed(3);
   }
   quoteCart.push(item);
   saveQuoteToStorage();
@@ -2910,41 +2933,38 @@ function updateQuoteCustomer() {
   saveQuoteToStorage();
 }
 
-function toggleQuoteCurrency(model) {
-  const item = quoteCart.find(x => x.model === model);
-  if (!item) return;
-  item.currency = (item.currency === 'RMB') ? 'USD' : 'RMB';
+function toggleGlobalCurrency() {
+  GLOBAL_CURRENCY = (GLOBAL_CURRENCY === 'RMB') ? 'USD' : 'RMB';
+  quoteCart.forEach(item => { item.currency = GLOBAL_CURRENCY; });
+  localStorage.setItem('gxykit_quote_currency', GLOBAL_CURRENCY);
   saveQuoteToStorage();
   renderQuotePanel();
+  const btn = document.getElementById('globalCurrencyBtn');
+  if (btn) btn.textContent = GLOBAL_CURRENCY;
 }
 
 function onQuotePriceChange(el) {
   const model = el.dataset.model;
-  const row = el.closest('.quote-item-info');
-  if (!row) return;
-  const rmbInput = row.querySelector('.quote-item-price[data-currency="RMB"]');
-  const usdInput = row.querySelector('.quote-item-price[data-currency="USD"]');
-  const rmbVal = rmbInput ? rmbInput.value : '';
-  const usdVal = usdInput ? usdInput.value : '';
   const item = quoteCart.find(x => x.model === model);
   if (!item) return;
-  const trimmedRMB = String(rmbVal || '').trim();
-  const trimmedUSD = String(usdVal || '').trim();
-  if (trimmedRMB === '' && trimmedUSD === '') {
-    item.priceRMB = null; item.priceUSD = null; item.customPrice = null;
-  } else if (trimmedRMB !== '') {
-    const rmb = parseFloat(trimmedRMB);
-    if (!isNaN(rmb) && rmb > 0) {
-      item.priceRMB = trimmedRMB;
-      item.customPrice = trimmedRMB;
-      if (GLOBAL_RATE > 0) item.priceUSD = (rmb / GLOBAL_RATE).toFixed(2);
-    }
-  } else if (trimmedUSD !== '') {
-    const usd = parseFloat(trimmedUSD);
-    if (!isNaN(usd) && usd > 0) {
-      item.priceUSD = trimmedUSD;
-      if (GLOBAL_RATE > 0) item.priceRMB = (usd * GLOBAL_RATE).toFixed(2);
-      item.customPrice = item.priceRMB;
+  const val = String(el.value || '').trim();
+  const currency = item.currency || GLOBAL_CURRENCY || 'RMB';
+  if (val === '') {
+    item.priceRMB = null;
+    item.priceUSD = null;
+    item.customPrice = null;
+  } else {
+    const num = parseFloat(val);
+    if (!isNaN(num) && num >= 0) {
+      if (currency === 'RMB') {
+        item.priceRMB = val;
+        item.customPrice = val;
+        if (GLOBAL_RATE > 0) item.priceUSD = (num / GLOBAL_RATE).toFixed(3);
+      } else {
+        item.priceUSD = val;
+        if (GLOBAL_RATE > 0) item.priceRMB = (num * GLOBAL_RATE).toFixed(3);
+        item.customPrice = item.priceRMB;
+      }
     }
   }
   saveQuoteToStorage();
@@ -2968,16 +2988,15 @@ function renderQuotePanel() {
     body.innerHTML = '<div class="quote-empty"><div class="quote-empty-icon">&#128196;</div><div class="quote-empty-text">No products selected. Tap "+" on cards to add.</div></div>';
     subtotalEl.style.display = 'none'; return;
   }
-  let totalRMB = 0, totalUSD = 0; let html = '';
+  const currency = GLOBAL_CURRENCY; let total = 0; let html = '';
   quoteCart.forEach(item => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
-    const currency = item.currency || 'RMB';
-    if (currency === 'RMB') totalRMB += subtotal; else totalUSD += subtotal;
-    const rmbDisplay = item.priceRMB || '';
-    const usdDisplay = item.priceUSD || '';
+    total += subtotal;
+    const priceDisplay = currency === 'RMB' ? (item.priceRMB || '') : (item.priceUSD || '');
+    const placeholder = currency === 'RMB' ? (getTierPriceRMB(item) > 0 ? getTierPriceRMB(item).toFixed(2) : '-') : (getTierPriceUSD(item) > 0 ? getTierPriceUSD(item).toFixed(2) : '-');
     const tierLabel = item.priceTier === 'sample' ? 'Sample' : item.priceTier + 'pcs';
     html += '<div class="quote-item">' +
       '<img class="quote-item-thumb" src="' + (p.image || '') + '" alt="' + item.model + '" onerror="this.style.display=\'none\'">' +
@@ -2991,29 +3010,22 @@ function renderQuotePanel() {
           '<span class="quote-qty-wrap">Qty <input type="number" class="quote-item-qty-inline" data-model="' + item.model + '" value="' + item.qty + '" min="1" onchange="onQuoteQtyChange(this)"></span>' +
         '</div>' +
         '<div class="quote-item-currency-row">' +
-          '<button type="button" class="quote-currency-toggle" onclick="toggleQuoteCurrency(\'' + item.model + '\')">' + currency + '</button>' +
-          '<div class="quote-price-inputs">' +
+          '<span class="quote-currency-badge">' + currency + '</span>' +
+          '<div class="quote-price-inputs single">' +
             '<div class="quote-price-group">' +
-              '<span class="quote-price-label">RMB</span>' +
-              '<input type="number" class="quote-item-price" data-model="' + item.model + '" data-currency="RMB" value="' + rmbDisplay + '" placeholder="' + (getTierPriceRMB(item) > 0 ? getTierPriceRMB(item).toFixed(2) : '-') + '" step="0.01" onchange="onQuotePriceChange(this)">' +
-            '</div>' +
-            '<div class="quote-price-group">' +
-              '<span class="quote-price-label">USD</span>' +
-              '<input type="number" class="quote-item-price" data-model="' + item.model + '" data-currency="USD" value="' + usdDisplay + '" placeholder="' + (getTierPriceUSD(item) > 0 ? getTierPriceUSD(item).toFixed(2) : '-') + '" step="0.01" onchange="onQuotePriceChange(this)">' +
+              '<input type="number" class="quote-item-price" data-model="' + item.model + '" data-currency="' + currency + '" value="' + priceDisplay + '" placeholder="' + placeholder + '" step="0.001" onchange="onQuotePriceChange(this)">' +
             '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="quote-item-line-total">Line: ' + (currency === 'RMB' ? 'RMB ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : 'USD ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})) + '</div>' +
+        '<div class="quote-item-line-total">Line: ' + currency + ' ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</div>' +
       '</div>' +
       '<button class="quote-item-remove" onclick="removeQuoteItem(\'' + item.model + '\')">&times;</button>' +
     '</div>';
   });
   body.innerHTML = html;
   subtotalEl.style.display = 'block';
-  let totalText = '';
-  if (totalRMB > 0) totalText += 'RMB ' + totalRMB.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  if (totalUSD > 0) { if (totalText) totalText += '  |  '; totalText += 'USD ' + totalUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
-  totalAmountEl.textContent = totalText || '-';
+  const rateNote = (RATE_SOURCE === 'auto') ? ('Rate ' + GLOBAL_RATE.toFixed(3) + ' (auto)') : ('Rate ' + GLOBAL_RATE.toFixed(3));
+  totalAmountEl.innerHTML = currency + ' ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' <span class="quote-rate-note">' + rateNote + '</span>';
 }
 
 function getTierPriceRMB(item) {
@@ -3048,7 +3060,7 @@ function updateQuoteItem(model, qty, priceTier, customPrice) {
       item.priceRMB = trimmed;
       const rmb = parseFloat(trimmed);
       if (!isNaN(rmb) && rmb > 0 && GLOBAL_RATE > 0) {
-        item.priceUSD = (rmb / GLOBAL_RATE).toFixed(2);
+        item.priceUSD = (rmb / GLOBAL_RATE).toFixed(3);
       }
     }
   }
@@ -3084,17 +3096,17 @@ function closeQuotePreview() {
 function generateQuoteHTML() {
   const date = quoteCustomer.date || new Date().toISOString().slice(0, 10);
   let rows = '';
-  let totalRMB = 0, totalUSD = 0;
+  let total = 0;
+  const currency = GLOBAL_CURRENCY;
   quoteCart.forEach((item, idx) => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
-    const currency = item.currency || 'RMB';
-    if (currency === 'RMB') totalRMB += subtotal; else totalUSD += subtotal;
+    total += subtotal;
     const descFull = (p.desc || '').replace(/\n/g, '<br>');
     const imgCell = '<img src="' + (p.image || '') + '" alt="' + item.model + '" style="width:48px;height:48px;object-fit:contain;border-radius:6px;background:var(--bg-secondary)">';
-    const currencyLabel = currency === 'RMB' ? 'RMB' : 'USD';
+    const currencyLabel = currency;
     rows += '<tr><td>' + (idx + 1) + '</td><td>' + imgCell + '</td><td>' + item.model + '</td><td>' + descFull + '</td><td>' + item.qty + '</td><td>' + currencyLabel + ' ' + (unitPrice > 0 ? unitPrice.toFixed(2) : '-') + '</td><td>' + currencyLabel + ' ' + (subtotal > 0 ? subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-') + '</td></tr>';
   });
   let rateInfo = '';
@@ -3103,9 +3115,7 @@ function generateQuoteHTML() {
   } else {
     rateInfo = '<div style="font-size:0.75rem;color:var(--text-secondary);margin-top:8px">Exchange Rate: 1 USD = ' + GLOBAL_RATE.toFixed(4) + ' CNY (manual/default)</div>';
   }
-  let totalText = '';
-  if (totalRMB > 0) totalText += 'RMB ' + totalRMB.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  if (totalUSD > 0) { if (totalText) totalText += '  |  '; totalText += 'USD ' + totalUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  const totalText = currency + ' ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
   return '<div class="quote-preview-company"><div class="quote-preview-company-name">Shenzhen GXY Electronic Co., Ltd.</div><div class="quote-preview-company-sub">GXYKIT Product Quotation</div></div>' +
     '<div class="quote-preview-info"><div class="quote-preview-info-item"><span class="quote-preview-info-label">Customer</span><span class="quote-preview-info-value">' + (quoteCustomer.name || '-') + '</span></div>' +
     '<div class="quote-preview-info-item"><span class="quote-preview-info-label">Company</span><span class="quote-preview-info-value">' + (quoteCustomer.company || '-') + '</span></div>' +
@@ -3114,7 +3124,7 @@ function generateQuoteHTML() {
     '<table class="quote-preview-table"><thead><tr><th>#</th><th>Image</th><th>Model</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr></thead><tbody>' + rows + '</tbody></table>' +
     '<div class="quote-preview-total">Total: <span>' + (totalText || '-') + '</span></div>' +
     rateInfo +
-    '<div class="quote-preview-note">Note: Prices are in RMB/USD, EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.</div>';
+    '<div class="quote-preview-note">Note: Prices are in ' + currency + ', EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.</div>';
 }
 
 function safeCutDesc(s, n) {
@@ -3141,24 +3151,20 @@ function copyQuoteText() {
   let text = 'GXYKIT Quotation\nShenzhen GXY Electronic Co., Ltd.\n\n';
   text += 'Customer: ' + (quoteCustomer.name || '-') + '\nCompany: ' + (quoteCustomer.company || '-') + '\nEmail: ' + (quoteCustomer.email || '-') + '\nDate: ' + date + '\n\n';
   text += '#\tModel\tImage\tDescription\tQty\tUnit Price\tSubtotal\n';
-  let totalRMB = 0, totalUSD = 0;
+  let total = 0;
+  const currency = GLOBAL_CURRENCY;
   quoteCart.forEach((item, idx) => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
-    const currency = item.currency || 'RMB';
-    if (currency === 'RMB') totalRMB += subtotal; else totalUSD += subtotal;
+    total += subtotal;
     const desc = (p.desc || '').replace(/\n/g, ' ');
     const imgUrl = p.image || '';
-    const currencyLabel = currency === 'RMB' ? 'RMB' : 'USD';
-    text += (idx + 1) + '\t' + item.model + '\t' + imgUrl + '\t' + desc + '\t' + item.qty + '\t' + (unitPrice > 0 ? currencyLabel + ' ' + unitPrice.toFixed(2) : '-') + '\t' + (subtotal > 0 ? currencyLabel + ' ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-') + '\n';
+    text += (idx + 1) + '\t' + item.model + '\t' + imgUrl + '\t' + desc + '\t' + item.qty + '\t' + (unitPrice > 0 ? currency + ' ' + unitPrice.toFixed(2) : '-') + '\t' + (subtotal > 0 ? currency + ' ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-') + '\n';
   });
-  let totalText = '';
-  if (totalRMB > 0) totalText += 'Total RMB: ' + totalRMB.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  if (totalUSD > 0) { if (totalText) totalText += '\n'; totalText += 'Total USD: ' + totalUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
-  text += '\n' + (totalText || 'Total: -') + '\n';
-  text += '\nNote: Prices are in RMB/USD, EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.';
+  text += '\nTotal ' + currency + ': ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '\n';
+  text += '\nNote: Prices are in ' + currency + ', EXW Shenzhen. Valid for 30 days from quotation date. MOQ and lead time subject to confirmation.';
   if (RATE_SOURCE === 'auto') {
     text += '\nExchange Rate: 1 USD = ' + GLOBAL_RATE.toFixed(4) + ' CNY (market reference, ' + new Date().toISOString().slice(0, 10) + ')';
   } else {
@@ -3172,27 +3178,25 @@ function copyQuoteText() {
 
 function exportQuoteCSV() {
   let csv = '#,Model,Image URL,Description,Qty,Unit Price,Total\n';
-  let totalRMB = 0, totalUSD = 0;
+  let total = 0;
+  const currency = GLOBAL_CURRENCY;
   quoteCart.forEach((item, idx) => {
     const p = PRODUCTS.find(x => x.model === item.model);
     if (!p) return;
     const unitPrice = getQuoteUnitPrice(item);
     const subtotal = unitPrice * item.qty;
-    const currency = item.currency || 'RMB';
-    if (currency === 'RMB') totalRMB += subtotal; else totalUSD += subtotal;
+    total += subtotal;
     const desc = (p.desc || '').replace(/\n/g, ' ').replace(/,/g, ';');
     const imgUrl = (p.image || '').replace(/,/g, ';');
-    const currencyLabel = currency === 'RMB' ? 'RMB' : 'USD';
-    csv += (idx + 1) + ',"' + item.model + '","' + imgUrl + '","' + desc + '",' + item.qty + ',"' + (unitPrice > 0 ? currencyLabel + ' ' + unitPrice.toFixed(2) : '-') + '","' + (subtotal > 0 ? currencyLabel + ' ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-') + '"\n';
+    csv += (idx + 1) + ',"' + item.model + '","' + imgUrl + '","' + desc + '",' + item.qty + ',"' + (unitPrice > 0 ? currency + ' ' + unitPrice.toFixed(2) : '-') + '","' + (subtotal > 0 ? currency + ' ' + subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-') + '"\n';
   });
-  if (totalRMB > 0) csv += '"","","","","","Total RMB:","RMB ' + totalRMB.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '"\n';
-  if (totalUSD > 0) csv += '"","","","","","Total USD:","USD ' + totalUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '"\n';
+  csv += '"","","","","","Total ' + currency + ':","' + currency + ' ' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '"\n';
   if (RATE_SOURCE === 'auto') {
     csv += '"","","","","","Exchange Rate:","1 USD = ' + GLOBAL_RATE.toFixed(4) + ' CNY (market reference, ' + new Date().toISOString().slice(0, 10) + ')"\n';
   } else {
     csv += '"","","","","","Exchange Rate:","1 USD = ' + GLOBAL_RATE.toFixed(4) + ' CNY (manual/default)"\n';
   }
-  csv += '"","","","","","","Note: Prices are in RMB/USD, EXW Shenzhen. Valid for 30 days."\n';
+  csv += '"","","","","","","Note: Prices are in ' + currency + ', EXW Shenzhen. Valid for 30 days."\n';
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -3204,6 +3208,15 @@ function exportQuoteCSV() {
 // Init quote system
 loadQuoteFromStorage();
 updateQuoteBadge();
+fetchExchangeRate().then(function() {
+  renderQuotePanel();
+  const syncBtn = document.getElementById('globalCurrencyBtn');
+  if (syncBtn) syncBtn.textContent = GLOBAL_CURRENCY;
+});
+(function syncGlobalCurrencyBtn() {
+  const btn = document.getElementById('globalCurrencyBtn');
+  if (btn) btn.textContent = GLOBAL_CURRENCY;
+})();
 
 // Init
 init();
@@ -3213,7 +3226,10 @@ init();
 <div class="quote-panel" id="quotePanel">
   <div class="quote-panel-header">
     <div class="quote-panel-title">Quotation List</div>
-    <button class="quote-panel-close" onclick="closeQuotePanel()">&times;</button>
+    <div class="quote-panel-header-right">
+      <button class="quote-currency-toggle" id="globalCurrencyBtn" onclick="toggleGlobalCurrency()">RMB</button>
+      <button class="quote-panel-close" onclick="closeQuotePanel()">&times;</button>
+    </div>
   </div>
   <div class="quote-panel-body" id="quotePanelBody">
     <div class="quote-empty">
